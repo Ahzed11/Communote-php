@@ -60,7 +60,14 @@ Encore
 
     .enablePostCssLoader()
 
-    // uncomment if you use TypeScript
+    .addStyleEntry("tailwind", "./assets/styles/app.css")
+
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[hash:8].[ext]',
+    })
+
+// uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
     // uncomment if you use React

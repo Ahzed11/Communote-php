@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <section class="h-screen flex flex-col justify-center">
+        <div class="flex flex-col lg:flex-row justify-between w-4/5 lg:w-2/3 mx-auto">
+            <div>
+                <h1 class="text-5xl font-semibold lg:hidden text-center mb-6">Communoté</h1>
+                <img
+                        class="hidden sm:block"
+                        src="{{ asset('build/images/home.png') }}"
+                        alt="Un étudiant devant son ordinateur" width="700"
+                />
+            </div>
+            <div class="flex justify-around flex-col gap-y-4 lg:gap-y-0">
+                <div>
+                    <h1 class="text-3xl font-semibold">S'enregistrer / Se connecter</h1>
+                    <p class="subtitle">Pour prendre part au partage ou récupérer des notes.</p>
+                    <div class="mt-2 flex gap-x-2">
+                        <a class="button primary" href="{{ path('register') }}">
+                            S'enregistrer
+                        </a>
+                        <a class="button primary light" href="{{ path('login') }}">
+                            Se connecter
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h1 class="text-3xl font-semibold">Parcourir</h1>
+                    <p class="subtitle">Parcourez, trouvez ce qu'il vous faut et c'est parti !</p>
+                    <div class="mt-2 flex gap-x-2">
+                        <a class="button primary" href="{{ path('browse') }}">
+                            Parcourir les notes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

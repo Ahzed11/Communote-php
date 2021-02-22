@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Welcome!{% endblock %} - Communote</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
@@ -14,6 +14,10 @@
         {% endblock %}
     </head>
     <body>
+        {% block navbar %}
+            {% include "component/navbar.html.twig" %}
+        {% endblock %}
+
         {% block body %}{% endblock %}
     </body>
 </html>

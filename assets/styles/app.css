@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .button {
+        @apply px-2;
+        @apply py-2;
+        @apply rounded-lg;
+        @apply hover:shadow;
+        @apply cursor-pointer;
+    }
+
+    .button.primary {
+        @apply bg-purple-800;
+        @apply text-white;
+    }
+
+    .button.primary.light {
+        @apply bg-purple-200;
+        @apply text-purple-800;
+    }
+}
