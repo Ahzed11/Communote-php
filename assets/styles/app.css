@@ -20,4 +20,65 @@
         @apply bg-purple-200;
         @apply text-purple-800;
     }
+
+    label {
+        @apply font-normal;
+    }
+
+    button[type=submit] {
+        @apply px-2;
+        @apply py-2;
+        @apply mt-6;
+        @apply rounded-lg;
+        @apply hover:shadow;
+        @apply cursor-pointer;
+        @apply w-full;
+        @apply bg-purple-800;
+        @apply text-white;
+        @apply font-bold;
+    }
+
+    input[type=text] {
+        @apply w-full;
+        @apply mb-3;
+        @apply rounded-lg;
+        @apply border-gray-200;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-800;
+    }
+
+    input[type=email] {
+        @apply w-full;
+        @apply mb-3;
+        @apply rounded-lg;
+        @apply border-gray-200;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-800;
+    }
+
+    input[type=password] {
+        @apply w-full;
+        @apply mb-3;
+        @apply rounded-lg;
+        @apply border-gray-200;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-800;
+    }
+
+    input[type=checkbox] {
+        @apply ml-2;
+        @apply rounded-lg;
+        @apply border-gray-200;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-800;
+    }
+
+    form li {
+        @apply text-red-600;
+        @apply font-normal
+    }
 }
