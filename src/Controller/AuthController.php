@@ -33,6 +33,8 @@ class AuthController extends AbstractController
              */
             $user = $form->getData();
 
+            $user->setFirstName(ucfirst($user->getFirstName()));
+            $user->setLastName(ucfirst($user->getFirstName()));
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $user->getPlainPassword()
