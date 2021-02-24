@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -20,37 +21,59 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('firstName')
-            ->add('lastName')
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
-                'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirmation'],
-                'constraints' => [
+            ->add("email", EmailType::class, [
+                "attr" => [
+                    "placeholder" => "firstname.lastname@student.school.com",
+                ],
+            ])
+            ->add("firstName", TextType::class, [
+                "attr" => [
+                    "placeholder" => "First name",
+                ],
+            ])
+            ->add("lastName", TextType::class, [
+                "attr" => [
+                    "placeholder" => "Last name",
+                ],
+            ])
+            ->add("plainPassword", RepeatedType::class, [
+                "type" => PasswordType::class,
+                "invalid_message" => "The password fields must match.",
+                "required" => true,
+                "first_options"  => [
+                    "label" => "Password",
+                    "attr" => [
+                        "placeholder" => "********",
+                    ],
+                ],
+                "second_options" => [
+                    "label" => "Confirmation",
+                    "attr" => [
+                        "placeholder" => "********",
+                    ],
+                ],
+                "constraints" => [
                     new NotBlank([
                     ]),
                     new Length([
-                        'min' => 4,
-                        'max' => 255
+                        "min" => 8,
+                        "max" => 255
                     ]),
                 ],
             ])
-            ->add('agreeToTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => new IsTrue(),
+            ->add("agreeToTerms", CheckboxType::class, [
+                "mapped" => false,
+                "constraints" => new IsTrue(),
             ])
-            ->add('submit', SubmitType::class, [
-                'attr' => ['class' => 'button primary']
+            ->add("submit", SubmitType::class, [
+                "attr" => ["class" => "button primary"]
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            "data_class" => User::class,
         ]);
     }
 }

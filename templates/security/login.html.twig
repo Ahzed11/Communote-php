@@ -17,12 +17,17 @@
         {% endif %}
 
         <label for="inputEmail">Email</label><br/>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
+        <input
+                type="email"
+                value="{{ last_username }}"
+                name="email" id="inputEmail"
+                placeholder="firstname.lastname@student.school.com"
+                required autofocus>
 
         <br/>
 
         <label for="inputPassword">Password</label><br/>
-        <input type="password" name="password" id="inputPassword" class="" required>
+        <input type="password" name="password" id="inputPassword" placeholder="********" required>
 
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
