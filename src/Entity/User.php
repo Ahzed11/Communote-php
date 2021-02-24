@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
+#[UniqueEntity(fields: ["email"], message: "This email is already used")]
 class User implements UserInterface
 {
     /**
