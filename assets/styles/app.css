@@ -13,29 +13,19 @@
 
     .button.primary {
         @apply bg-purple-800;
+        @apply dark:bg-green-600;
         @apply text-white;
     }
 
     .button.primary.light {
         @apply bg-purple-200;
+        @apply dark:bg-green-200;
         @apply text-purple-800;
+        @apply dark:text-green-800;
     }
 
     label {
         @apply font-normal;
-    }
-
-    button[type=submit] {
-        @apply px-2;
-        @apply py-2;
-        @apply mt-6;
-        @apply rounded-lg;
-        @apply hover:shadow;
-        @apply cursor-pointer;
-        @apply w-full;
-        @apply bg-purple-800;
-        @apply text-white;
-        @apply font-bold;
     }
 
     input[type=text] {
@@ -43,9 +33,11 @@
         @apply mb-3;
         @apply rounded-lg;
         @apply border-gray-200;
+        @apply border-gray-800;
         @apply border-2;
         @apply outline-none;
         @apply focus:border-purple-800;
+        @apply dark:focus:border-green-600;
     }
 
     input[type=email] {
@@ -53,9 +45,11 @@
         @apply mb-3;
         @apply rounded-lg;
         @apply border-gray-200;
+        @apply border-gray-800;
         @apply border-2;
         @apply outline-none;
         @apply focus:border-purple-800;
+        @apply dark:focus:border-green-600;
     }
 
     input[type=password] {
@@ -63,18 +57,22 @@
         @apply mb-3;
         @apply rounded-lg;
         @apply border-gray-200;
+        @apply border-gray-800;
         @apply border-2;
         @apply outline-none;
         @apply focus:border-purple-800;
+        @apply dark:focus:border-green-600;
     }
 
     input[type=checkbox] {
         @apply ml-2;
         @apply rounded-lg;
         @apply border-gray-200;
+        @apply border-gray-800;
         @apply border-2;
         @apply outline-none;
         @apply focus:border-purple-800;
+        @apply dark:focus:border-green-600;
     }
 
     form li {
