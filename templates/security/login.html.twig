@@ -1,0 +1,44 @@
+{% extends 'form-center.html.twig' %}
+
+{% block Title %}Log in{% endblock %}
+
+{% block formTitle %}Log in{% endblock %}
+
+{% block form %}
+    <form method="post">
+        {% if error %}
+            <div class="">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <label for="inputEmail">Email</label><br/>
+        <input
+                type="email"
+                value="{{ last_username }}"
+                name="email" id="inputEmail"
+                placeholder="firstname.lastname@student.school.com"
+                required autofocus>
+
+        <br/>
+
+        <label for="inputPassword">Password</label><br/>
+        <input type="password" name="password" id="inputPassword" placeholder="********" required>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        <label>
+            Remember me <input type="checkbox" name="_remember_me">
+        </label>
+
+        <button type="submit">
+            Sign in
+        </button>
+    </form>
+{% endblock %}
