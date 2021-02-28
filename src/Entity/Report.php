@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=ReportRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener", "App\EntityListener\AuthorListener"})
  */
 class Report
 {
@@ -39,19 +40,16 @@ class Report
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports")
      * @ORM\JoinColumn(nullable=false)
      */
-    #[NotNull]
     private User $author;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $updatedAt;
 
     public function getId(): int

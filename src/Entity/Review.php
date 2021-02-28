@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\Range;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener", "App\EntityListener\AuthorListener"})
  */
 class Review
 {
@@ -37,19 +38,16 @@ class Review
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reviews")
      * @ORM\JoinColumn(nullable=false)
      */
-    #[NotNull]
     private User $author;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $updatedAt;
 
     public function getId(): ?int

@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=NoteRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener", "App\EntityListener\AuthorListener"})
  */
 class Note
 {
@@ -73,15 +74,19 @@ class Note
     private iterable $reviews;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private User $author;
+
+    /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -89,6 +94,11 @@ class Note
         $this->comments = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 
     public function getId(): int
@@ -233,6 +243,18 @@ class Note
                 $review->setNote(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

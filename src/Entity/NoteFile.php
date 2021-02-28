@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=NoteFileRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
  */
 class NoteFile
 {
@@ -41,14 +42,17 @@ class NoteFile
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $updatedAt;
+
+    public function __toString(): string
+    {
+        return $this->fileName;
+    }
 
     public function getId(): ?int
     {

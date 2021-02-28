@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=FacultyRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
  */
 class Faculty
 {
@@ -38,18 +39,21 @@ class Faculty
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $updatedAt;
 
     public function __construct()
     {
         $this->studies = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 
     public function getId(): ?int

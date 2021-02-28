@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
  */
 #[UniqueEntity(fields: ["email"], message: "This email is already used")]
 class User implements UserInterface
@@ -49,13 +50,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=64)
      */
-    #[NotBlank]
     private string $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    #[NotBlank]
     private string $lastName;
 
     /**
@@ -85,11 +84,17 @@ class User implements UserInterface
     #[NotNull]
     private DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="author", orphanRemoval=true)
+     */
+    private iterable $notes;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -309,6 +314,33 @@ class User implements UserInterface
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getAuthor() === $this) {
+                $note->setAuthor(null);
+            }
+        }
 
         return $this;
     }
