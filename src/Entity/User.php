@@ -59,18 +59,6 @@ class User implements UserInterface
     private string $lastName;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    #[NotNull]
-    private DateTimeInterface $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    #[NotNull]
-    private DateTimeInterface $updatedAt;
-
-    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
      */
     private iterable $comments;
@@ -84,6 +72,18 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="author", orphanRemoval=true)
      */
     private iterable $reviews;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    #[NotNull]
+    private DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    #[NotNull]
+    private DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -208,30 +208,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getComments(): Collection
     {
         return $this->comments;
@@ -309,6 +285,30 @@ class User implements UserInterface
                 $review->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
