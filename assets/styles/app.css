@@ -79,6 +79,16 @@
         @apply focus:border-purple-800;
         @apply dark:focus:border-green-600;
     }
+    textarea {
+        @apply w-full;
+        @apply mb-3;
+        @apply rounded-lg;
+        @apply border-gray-200;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-800;
+        @apply dark:focus:border-green-600;
+    }
 
     select {
         @apply w-full;
