@@ -34,3 +34,6 @@ services:
 
     App\EntityListener\AuthorListener:
         tags: [ doctrine.orm.entity_listener ]
+
+    App\EntityListener\SlugListener:
+        tags: [ doctrine.orm.entity_listener ]

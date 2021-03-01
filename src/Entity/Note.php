@@ -14,7 +14,11 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=NoteRepository::class)
- * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener", "App\EntityListener\AuthorListener"})
+ * @ORM\EntityListeners({
+ *     "App\EntityListener\CreatedAtListener",
+ *     "App\EntityListener\AuthorListener",
+ *     "App\EntityListener\SlugListener"
+ *     })
  */
 #[UniqueEntity(fields: ["slug"], message: "This slug is already used")]
 class Note
@@ -43,7 +47,6 @@ class Note
     /**
      * @ORM\Column(type="string", length=127, unique=true)
      */
-    #[NotBlank]
     private string $slug;
 
     /**
@@ -57,7 +60,6 @@ class Note
      * @ORM\OneToOne(targetEntity=NoteFile::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    #[NotNull]
     private NoteFile $file;
 
     /**
