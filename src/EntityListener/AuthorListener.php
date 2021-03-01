@@ -17,8 +17,6 @@ class AuthorListener
 
     public function prePersist($e)
     {
-        if (!$e->getAuthor()) {
-            $e->setAuthor($this->security->getUser());
-        }
+        $e->setAuthor($this->security->getUser());
     }
 }
