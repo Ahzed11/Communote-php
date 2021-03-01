@@ -4,15 +4,18 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
  */
 #[UniqueEntity(fields: ["email"], message: "This email is already used")]
 class User implements UserInterface
@@ -46,24 +49,58 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=64)
      */
-    #[NotBlank]
     private string $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    #[NotBlank]
     private string $lastName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
+     */
+    private iterable $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="author", orphanRemoval=true)
+     */
+    private iterable $reports;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="author", orphanRemoval=true)
+     */
+    private iterable $reviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="author", orphanRemoval=true)
+     */
+    private iterable $notes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=School::class, inversedBy="students")
+     */
+    private iterable $schools;
 
     /**
      * @ORM\Column(type="datetime")
      */
+    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
+    #[NotNull]
     private DateTimeInterface $updatedAt;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->reports = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+        $this->schools = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -177,6 +214,135 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): self
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports[] = $report;
+            $report->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): self
+    {
+        if ($this->reports->removeElement($report)) {
+            // set the owning side to null (unless already changed)
+            if ($report->getAuthor() === $this) {
+                $report->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getAuthor() === $this) {
+                $review->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getAuthor() === $this) {
+                $note->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSchools(): Collection
+    {
+        return $this->schools;
+    }
+
+    public function addSchool(School $school): self
+    {
+        if (!$this->schools->contains($school)) {
+            $this->schools[] = $school;
+        }
+
+        return $this;
+    }
+
+    public function removeSchool(School $school): self
+    {
+        $this->schools->removeElement($school);
 
         return $this;
     }
