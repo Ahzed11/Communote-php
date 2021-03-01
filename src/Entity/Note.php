@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
  * @ORM\Entity(repositoryClass=NoteRepository::class)
  * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener", "App\EntityListener\AuthorListener"})
  */
+#[UniqueEntity(fields: ["slug"], message: "This slug is already used")]
 class Note
 {
     /**
@@ -39,7 +41,7 @@ class Note
     private string $description;
 
     /**
-     * @ORM\Column(type="string", length=127)
+     * @ORM\Column(type="string", length=127, unique=true)
      */
     #[NotBlank]
     private string $slug;

@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
  * @ORM\Entity(repositoryClass=CourseRepository::class)
  * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
  */
+#[UniqueEntity(fields: ["code"], message: "This code is already used")]
 class Course
 {
     /**
@@ -32,7 +34,7 @@ class Course
     private string $title;
 
     /**
-     * @ORM\Column(type="string", length=31)
+     * @ORM\Column(type="string", length=31, unique=true)
      */
     #[NotBlank]
     #[Length(max: 31)]
