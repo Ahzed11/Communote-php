@@ -46,6 +46,12 @@ class Faculty
      */
     private DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=School::class, inversedBy="faculties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $school;
+
     public function __construct()
     {
         $this->studies = new ArrayCollection();
@@ -120,6 +126,18 @@ class Faculty
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): self
+    {
+        $this->school = $school;
 
         return $this;
     }

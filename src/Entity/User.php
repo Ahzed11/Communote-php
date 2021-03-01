@@ -72,6 +72,16 @@ class User implements UserInterface
     private iterable $reviews;
 
     /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="author", orphanRemoval=true)
+     */
+    private iterable $notes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=School::class, inversedBy="students")
+     */
+    private iterable $schools;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     #[NotNull]
@@ -83,17 +93,13 @@ class User implements UserInterface
     #[NotNull]
     private DateTimeInterface $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="author", orphanRemoval=true)
-     */
-    private iterable $notes;
-
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->schools = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,30 +299,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getNotes(): Collection
     {
         return $this->notes;
@@ -340,6 +322,51 @@ class User implements UserInterface
                 $note->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSchools(): Collection
+    {
+        return $this->schools;
+    }
+
+    public function addSchool(School $school): self
+    {
+        if (!$this->schools->contains($school)) {
+            $this->schools[] = $school;
+        }
+
+        return $this;
+    }
+
+    public function removeSchool(School $school): self
+    {
+        $this->schools->removeElement($school);
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
