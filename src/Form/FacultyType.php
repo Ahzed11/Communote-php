@@ -25,7 +25,7 @@ class FacultyType extends AbstractType
             ->add('title')
             ->add('schools', null, array(
                 "class" => School::class,
-                "placeholder" => 'Select a faculty',
+                "placeholder" => 'Select a school',
                 "choices" => $this->schoolRepository->findAll(),
             ))
             ->add("submit", SubmitType::class, [
