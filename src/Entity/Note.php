@@ -60,7 +60,7 @@ class Note
      * @ORM\OneToOne(targetEntity=NoteFile::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private NoteFile $file;
+    private NoteFile $noteFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Note", orphanRemoval=true)
@@ -158,14 +158,14 @@ class Note
         return $this;
     }
 
-    public function getFile(): NoteFile
+    public function getNoteFile(): NoteFile
     {
-        return $this->file;
+        return $this->noteFile;
     }
 
-    public function setFile(NoteFile $file): self
+    public function setNoteFile(NoteFile $noteFile): self
     {
-        $this->file = $file;
+        $this->noteFile = $noteFile;
 
         return $this;
     }
