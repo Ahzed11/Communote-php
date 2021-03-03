@@ -5,7 +5,13 @@
 @layer base {
     nav div ul li {
         @apply hover:text-purple-800;
-        @apply dark:hover:text-green-600;
+        @apply dark:hover:text-green-400;
+    }
+
+    hr {
+        @apply border-2;
+        @apply border-white;
+        @apply dark:border-gray-900;
     }
 
     .button {
@@ -40,6 +46,7 @@
     input[type=text] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -52,6 +59,7 @@
     input[type=email] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -64,6 +72,7 @@
     input[type=password] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -76,6 +85,7 @@
     input[type=checkbox] {
         @apply ml-2;
         @apply rounded-lg;
+        @apply text-black;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
@@ -83,9 +93,11 @@
         @apply focus:border-purple-800;
         @apply dark:focus:border-green-600;
     }
+
     textarea {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -98,6 +110,7 @@
     select {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -105,11 +118,13 @@
         @apply outline-none;
         @apply focus:border-purple-800;
         @apply dark:focus:border-green-600;
+        @apply text-black;
     }
 
     select[multiple] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;

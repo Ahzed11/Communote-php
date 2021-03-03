@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Browse{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto">
+        <section class="flex justify-between flex-wrap mt-8">
+            {% include 'component/breadcrumb.html.twig' with {'endWord': title} %}
+        </section>
+
+        <hr class="mb-4 mt-2" />
+
+        <section>
+            <ul class="list-none grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6">
+                {% for item in items %}
+                    {% set path = path(app.request.attributes.get('_route'),
+                        app.request.attributes.get('_route_params')) %}
+                    {% set path = path ~ ((path | slice(-1)) == '/' ? '' : '/') ~ item.title %}
+                    
+                    {% include cardComponent with {
+                        'path': path
+                    }%}
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+{% endblock %}
