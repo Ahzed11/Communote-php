@@ -5,11 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Security\Authenticator;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,8 +37,6 @@ class AuthController extends AbstractController
                 $user->getPlainPassword()
             ));
             $user->eraseCredentials();
-            $user->setCreatedAt(new DateTime("NOW"));
-            $user->setUpdatedAt($user->getCreatedAt());
 
             $em->persist($user);
             $em->flush();
