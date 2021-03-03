@@ -36,7 +36,7 @@ class School
     private iterable $faculties;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="school")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="schools")
      */
     private iterable $students;
 
