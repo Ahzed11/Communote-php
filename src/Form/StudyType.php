@@ -29,7 +29,7 @@ class StudyType extends AbstractType
                 "choices" => $this->facultyRepository->findAll(),
             ))
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "button primary"]
+                "attr" => ["class" => "button primary w-full"]
             ]);
         ;
     }

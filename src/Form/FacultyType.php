@@ -23,13 +23,13 @@ class FacultyType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('schools', null, array(
+            ->add('school', null, array(
                 "class" => School::class,
                 "placeholder" => 'Select a school',
                 "choices" => $this->schoolRepository->findAll(),
             ))
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "button primary"]
+                "attr" => ["class" => "button primary w-full"]
             ]);
     }
 
