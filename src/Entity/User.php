@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -84,13 +83,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[NotNull]
     private DateTimeInterface $updatedAt;
 
     public function __construct()
