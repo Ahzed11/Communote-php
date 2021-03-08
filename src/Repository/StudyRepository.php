@@ -29,7 +29,7 @@ class StudyRepository extends ServiceEntityRepository
             ->setParameter('faculty', $faculty);
 
         if ($term) {
-            $qb->andWhere('s.title LIKE :term')
+            $qb->andWhere('LOWER(s.title) LIKE LOWER(:term)')
                 ->setParameter('term', '%'.$term.'%');
         }
 

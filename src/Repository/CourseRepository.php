@@ -33,8 +33,8 @@ class CourseRepository extends ServiceEntityRepository
 
         if($term)
         {
-            $qb->andWhere('c.title LIKE :term OR c.title LIKE :term OR s.title LIKE :term OR
-            y.title LIKE :term')
+            $qb->andWhere('LOWER(c.title) LIKE LOWER(:term) OR LOWER(c.title) LIKE LOWER(:term) OR LOWER(s.title) LIKE LOWER(:term) OR
+            LOWER(y.title) LIKE LOWER(:term)')
                 ->setParameter('term', '%'.$term.'%');
         }
 

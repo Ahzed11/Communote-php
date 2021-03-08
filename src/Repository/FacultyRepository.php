@@ -24,7 +24,7 @@ class FacultyRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('f');
         if ($term) {
-            $qb->andWhere('f.title LIKE :term')
+            $qb->andWhere('LOWER(f.title) LIKE LOWER(:term)')
                 ->setParameter('term', '%'.$term.'%');
         }
         $qb->orderBy('f.title', 'ASC');

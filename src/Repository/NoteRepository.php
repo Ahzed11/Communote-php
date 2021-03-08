@@ -32,7 +32,7 @@ class NoteRepository extends ServiceEntityRepository
 
         if($term)
         {
-            $qb->andWhere('n.title LIKE :term')
+            $qb->andWhere('LOWER(n.title) LIKE LOWER(:term)')
                 ->setParameter('term', '%'.$term.'%');
         }
 

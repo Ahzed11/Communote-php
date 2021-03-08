@@ -24,7 +24,7 @@ class YearRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('y');
         if ($term) {
-            $qb->andWhere('y.title LIKE :term')
+            $qb->andWhere('LOWER(y.title) LIKE LOWER(:term)')
                 ->setParameter('term', '%'.$term.'%');
         }
         $qb->orderBy('y.title', 'ASC');
