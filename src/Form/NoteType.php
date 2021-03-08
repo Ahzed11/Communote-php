@@ -66,7 +66,7 @@ class NoteType extends AbstractType
                 )
             )
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "button primary"]
+                "attr" => ["class" => "button primary w-full"]
             ]);
     }
 

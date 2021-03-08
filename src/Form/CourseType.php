@@ -39,7 +39,7 @@ class CourseType extends AbstractType
                 "choices" => $this->yearRepository->findAll(),
             ))
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "button primary"]
+                "attr" => ["class" => "button primary w-full"]
             ]);
         ;
     }
