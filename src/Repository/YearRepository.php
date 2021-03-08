@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Year;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,14 @@ class YearRepository extends ServiceEntityRepository
         parent::__construct($registry, Year::class);
     }
 
-    // /**
-    //  * @return Year[] Returns an array of Year objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function queryByTitle(?string $term) : QueryBuilder
     {
-        return $this->createQueryBuilder('y')
-            ->andWhere('y.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('y.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('y');
+        if ($term) {
+            $qb->andWhere('LOWER(y.title) LIKE LOWER(:term)')
+                ->setParameter('term', '%'.$term.'%');
+        }
+        $qb->orderBy('y.title', 'ASC');
+        return $qb;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Year
-    {
-        return $this->createQueryBuilder('y')
-            ->andWhere('y.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Faculty;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,14 @@ class FacultyRepository extends ServiceEntityRepository
         parent::__construct($registry, Faculty::class);
     }
 
-    // /**
-    //  * @return Faculty[] Returns an array of Faculty objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function queryByTitle(?string $term) : QueryBuilder
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('f');
+        if ($term) {
+            $qb->andWhere('LOWER(f.title) LIKE LOWER(:term)')
+                ->setParameter('term', '%'.$term.'%');
+        }
+        $qb->orderBy('f.title', 'ASC');
+        return $qb;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Faculty
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Course;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,25 @@ class CourseRepository extends ServiceEntityRepository
         parent::__construct($registry, Course::class);
     }
 
-    // /**
-    //  * @return Course[] Returns an array of Course objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function queryByTitleStudyAndYear(?string $term, string $study, string $year) : QueryBuilder
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.study', 's')
+            ->andWhere('s.title = :study')
+            ->setParameter('study', $study)
+            ->leftJoin('c.year', 'y')
+            ->addSelect('y')
+            ->andWhere('y.title = :year')
+            ->setParameter('year', $year);
 
-    /*
-    public function findOneBySomeField($value): ?Course
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if($term)
+        {
+            $qb->andWhere('LOWER(c.title) LIKE LOWER(:term) OR LOWER(c.title) LIKE LOWER(:term) OR LOWER(s.title) LIKE LOWER(:term) OR
+            LOWER(y.title) LIKE LOWER(:term)')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        $qb->orderBy('c.title', 'ASC');
+        return $qb;
     }
-    */
 }

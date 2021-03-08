@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Note;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,25 @@ class NoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Note::class);
     }
 
-    // /**
-    //  * @return Note[] Returns an array of Note objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function queryByTitleAndCourse(?string $term, string $course) : QueryBuilder
     {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('n.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('n')
+            ->leftJoin('n.course', 'c')
+            ->addSelect('c')
+            ->leftJoin('n.author', 'a')
+            ->addSelect('a')
+            ->andWhere('c.title LIKE :course')
+            ->setParameter('course', '%'.$course.'%');
 
-    /*
-    public function findOneBySomeField($value): ?Note
-    {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if($term)
+        {
+            $qb->andWhere('LOWER(n.title) LIKE LOWER(:term)')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        $qb->orderBy('n.createdAt', 'DESC');
+        return $qb;
     }
-    */
+
+
 }

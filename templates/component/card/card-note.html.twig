@@ -1,0 +1,21 @@
+<li class="rounded-lg shadow overflow-hidden h-full hover:shadow-lg transform hover:scale-105 transition duration-300 dark:bg-gray-900">
+    <a href="{{ path }}" class="relative h-full">
+        <div class="py-10 px-8 flex flex-col justify-between h-full">
+            <div>
+                <h2 class="text-2xl font-bold">{{ item.title }}</h2>
+                <div class="text-purple-700 dark:text-green-400 text-sm font-medium flex mb-4">
+                    <p>{{ item.author.firstName }} {{ item.author.lastName }}</p>
+                </div>
+            </div>
+
+            <p class="font-light">
+                {{ item.description }}
+            </p>
+
+            <div class="mt-10 flex justify-between items-center">
+                <p>Review</p>
+                <span class="mr-4 text-purple-700 dark:text-green-400">{{ item.createdAt | ago }}</span>
+            </div>
+        </div>
+    </a>
+</li>

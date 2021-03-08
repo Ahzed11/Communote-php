@@ -4,8 +4,14 @@
 
 @layer base {
     nav div ul li {
-        @apply hover:text-purple-800;
-        @apply dark:hover:text-green-600;
+        @apply hover:text-purple-700;
+        @apply dark:hover:text-green-400;
+    }
+
+    hr {
+        @apply border;
+        @apply border-purple-700;
+        @apply dark:border-gray-900;
     }
 
     .button {
@@ -16,8 +22,47 @@
         @apply cursor-pointer;
     }
 
+    .pagination {
+        @apply mt-12;
+        @apply flex;
+        @apply flex-wrap;
+        @apply justify-center;
+        @apply space-x-2;
+    }
+
+    .pagination span {
+        @apply px-3;
+        @apply py-1;
+        @apply rounded-lg;
+        @apply shadow-lg;
+        @apply font-bold;
+        @apply text-purple-700;
+        @apply dark:text-white;
+        @apply bg-purple-200;
+        @apply dark:bg-gray-900;
+    }
+
+    .pagination span:hover {
+        @apply text-white;
+        @apply dark:text-green-400;
+    }
+
+    .pagination .current {
+        @apply bg-purple-700;
+        @apply dark:bg-green-400;
+        @apply text-white;
+        @apply dark:text-gray-900;
+    }
+
+    .pagination .current:hover {
+        @apply bg-purple-700;
+        @apply dark:bg-green-400;
+        @apply text-white;
+        @apply dark:text-gray-900;
+    }
+
     .button.primary {
-        @apply bg-purple-800;
+        @apply bg-purple-700;
         @apply dark:bg-green-600;
         @apply text-white;
     }
@@ -25,8 +70,14 @@
     .button.primary.light {
         @apply bg-purple-200;
         @apply dark:bg-green-200;
-        @apply text-purple-800;
+        @apply text-purple-700;
         @apply dark:text-green-800;
+    }
+
+    .browse-search {
+        @apply dark:text-white !important;
+        @apply dark:bg-gray-900;
+        @apply font-semibold;
     }
 
     label {
@@ -40,82 +91,91 @@
     input[type=text] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
     }
 
     input[type=email] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
     }
 
     input[type=password] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
     }
 
     input[type=checkbox] {
         @apply ml-2;
         @apply rounded-lg;
+        @apply text-black;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
     }
+
     textarea {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
     }
 
     select {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
+        @apply text-black;
     }
 
     select[multiple] {
         @apply w-full;
         @apply mb-3;
+        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
         @apply outline-none;
-        @apply focus:border-purple-800;
+        @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
     }
 
