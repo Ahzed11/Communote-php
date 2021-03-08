@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Study;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,20 @@ class StudyRepository extends ServiceEntityRepository
         parent::__construct($registry, Study::class);
     }
 
-    // /**
-    //  * @return Study[] Returns an array of Study objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function queryByTitleAndFaculty(?string $term, string $faculty) : QueryBuilder
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('s');
 
-    /*
-    public function findOneBySomeField($value): ?Study
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb->leftJoin('s.faculty', 'f')
+            ->andWhere('f.title = :faculty')
+            ->setParameter('faculty', $faculty);
+
+        if ($term) {
+            $qb->andWhere('s.title LIKE :term')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        $qb->orderBy('s.title', 'ASC');
+        return $qb;
     }
-    */
 }
