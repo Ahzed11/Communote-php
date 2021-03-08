@@ -12,23 +12,23 @@
 
         <ul class="inline-flex content-center gap-x-2 text-md font-medium">
             <li>
-                <a href="{{ path('home') }}" class="py-4 px-2 block">Accueil</a>
+                <a href="{{ path('home') }}" class="py-4 px-2 block">Home</a>
             </li>
 
             <li>
-                <a href="{#{{ path('browse') }}#}" class="py-4 px-2 block">Parcourir</a>
+                <a href="{{ path('browse_faculty') }}" class="py-4 px-2 block">Browse</a>
             </li>
         </ul>
     </div>
 
     {% if is_granted("ROLE_USER") %}
     <ul class="inline-flex py-2 content-center gap-x-2 text-md font-medium">
-        <li class="px-2 py-2 text-md rounded-lg bg-purple-200 text-purple-700 hover:shadow">
+        <li class="button primary light">
             <a class="inline-flex">
                 <svg class="lg:hidden" style="width:24px;height:24px" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
                 </svg>
-                <span class="hidden lg:inline">Créer une note</span>
+                <span class="hidden lg:inline">Write a note</span>
             </a>
         </li>
 
@@ -43,16 +43,16 @@
                     class="absolute p-4 -inset-x-32 lg:-inset-x-8 rounded-lg bg-white shadow"
             >
                 <li class="py-1 hover:text-purple-700">
-                    <a href="{#{{ path('my-course') }}#}">Mes cours</a>
+                    <a href="{#{{ path('my-course') }}#}">My courses</a>
                 </li>
                 <li class="py-1 hover:text-purple-700">
-                    <a href="{#{{ path('my-note') }}#}">Mes notes</a>
+                    <a href="{#{{ path('my-note') }}#}">My notes</a>
                 </li>
                 <li class="py-1 hover:text-purple-700">
-                    <a href="{#{{ path('my-account') }}#}">Mon compte</a>
+                    <a href="{#{{ path('my-account') }}#}">My account</a>
                 </li>
                 <li class="py-1 hover:text-purple-700">
-                    <a href="{{ path('logout') }}">Se déconnecter</a>
+                    <a href="{{ path('logout') }}">Log out</a>
                 </li>
             </ul>
         </li>
