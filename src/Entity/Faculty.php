@@ -50,7 +50,7 @@ class Faculty
      * @ORM\ManyToOne(targetEntity=School::class, inversedBy="faculties")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $school;
+    private School $school;
 
     public function __construct()
     {
@@ -130,12 +130,12 @@ class Faculty
         return $this;
     }
 
-    public function getSchool(): ?School
+    public function getSchool(): School
     {
         return $this->school;
     }
 
-    public function setSchool(?School $school): self
+    public function setSchool(School $school): self
     {
         $this->school = $school;
 
