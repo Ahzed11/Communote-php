@@ -57,10 +57,6 @@ class NoteType extends AbstractType
             ))
             ->add('noteFile', FileType::class, array(
                     'mapped' => false,
-                    'attr' => [
-                        // 'class' => '',
-                        'placeholder' => 'Select a file'
-                    ],
                     'required' => !$isEdit || !$note,
                     'constraints' => $fileConstraints
                 )

@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    uploads_base_url: 'https://%env(AWS_S3_ACCESS_BUCKET)%.s3.%env(AWS_S3_REGION)%.amazonaws.com'
 
 services:
     # default configuration for services in *this* file
@@ -29,6 +30,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Symfony\Component\Asset\Context\RequestStackContext: '@assets.context'
+
+    App\Service\UploaderHelper:
+        arguments:
+            - '%env(AWS_S3_ACCESS_BUCKET)%'
+            - '%env(AWS_S3_ACCESS_ID)%'
+            - '%env(AWS_S3_ACCESS_SECRET)%'
+            - '%env(AWS_S3_REGION)%'
+
     App\EntityListener\CreatedAtListener:
         tags: [ doctrine.orm.entity_listener ]
 

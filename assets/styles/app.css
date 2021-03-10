@@ -81,7 +81,9 @@
     }
 
     label {
-        @apply font-semibold
+        @apply font-semibold;
+        @apply text-purple-700;
+        @apply dark:text-green-400;
     }
 
     form input {
@@ -131,6 +133,22 @@
         @apply ml-2;
         @apply rounded-lg;
         @apply text-black;
+        @apply border-gray-200;
+        @apply dark:border-gray-800;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-700;
+        @apply dark:focus:border-green-600;
+    }
+
+    input[type=file] {
+        @apply inline-block;
+        @apply mb-4;
+        @apply w-full;
+        @apply resize-none;
+        @apply rounded-lg;
+        @apply text-black;
+        @apply dark:text-green-400;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
