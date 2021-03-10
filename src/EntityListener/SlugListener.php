@@ -4,6 +4,7 @@
 namespace App\EntityListener;
 
 use App\Entity\Note;
+use App\Utils\Slugger;
 use Symfony\Component\Security\Core\Security;
 
 class SlugListener
@@ -17,8 +18,6 @@ class SlugListener
 
     public function prePersist($e)
     {
-        $slug = strtolower(preg_replace(array( '/[^-a-zA-Z0-9\s]/', '/[\s]/' ), array( '', '-' ), $e->getTitle()));
-        $slug .= uniqid("-");
-        $e->setSlug($slug);
+        $e->setSlug(Slugger::slug($e));
     }
 }
