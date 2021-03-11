@@ -7,9 +7,11 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use TheNetworg\OAuth2\Client\Provider\AzureResourceOwner;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -42,32 +44,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOrCreateFromOAuth(AzureResourceOwner $owner): User
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        $user = $this->createQueryBuilder('u')
+            ->where('u.azureOID = :oid')
+            ->setParameter('oid', $owner->getId())
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->getOneOrNullResult();
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ($user) {
+            return $user;
+        }
+
+        $names = explode(' ', $owner->claim('name'));
+        $user = (new User())->setAzureOID($owner->getId())
+                            ->setEmail($owner->claim('email'))
+                            ->setPassword(null)
+                            ->setRoles(['ROLE_VALIDATED'])
+                            ->setFirstName($names[0])
+                            ->setLastName($names[1]);
+        $em = $this->getEntityManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $user;
     }
-    */
 }
