@@ -4,7 +4,7 @@
 namespace App\Utils;
 
 
-class Slugger
+class StringUtil
 {
     static public function slug(string $toSlug): string
     {
