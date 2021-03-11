@@ -4,9 +4,9 @@
 namespace App\Utils;
 
 
-class StringUtil
+class StringUtils
 {
-    static public function slug(string $toSlug): string
+    static public function slugify(string $toSlug): string
     {
         $slug = strtolower(preg_replace(array( '/[^-a-zA-Z0-9\s]/', '/[\s]/' ), array( '', '-' ), $toSlug));
         $slug .= uniqid("-");
