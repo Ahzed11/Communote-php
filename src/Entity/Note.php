@@ -289,9 +289,10 @@ class Note
 
     public function getPath() : string
     {
-        return $this->course->getStudy()->getFaculty()->getSchool()->getTitle() . '/' .
+        $path = $this->course->getStudy()->getFaculty()->getSchool()->getTitle() . '/' .
             $this->course->getStudy()->getFaculty()->getTitle() . '/' .
             $this->course->getStudy()->getTitle() . '/' .
             $this->course->getTitle();
+        return str_replace(' ', '-', $path);
     }
 }

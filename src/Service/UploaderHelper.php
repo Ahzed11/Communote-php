@@ -2,7 +2,8 @@
 
 namespace App\Service;
 
-use App\Utils\Slugger;
+use App\Entity\Note;
+use App\Utils\StringUtils;
 use Aws\S3\S3Client;
 use Aws\S3\S3ClientInterface;
 use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
@@ -21,10 +22,13 @@ class UploaderHelper
     private RequestStackContext $requestStackContext;
     private LoggerInterface $logger;
     private Filesystem $fileSystem;
+    private string $publicAssetsBaseUrl;
 
     public function __construct(string $bucket, string $accessId, string $accessSecret, string $region,
-                                RequestStackContext $requestStackContext, LoggerInterface $logger)
+                                RequestStackContext $requestStackContext, LoggerInterface $logger,
+                                string $uploadedAssetsBaseUrl)
     {
+        $this->publicAssetsBaseUrl = $uploadedAssetsBaseUrl;
         $this->requestStackContext = $requestStackContext;
         $this->logger = $logger;
 
@@ -53,7 +57,7 @@ class UploaderHelper
     public function uploadFile(UploadedFile $uploadedFile, string $path): string
     {
         $originalFileName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $newFileName = Slugger::slug($originalFileName) . '.' . $uploadedFile->guessExtension();
+        $newFileName = StringUtils::slugify($originalFileName) . '.' . $uploadedFile->guessExtension();
 
         $stream = fopen($uploadedFile->getPathname(), 'r');
 
@@ -73,9 +77,9 @@ class UploaderHelper
         return $newFileName;
     }
 
-    public function uploadNoteFile(UploadedFile $noteFile, string $path, ?string $existingFilename): string
+    public function uploadNoteFile(UploadedFile $uploadedFile, string $path, ?string $existingFilename): string
     {
-        $newFileName = $this->uploadFile($noteFile, $path);
+        $newFileName = $this->uploadFile($uploadedFile, $path);
 
         if($existingFilename)
         {
@@ -89,13 +93,14 @@ class UploaderHelper
         return $newFileName;
     }
 
-    public function getPublicPath(string $path) : string
+    public function getNoteFilePublicPath(Note $note) : string
     {
-        if(str_contains($path, '://')){
-            return $path;
+        $fullPath = $this->publicAssetsBaseUrl . '/' . $note->getPath() .'/'. $note->getNoteFile()->getFileName();
+        if(str_contains($fullPath, '://')){
+            return $fullPath;
         }
 
-        return $this->requestStackContext->getBasePath().$path;
+        return $this->requestStackContext->getBasePath() . $fullPath;
     }
 
     public function readStream(string $path)

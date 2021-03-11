@@ -20,6 +20,17 @@
         @apply rounded-lg;
         @apply hover:shadow;
         @apply cursor-pointer;
+        @apply font-semibold;
+    }
+
+    .pill {
+        @apply rounded-full;
+        @apply py-1;
+        @apply px-4;
+        @apply shadow-md;
+        @apply mr-2;
+        @apply text-center;
+        @apply inline-block;
     }
 
     .pagination {
@@ -61,17 +72,27 @@
         @apply dark:text-gray-900;
     }
 
-    .button.primary {
+    .primary {
         @apply bg-purple-700;
         @apply dark:bg-green-600;
         @apply text-white;
     }
 
-    .button.primary.light {
+    .primary.light {
         @apply bg-purple-200;
         @apply dark:bg-green-200;
         @apply text-purple-700;
         @apply dark:text-green-800;
+    }
+
+    .danger {
+        @apply bg-red-700;
+        @apply text-white;
+    }
+
+    .danger.light {
+        @apply bg-red-200;
+        @apply text-red-700;
     }
 
     .browse-search {

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note View{% endblock %}
+
+{% block body %}
+    <section class="text-center mb-8">
+        <h1 class="text-5xl text-bold mb-2">{{ note.title | capitalize }}</h1>
+        <div class="flex justify-center mb-2">
+            <a class="pill primary">
+                {{ note.author.firstName }} {{ note.author.lastName }}
+            </a>
+            <a class="pill primary light">
+                {{ note.course.title }} - {{ note.createdAt | date('Y') }}
+            </a>
+        </div>
+    </section>
+    <section class="container mx-auto">
+        <h2 class="text-3xl text-bold text-purple-700 dark:text-green-400">Description</h2>
+        <p class="mb-4 text-lg">{{ note.description }}</p>
+        <div class="flex justify-between pb-4">
+            <div class="flex space-x-2">
+                <a class="button primary">
+                    Download
+                </a>
+                <a class="button primary light">
+                    Report
+                </a>
+                {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}
+                <a class="button danger">
+                    Edit
+                </a>
+                <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light">
+                    Delete
+                </a>
+                {% endif %}
+            </div>
+            <div>
+                <p>Rating</p>
+            </div>
+        </div>
+        <hr />
+    </section>
+
+    <section class="has-text-centered">
+        <embed
+                class=""
+                src="{{ uploaded_asset(note) }}"
+                type="{{note.noteFile.mimeType}}"
+        />
+    </section>
+{% endblock %}
