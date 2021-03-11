@@ -113,10 +113,10 @@ class UploaderHelper
         return new Stream(null);
     }
 
-    public function deleteFile(string $path): Response
+    public function deleteNoteFile(Note $note): Response
     {
         try {
-            $this->fileSystem->delete($path);
+            $this->fileSystem->delete($note->getPath() .'/'. $note->getNoteFile()->getFileName());
         } catch (FilesystemException $e) {
             $this->logger->error($e);
         }

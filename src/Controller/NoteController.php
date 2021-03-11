@@ -58,9 +58,9 @@ class NoteController extends BaseController
     public function delete(string $slug, NoteRepository $noteRepository, EntityManagerInterface $em,
                            UploaderHelper $uploaderHelper): Response
     {
-        $note = $noteRepository->findOneBy(['slug'=>$slug]);
+        $note = $noteRepository->getNoteBySlug($slug);
 
-        $uploaderHelper->deleteFile($uploaderHelper->getNoteFilePublicPath($note));
+        $uploaderHelper->deleteNoteFile($note);
 
         $em->remove($note);
         $em->flush();
@@ -76,7 +76,7 @@ class NoteController extends BaseController
     #[Route('/view/{slug}', name: 'note_view')]
     public function view(string $slug, NoteRepository $noteRepository): Response
     {
-        $note = $noteRepository->getNoteBySlug($slug)[0];
+        $note = $noteRepository->getNoteBySlug($slug);
 
         if(!$note) {
             throw $this->createNotFoundException();
