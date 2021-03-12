@@ -49,6 +49,7 @@ class NoteType extends AbstractType
 
         $builder
             ->add('title')
+            ->add('shortDescription')
             ->add('description')
             ->add('course', null, array(
                 "class" => Course::class,

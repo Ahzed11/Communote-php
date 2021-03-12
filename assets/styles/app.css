@@ -160,6 +160,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -173,6 +175,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -186,6 +190,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -199,6 +205,8 @@
         @apply ml-2;
         @apply rounded-lg;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
@@ -214,6 +222,8 @@
         @apply resize-none;
         @apply rounded-lg;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply dark:text-green-400;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -227,6 +237,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -239,7 +251,6 @@
     select {
         @apply w-full;
         @apply mb-3;
-        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
