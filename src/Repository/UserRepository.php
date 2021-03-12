@@ -4,10 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,8 +27,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * Used to upgrade (rehash) the user's password automatically over time.
      * @param UserInterface $user
      * @param string $newEncodedPassword
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
@@ -46,6 +41,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findOrCreateFromOAuth(AzureResourceOwner $owner): User
     {
+        // If User already exist and has oid
         $user = $this->createQueryBuilder('u')
             ->where('u.azureOID = :oid')
             ->setParameter('oid', $owner->getId())
@@ -56,14 +52,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             return $user;
         }
 
+        $em = $this->getEntityManager();
         $names = explode(' ', $owner->claim('name'));
+
+        // if User already exist but doesn't have an oid
+        $user = $this->createQueryBuilder('u')
+            ->where('u.email = :email')
+            ->setParameter('email', $owner->claim('email'))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if ($user) {
+            $user->setAzureOID($owner->getId())
+                ->setRoles(['ROLE_VALIDATED'])
+                ->setFirstName($names[0])
+                ->setLastName($names[1]);
+            $em->persist($user);
+            $em->flush();
+            return $user;
+        }
+
+        // If User doesn't exist
         $user = (new User())->setAzureOID($owner->getId())
                             ->setEmail($owner->claim('email'))
                             ->setPassword(null)
                             ->setRoles(['ROLE_VALIDATED'])
                             ->setFirstName($names[0])
                             ->setLastName($names[1]);
-        $em = $this->getEntityManager();
         $em->persist($user);
         $em->flush();
 
