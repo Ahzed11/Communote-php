@@ -15,14 +15,18 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Asset\Context\RequestStackContext;
 use Symfony\Component\HttpFoundation\File\Stream;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class UploaderHelper
+class S3Helper
 {
     private RequestStackContext $requestStackContext;
     private LoggerInterface $logger;
     private Filesystem $fileSystem;
+    private S3ClientInterface $client;
     private string $publicAssetsBaseUrl;
+    private string $bucket;
 
     public function __construct(string $bucket, string $accessId, string $accessSecret, string $region,
                                 RequestStackContext $requestStackContext, LoggerInterface $logger,
@@ -31,11 +35,9 @@ class UploaderHelper
         $this->publicAssetsBaseUrl = $uploadedAssetsBaseUrl;
         $this->requestStackContext = $requestStackContext;
         $this->logger = $logger;
+        $this->bucket = $bucket;
 
-        /**
-         * @var $client S3ClientInterface
-         */
-        $client = new S3Client([
+        $this->client = new S3Client([
             'credentials' => [
                 'key' => $accessId,
                 'secret' => $accessSecret,
@@ -44,7 +46,7 @@ class UploaderHelper
             'version' => '2006-03-01'
         ]);
         $adapter = new AwsS3V3Adapter(
-            $client,
+            $this->client,
             $bucket,
             '',
             new PortableVisibilityConverter(
@@ -121,5 +123,24 @@ class UploaderHelper
             $this->logger->error($e);
         }
         return new Response(null, 204);
+    }
+
+    public function getDownloadRedirectResponse(Note $note) : RedirectResponse
+    {
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            $note->getNoteFile()->getOriginalFilename(),
+            'download'
+        );
+
+        $command = $this->client->getCommand('GetObject', [
+            'Bucket' => $this->bucket,
+            'Key' => $note->getNoteFile()->getFilename(),
+            'ResponceContentType' => $note->getNoteFile()->getMimeType(),
+            'ResponseContentDisposition' => $disposition
+        ]);
+
+        $request = $this->client->createPresignedRequest($command, '+5 minutes');
+        return new RedirectResponse((string) $request->getUri());
     }
 }

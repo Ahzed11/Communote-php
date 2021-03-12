@@ -6,8 +6,12 @@ use App\Entity\Note;
 use App\Entity\NoteFile;
 use App\Form\NoteType;
 use App\Repository\NoteRepository;
-use App\Service\UploaderHelper;
+use App\Service\S3Helper;
+use Aws\S3\S3Client;
+use Aws\S3\S3ClientInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NoteController extends BaseController
 {
     #[Route('/create', name: 'note_create')]
-    public function write(UploaderHelper $uploaderHelper, Request $request, EntityManagerInterface $em): Response
+    public function write(S3Helper $uploaderHelper, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(NoteType::class);
         $form->handleRequest($request);
@@ -55,11 +59,9 @@ class NoteController extends BaseController
     }
 
     #[Route('/edit/{slug}', name: 'note_edit')]
-    public function edit(string $slug, NoteRepository $noteRepository, UploaderHelper $uploaderHelper,
+    public function edit(Note $note, S3Helper $uploaderHelper,
                          Request $request, EntityManagerInterface $em): Response
     {
-        $note = $noteRepository->getNoteBySlug($slug);
-
         $form = $this->createForm(NoteType::class, $note);
         $form->handleRequest($request);
 
@@ -97,11 +99,9 @@ class NoteController extends BaseController
     }
 
     #[Route('/delete/{slug}', name: 'note_delete')]
-    public function delete(string $slug, NoteRepository $noteRepository, EntityManagerInterface $em,
-                           UploaderHelper $uploaderHelper): Response
+    public function delete(Note $note, EntityManagerInterface $em,
+                           S3Helper $uploaderHelper): Response
     {
-        $note = $noteRepository->getNoteBySlug($slug);
-
         $uploaderHelper->deleteNoteFile($note);
 
         $em->remove($note);
@@ -115,11 +115,15 @@ class NoteController extends BaseController
         ]);
     }
 
-    #[Route('/view/{slug}', name: 'note_view')]
-    public function view(string $slug, NoteRepository $noteRepository): Response
+    #[Route('/download/{slug}', name: 'note_download')]
+    public function download(Note $note, S3Helper $s3Helper): RedirectResponse
     {
-        $note = $noteRepository->getNoteBySlug($slug);
+        return $s3Helper->getDownloadRedirectResponse($note);
+    }
 
+    #[Route('/view/{slug}', name: 'note_view')]
+    public function view(Note $note): Response
+    {
         if(!$note) {
             throw $this->createNotFoundException();
         }

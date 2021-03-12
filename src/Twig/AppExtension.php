@@ -5,15 +5,15 @@ namespace App\Twig;
 
 
 use App\Entity\Note;
-use App\Service\UploaderHelper;
+use App\Service\S3Helper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
-    private UploaderHelper $uploaderHelper;
+    private S3Helper $uploaderHelper;
 
-    public function __construct(UploaderHelper $uploaderHelper)
+    public function __construct(S3Helper $uploaderHelper)
     {
         $this->uploaderHelper = $uploaderHelper;
     }
