@@ -44,7 +44,7 @@ class NoteController extends BaseController
                 $em->persist($note);
                 $em->flush();
 
-                // TODO: Redirect to user's note page
+                return $this->redirectToRoute('note_view', ['slug' => $note->getSlug()]);
             }
         }
 
