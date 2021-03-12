@@ -38,10 +38,10 @@ class User implements UserInterface
     private iterable $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @var ?string The hashed password
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $password;
+    private ?string $password;
 
     private ?string $plainPassword;
 
@@ -89,6 +89,11 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private DateTimeInterface $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $azureOID;
 
     public function __construct()
     {
@@ -148,12 +153,12 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -364,6 +369,18 @@ class User implements UserInterface
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAzureOID(): ?string
+    {
+        return $this->azureOID;
+    }
+
+    public function setAzureOID(?string $azureOID): self
+    {
+        $this->azureOID = $azureOID;
 
         return $this;
     }
