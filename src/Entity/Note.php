@@ -239,6 +239,16 @@ class Note
         return $this;
     }
 
+    public function getAverageScore(): float
+    {
+        $sum = 0.0;
+        foreach ($this->reviews as $review) {
+            $sum += $review->getScore();
+        }
+
+        return sizeof($this->reviews) > 0 ? $sum / sizeof($this->reviews) : 0;
+    }
+
     public function removeReview(Review $review): self
     {
         if ($this->reviews->removeElement($review)) {

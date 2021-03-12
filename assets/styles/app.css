@@ -125,6 +125,12 @@
         @apply text-red-700;
     }
 
+    .warning {
+        @apply bg-yellow-500;
+        @apply dark:bg-yellow-400;
+        @apply text-white;
+    }
+
     .browse-search {
         @apply dark:text-white !important;
         @apply dark:bg-gray-900;

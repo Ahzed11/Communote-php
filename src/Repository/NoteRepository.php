@@ -49,7 +49,6 @@ class NoteRepository extends ServiceEntityRepository
             ->addSelect('a')
             ->andWhere('n.slug = :slug')
             ->setParameter('slug', $slug)
-            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }
