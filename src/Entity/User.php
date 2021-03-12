@@ -38,10 +38,10 @@ class User implements UserInterface
     private iterable $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @var ?string The hashed password
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $password;
+    private ?string $password;
 
     private ?string $plainPassword;
 
@@ -148,12 +148,12 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 

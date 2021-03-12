@@ -23,6 +23,36 @@
         @apply font-semibold;
     }
 
+    .content h1 {
+        @apply text-3xl;
+        @apply font-semibold;
+    }
+
+    .content h2 {
+        @apply text-2xl;
+        @apply font-semibold;
+    }
+
+    .content h3 {
+        @apply text-xl;
+        @apply font-semibold;
+    }
+
+    .content h4 {
+        @apply text-lg;
+        @apply font-semibold;
+    }
+
+    .content h5 {
+        @apply font-semibold;
+    }
+
+    .content a {
+        @apply underline;
+        @apply text-purple-700;
+        @apply dark:text-green-400;
+    }
+
     .pill {
         @apply rounded-full;
         @apply py-1;

@@ -99,6 +99,9 @@
     "knplabs/knp-components": {
         "version": "v3.0.0"
     },
+    "knplabs/knp-markdown-bundle": {
+        "version": "1.9.0"
+    },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.4.2"
     },
@@ -122,6 +125,9 @@
     },
     "league/mime-type-detection": {
         "version": "1.7.0"
+    },
+    "michelf/php-markdown": {
+        "version": "1.9.0"
     },
     "monolog/monolog": {
         "version": "2.2.0"
