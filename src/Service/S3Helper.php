@@ -135,7 +135,7 @@ class S3Helper
 
         $command = $this->client->getCommand('GetObject', [
             'Bucket' => $this->bucket,
-            'Key' => $note->getNoteFile()->getFilename(),
+            'Key' => $note->getPath() . '/' . $note->getNoteFile()->getFilename(),
             'ResponceContentType' => $note->getNoteFile()->getMimeType(),
             'ResponseContentDisposition' => $disposition
         ]);
