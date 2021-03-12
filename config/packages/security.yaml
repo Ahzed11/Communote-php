@@ -19,10 +19,10 @@ security:
             lazy: true
             provider: app_user_provider
             guard:
-                entry_point: App\Security\Authenticator
+                # entry_point: App\Security\Authenticator
                 authenticators:
-                    - App\Security\Authenticator
                     - App\Security\AzureAuthenticator
+                    # - App\Security\Authenticator
             logout:
                 path: logout
                 # where to redirect after logout

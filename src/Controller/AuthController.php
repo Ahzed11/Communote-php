@@ -19,6 +19,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route(path: "/auth")]
 class AuthController extends BaseController
 {
+    /*
     #[Route(path: "/register", name: "register")]
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em,
                             GuardAuthenticatorHandler $guardAuthenticatorHandler, Authenticator $authenticator): Response
@@ -27,9 +28,6 @@ class AuthController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            /**
-             * @var $user User
-             */
             $user = $form->getData();
 
             $user->setFirstName(ucfirst($user->getFirstName()));
@@ -66,6 +64,7 @@ class AuthController extends BaseController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+    */
 
     #[Route(path: "/connect/azure", name: "azure_connect")]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
