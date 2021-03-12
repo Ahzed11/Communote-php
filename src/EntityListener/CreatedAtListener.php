@@ -16,6 +16,6 @@ class CreatedAtListener
 
     public function preUpdate($e)
     {
-        $e->setCreatedAt(new DateTime("NOW"));
+        $e->setUpdatedAt(new DateTime("NOW"));
     }
 }
