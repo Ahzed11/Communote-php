@@ -52,7 +52,7 @@
                     <a href="{#{{ path('my-account') }}#}">My account</a>
                 </li>
                 <li class="py-1 hover:text-purple-700">
-                    <a href="{{ path('logout') }}">Log out</a>
+                    <a href="{{ path('logout') }}">Sign out</a>
                 </li>
             </ul>
         </li>
@@ -60,25 +60,12 @@
 
     {% else %}
 
-    <ul class="inline-flex py-2 content-center gap-x-2 text-md font-medium">
-        <li class="button primary">
-            <a href="{{ path('azure_connect') }}">
-                <svg class="lg:hidden" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z" />
-                </svg>
-                <span class="hidden lg:inline">S'enregistrer</span>
-            </a>
-        </li>
-
-        <li class="button primary light">
-            <a href="{{ path('azure_connect') }}">
-                <svg class="lg:hidden" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
-                </svg>
-                <span class="hidden lg:inline">Se connecter</span>
-            </a>
-        </li>
-    </ul>
+    <div class="flex justify-center h-10 mt-2 mr-2">
+        <span class="button primary flex flex-wrap space-x-2">
+            <img src="{{ asset('build/images/ms.png') }}" alt="Microsoft Logo" class="w-6 h-6"/>
+            <a href="{{ path('azure_connect') }}" class="font-semibold">Sign In</a>
+        </span>
+    </div>
 
     {% endif %}
 </nav>
