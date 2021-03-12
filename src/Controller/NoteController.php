@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/note')]
 class NoteController extends BaseController
 {
-    #[Route('/write', name: 'note_write')]
+    #[Route('/create', name: 'note_create')]
     public function write(UploaderHelper $uploaderHelper, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(NoteType::class);
@@ -46,6 +46,48 @@ class NoteController extends BaseController
 
                 return $this->redirectToRoute('note_view', ['slug' => $note->getSlug()]);
             }
+        }
+
+        return $this->render("note/write.html.twig", [
+            'controller_name' => 'NoteController',
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/edit/{slug}', name: 'note_edit')]
+    public function edit(string $slug, NoteRepository $noteRepository, UploaderHelper $uploaderHelper,
+                         Request $request, EntityManagerInterface $em): Response
+    {
+        $note = $noteRepository->getNoteBySlug($slug);
+
+        $form = $this->createForm(NoteType::class, $note);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            /**
+             * @var $note NoteFile
+             */
+            $uploadedFile = $form['noteFile']->getData();
+
+            /**
+             * @var $note Note
+             */
+            $note = $form->getData();
+
+            if ($uploadedFile) {
+                $newFileName = $uploaderHelper->uploadNoteFile($uploadedFile, $note->getPath(), $note->getNoteFile()->getFileName());
+                $noteFile = new NoteFile();
+                $noteFile->setFileName($newFileName);
+                $noteFile->setOriginalFilename($uploadedFile->getClientOriginalName() ?? $newFileName);
+                $noteFile->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
+
+                $note->setNoteFile($noteFile);
+            }
+
+            $em->persist($note);
+            $em->flush();
+
+            return $this->redirectToRoute('note_view', ['slug' => $note->getSlug()]);
         }
 
         return $this->render("note/write.html.twig", [

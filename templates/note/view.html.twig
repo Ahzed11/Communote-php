@@ -16,7 +16,9 @@
     </section>
     <section class="container mx-auto">
         <h2 class="text-3xl text-bold text-purple-700 dark:text-green-400">Description</h2>
-        <p class="mb-4 text-lg">{{ note.description }}</p>
+        <article class="content mt-2 mb-4">
+            {{ note.description | markdown }}
+        </article>
         <div class="flex justify-between pb-4">
             <div class="flex space-x-2">
                 <a class="button primary">
@@ -26,7 +28,7 @@
                     Report
                 </a>
                 {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}
-                <a class="button danger">
+                <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="button danger">
                     Edit
                 </a>
                 <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light">
@@ -43,7 +45,7 @@
 
     <section class="has-text-centered">
         <embed
-                class=""
+                class="w-3/4 h mx-auto"
                 src="{{ uploaded_asset(note) }}"
                 type="{{note.noteFile.mimeType}}"
         />
