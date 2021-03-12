@@ -53,6 +53,7 @@ class AuthController extends BaseController
             "form" => $form->createView(),
         ]);
     }
+    */
 
     #[Route(path: "/login", name: "login")]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -64,7 +65,6 @@ class AuthController extends BaseController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-    */
 
     #[Route(path: "/connect/azure", name: "azure_connect")]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
