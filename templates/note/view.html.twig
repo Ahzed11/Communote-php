@@ -7,10 +7,15 @@
         <h1 class="text-5xl text-bold mb-2">{{ note.title | capitalize }}</h1>
         <div class="flex justify-center mb-2">
             <a class="pill primary">
-                {{ note.author.firstName }} {{ note.author.lastName }}
+                {{ note.author.firstName | capitalize }} {{ note.author.lastName | capitalize }}
             </a>
-            <a class="pill primary light">
-                {{ note.course.title }} - {{ note.createdAt | date('Y') }}
+            <a href="{{ path('browse_note', {
+                'faculty':note.course.study.faculty.title,
+                'study':note.course.study.title,
+                'year':note.course.year.title,
+                'course':note.course.title,
+            }) }}" class="pill primary light">
+                {{ note.course.code }} - {{ note.createdAt | date('Y') }}
             </a>
         </div>
     </section>

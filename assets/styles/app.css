@@ -72,8 +72,7 @@
     }
 
     .pagination span {
-        @apply px-3;
-        @apply py-1;
+        @apply block;
         @apply rounded-lg;
         @apply shadow-lg;
         @apply font-bold;
@@ -83,12 +82,21 @@
         @apply dark:bg-gray-900;
     }
 
+    .pagination span a {
+        @apply inline-block;
+        @apply px-4;
+        @apply py-2;
+    }
+
     .pagination span:hover {
         @apply text-white;
         @apply dark:text-green-400;
     }
 
     .pagination .current {
+        @apply inline-block;
+        @apply px-4;
+        @apply py-2;
         @apply bg-purple-700;
         @apply dark:bg-green-400;
         @apply text-white;
@@ -126,9 +134,10 @@
     }
 
     .warning {
-        @apply bg-yellow-500;
-        @apply dark:bg-yellow-400;
+        @apply bg-yellow-400;
+        @apply dark:bg-yellow-200;
         @apply text-white;
+        @apply dark:text-yellow-600;
     }
 
     .browse-search {

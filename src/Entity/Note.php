@@ -38,10 +38,17 @@ class Note
     private string $title;
 
     /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    #[NotBlank]
+    #[Length(max: 127)]
+    private string $shortDescription;
+
+    /**
      * @ORM\Column(type="text")
      */
     #[NotBlank]
-    #[Length(max: 800)]
+    #[Length(max: 2000)]
     private string $description;
 
     /**
@@ -118,6 +125,18 @@ class Note
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(string $shortDescription): self
+    {
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }

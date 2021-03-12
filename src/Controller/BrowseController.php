@@ -128,6 +128,7 @@ class BrowseController extends BaseController
             'title' => 'Notes',
             'pagination' => $pagination,
             'cardComponent' => NOTE_CARD_COMPONENT,
+            'isNote' => true,
         ]);
     }
 }

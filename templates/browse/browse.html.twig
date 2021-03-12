@@ -26,9 +26,13 @@
         <section>
             <ul class="list-none grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6">
                 {% for item in pagination %}
-                    {% set path = path(app.request.attributes.get('_route'),
-                        app.request.attributes.get('_route_params')) %}
-                    {% set path = path ~ ((path | slice(-1)) == '/' ? '' : '/') ~ item.title %}
+                    {% if not isNote is defined %}
+                        {% set path = path(app.request.attributes.get('_route'),
+                            app.request.attributes.get('_route_params')) %}
+                        {% set path = path ~ ((path | slice(-1)) == '/' ? '' : '/') ~ item.title %}
+                    {% else %}
+                        {% set path = path('note_view', { 'slug':item.slug }) %}
+                    {% endif %}
                     
                     {% include cardComponent with {
                         'path': path
