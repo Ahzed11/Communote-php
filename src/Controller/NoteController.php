@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Note;
 use App\Entity\NoteFile;
+use App\Form\CommentType;
 use App\Form\NoteType;
+use App\Repository\CommentRepository;
 use App\Service\S3Helper;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -118,15 +122,42 @@ class NoteController extends BaseController
     }
 
     #[Route('/view/{slug}', name: 'note_view')]
-    public function view(Note $note): Response
+    public function view(Note $note, CommentRepository $commentRepository, PaginatorInterface $paginator,
+                         Request $request, EntityManagerInterface $em)
+        : Response
     {
         if(!$note) {
             throw $this->createNotFoundException();
         }
 
+        $form = $this->createForm(CommentType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var $comment Comment
+             */
+            $comment = $form->getData();
+            $comment->setNote($note);
+
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('note_view', ['slug' => $note->getSlug()]);
+        }
+
+        $query = $commentRepository->queryCommentsByNoteSlug($note->getSlug());
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            8,
+        );
+
         return $this->render("note/view.html.twig", [
             'controller_name' => 'NoteController',
             'note' => $note,
+            'pagination' => $pagination,
+            'form' => $form->createView(),
         ]);
     }
 }

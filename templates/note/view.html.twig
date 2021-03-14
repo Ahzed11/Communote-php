@@ -24,7 +24,7 @@
         <article class="content mt-2 mb-4">
             {{ note.description | markdown }}
         </article>
-        <div class="flex justify-between pb-4">
+        <div class="flex pb-4 flex-wrap sm:justify-between justify-around">
             <div class="flex space-x-2">
                 <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary">
                     Download
@@ -52,7 +52,24 @@
         <embed
                 class="w-3/4 h mx-auto"
                 src="{{ uploaded_asset(note) }}"
-                type="{{note.noteFile.mimeType}}"
+                type="{{ note.noteFile.mimeType }}"
         />
+    </section>
+
+    <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
+        <hr class="mb-4" />
+        {% for item in pagination %}
+            {% include ('/component/comment/comment.html.twig') %}
+        {% endfor %}
+        {{ knp_pagination_render(pagination) }}
+
+        <div class="mt-8">
+            <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl p-8">
+                <h2 class="text-3xl text-center text-bold text-purple-700 dark:text-white mb-4">
+                    Post a comment
+                </h2>
+                {{ form(form) }}
+            </div>
+        </div>
     </section>
 {% endblock %}

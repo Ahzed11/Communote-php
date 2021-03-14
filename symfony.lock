@@ -138,6 +138,9 @@
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
+    "php": {
+        "version": "8.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },

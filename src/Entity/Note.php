@@ -70,7 +70,7 @@ class Note
     private NoteFile $noteFile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Note", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="note", orphanRemoval=true)
      */
     private iterable $comments;
 

@@ -42,7 +42,7 @@ class NoteRepository extends ServiceEntityRepository
 
     public function getNoteBySlug(string $slug) : Note
     {
-        return $result = $this->createQueryBuilder('n')
+        return $this->createQueryBuilder('n')
             ->leftJoin('n.course', 'c')
             ->addSelect('c')
             ->leftJoin('n.author', 'a')
