@@ -58,9 +58,11 @@
 
     <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
         <hr class="mb-4" />
-        {% for item in pagination %}
-            {% include ('/component/comment/comment.html.twig') %}
-        {% endfor %}
+        <div class="flex flex-col space-y-4">
+            {% for item in pagination %}
+                {% include ('/component/comment/comment.html.twig') %}
+            {% endfor %}
+        </div>
         {{ knp_pagination_render(pagination) }}
 
         <div class="mt-8">

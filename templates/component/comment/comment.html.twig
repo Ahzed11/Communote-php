@@ -1,7 +1,7 @@
-<div class="p-4 mt-2 bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl flex">
+<div class="p-4 mt-2 bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl flex shadow" data-controller="comment">
     <div class="rounded-full bg-purple-700 text-white dark:text-black dark:bg-green-400 w-14 h-12
     w-min-14 h-min-12 mr-4 flex items-center justify-center">
-        <span class="text-center">
+        <span class="text-center text-gray-100 dark:text-gray-900">
             {{ item.author.firstname | slice(0, 1) }}{{ item.author.lastName | slice(0, 1) }}
         </span>
     </div>
@@ -17,8 +17,14 @@
         <p class="break-all">{{ item.body }}</p>
         {#{% if is_granted("ROLE_USER") or is_granted("COMMENT_EDIT") %}#}
         <div class="flex justify-end">
-            <div class="text-xl font-bold text-purple-700 dark:text-green-400 px-4 cursor-pointer">
-                <span>...</span>
+            <div class="relative">
+                <button class="text-xl font-bold text-purple-700 dark:text-green-400 px-4">...</button>
+                <nav class="absolute p-4 rounded-2xl bg-purple-700 dark:bg-green-400 dark:text-white top-0 right-0 hidden"
+                >
+                    <ul class="text-gray-100 dark:text-gray-900">
+                        <li><a href="{{ path('comment_delete', { id: item.id }) }}">Delete</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
         {# {% endif %} #}
