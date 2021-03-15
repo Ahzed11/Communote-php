@@ -29,7 +29,7 @@
                 <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary">
                     Download
                 </a>
-                <a class="button primary light">
+                <a href="{{ path('report_create', {'slug': note.slug}) }}" class="button primary light">
                     Report
                 </a>
                 {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}

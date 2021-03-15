@@ -33,7 +33,6 @@ class Report
      * @ORM\ManyToOne(targetEntity=Note::class, inversedBy="reports")
      * @ORM\JoinColumn(nullable=false)
      */
-    #[NotNull]
     private Note $Note;
 
     /**
