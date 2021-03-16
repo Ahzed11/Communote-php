@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends BaseController
 {
     /**
-     * @IsGranted("COMMENT_DELETE")
+     * @IsGranted("COMMENT_DELETE", subject="comment", message="You are not allowed to delete this message")
      */
     #[Route('/delete/{id}', name: 'comment_delete')]
     public function delete(Comment $comment, EntityManagerInterface $em): Response

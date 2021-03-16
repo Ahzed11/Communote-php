@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NoteController extends BaseController
 {
     /**
-     * @IsGranted("NOTE_CREATE")
+     * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
      */
     #[Route('/create', name: 'note_create')]
     public function write(S3Helper $uploaderHelper, Request $request, EntityManagerInterface $em): Response
@@ -67,7 +67,7 @@ class NoteController extends BaseController
     }
 
     /**
-     * @IsGranted("NOTE_EDIT")
+     * @IsGranted("NOTE_EDIT", subject="note", message="You do not own this note")
      */
     #[Route('/edit/{slug}', name: 'note_edit')]
     public function edit(Note $note, S3Helper $uploaderHelper,
@@ -110,7 +110,7 @@ class NoteController extends BaseController
     }
 
     /**
-     * @IsGranted("NOTE_DELETE")
+     * @IsGranted("NOTE_DELETE", subject="note", message="You do not own this note")
      */
     #[Route('/delete/{slug}', name: 'note_delete')]
     public function delete(Note $note, EntityManagerInterface $em,
@@ -148,7 +148,7 @@ class NoteController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->isGranted("NOTE_CREATE", $this->getUser())) {
+            if (!$this->isGranted("ROLE_VALIDATED", $this->getUser())) {
                 throw $this->createAccessDeniedException("Your account is not validated");
             }
             /**

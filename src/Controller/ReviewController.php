@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReviewController extends BaseController
 {
     /**
-     * @IsGranted("REVIEW_CREATE")
+     * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
      */
     #[Route('/create/{slug}', name: 'review_create')]
     public function create(Note $note, EntityManagerInterface $em, Request $request): Response
@@ -38,7 +38,7 @@ class ReviewController extends BaseController
     }
 
     /**
-     * @IsGranted("REVIEW_EDIT")
+     * @IsGranted("REVIEW_EDIT", subject="review", message="You do not own this review")
      */
     #[Route('/edit/{id}', name: 'review_edit')]
     public function edit(Review $review, EntityManagerInterface $em, Request $request): Response

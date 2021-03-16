@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReportController extends BaseController
 {
     /**
-     * @IsGranted("REPORT_CREATE")
+     * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
      */
     #[Route('/create/{slug}', name: 'report_create')]
     public function delete(Note $note, EntityManagerInterface $em, Request $request): Response

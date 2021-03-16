@@ -20,7 +20,7 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
-    public function getByNoteSlugAndUser(string $slug, int $id) : Review {
+    public function getByNoteSlugAndUser(string $slug, int $id) : ?Review {
         return $this->createQueryBuilder('r')
             ->leftJoin('r.note', 'n')
             ->addSelect('n')
