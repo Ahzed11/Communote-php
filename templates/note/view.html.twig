@@ -41,8 +41,24 @@
                 </a>
                 {% endif %}
             </div>
-            <div class="mt-2">
-                <span class="button warning">Score: {{ note.averageScore }}</span>
+            <div class="button warning" data-controller="review">
+                {% if not userReview is defined %}
+                    <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                {% else %}
+                    <span class="hidden">{{ path('review_edit', {'id': userReview.id}) }}</span>
+                    {% for i in 0..4 %}
+                        {% if i <= userReview.score %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
         <hr />

@@ -8,6 +8,7 @@ use App\Entity\NoteFile;
 use App\Form\CommentType;
 use App\Form\NoteType;
 use App\Repository\CommentRepository;
+use App\Repository\ReviewRepository;
 use App\Service\S3Helper;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -122,8 +123,8 @@ class NoteController extends BaseController
     }
 
     #[Route('/view/{slug}', name: 'note_view')]
-    public function view(Note $note, CommentRepository $commentRepository, PaginatorInterface $paginator,
-                         Request $request, EntityManagerInterface $em)
+    public function view(Note $note, CommentRepository $commentRepository, ReviewRepository $reviewRepository,
+                         PaginatorInterface $paginator, Request $request, EntityManagerInterface $em)
         : Response
     {
         if(!$note) {
@@ -146,6 +147,8 @@ class NoteController extends BaseController
             return $this->redirectToRoute('note_view', ['slug' => $note->getSlug()]);
         }
 
+        $userReview = $reviewRepository->getByNoteSlugAndUser($note->getSlug(), $this->getUser()->getId());
+
         $query = $commentRepository->queryCommentsByNoteSlug($note->getSlug());
         $pagination = $paginator->paginate(
             $query,
@@ -156,6 +159,7 @@ class NoteController extends BaseController
         return $this->render("note/view.html.twig", [
             'controller_name' => 'NoteController',
             'note' => $note,
+            'userReview' => $userReview,
             'pagination' => $pagination,
             'form' => $form->createView(),
         ]);
