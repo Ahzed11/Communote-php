@@ -12,14 +12,21 @@ use App\Repository\ReviewRepository;
 use App\Service\S3Helper;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 #[Route('/note')]
 class NoteController extends BaseController
 {
+    /**
+     * @IsGranted("NOTE_CREATE")
+     */
     #[Route('/create', name: 'note_create')]
     public function write(S3Helper $uploaderHelper, Request $request, EntityManagerInterface $em): Response
     {
@@ -59,6 +66,9 @@ class NoteController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("NOTE_EDIT")
+     */
     #[Route('/edit/{slug}', name: 'note_edit')]
     public function edit(Note $note, S3Helper $uploaderHelper,
                          Request $request, EntityManagerInterface $em): Response
@@ -99,6 +109,9 @@ class NoteController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("NOTE_DELETE")
+     */
     #[Route('/delete/{slug}', name: 'note_delete')]
     public function delete(Note $note, EntityManagerInterface $em,
                            S3Helper $uploaderHelper): Response
@@ -135,6 +148,9 @@ class NoteController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->isGranted("NOTE_CREATE", $this->getUser())) {
+                throw $this->createAccessDeniedException("Your account is not validated");
+            }
             /**
              * @var $comment Comment
              */

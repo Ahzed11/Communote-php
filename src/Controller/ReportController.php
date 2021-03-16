@@ -6,13 +6,20 @@ use App\Entity\Note;
 use App\Entity\Report;
 use App\Form\ReportType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 #[Route('/report')]
 class ReportController extends BaseController
 {
+    /**
+     * @IsGranted("REPORT_CREATE")
+     */
     #[Route('/create/{slug}', name: 'report_create')]
     public function delete(Note $note, EntityManagerInterface $em, Request $request): Response
     {

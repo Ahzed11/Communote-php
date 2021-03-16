@@ -41,6 +41,7 @@
                 </a>
                 {% endif %}
             </div>
+            {% if not note.author == app.user %}
             <div class="button warning" data-controller="review">
                 {% if not userReview is defined %}
                     <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
@@ -60,6 +61,7 @@
                     {% endfor %}
                 {% endif %}
             </div>
+            {% endif %}
         </div>
         <hr />
     </section>
