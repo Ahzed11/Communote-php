@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Course;
-use App\Entity\Faculty;
 use App\Entity\Note;
+use App\Form\DataTransformer\TextToCourseTransformer;
 use App\Repository\CourseRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -51,11 +51,7 @@ class NoteType extends AbstractType
             ->add('title')
             ->add('shortDescription')
             ->add('description')
-            ->add('course', null, array(
-                "class" => Course::class,
-                "placeholder" => 'Select a course',
-                "choices" => $this->courseRepository->findAll(),
-            ))
+            ->add('course', CourseSelectTextType::class)
             ->add('noteFile', FileType::class, array(
                     'mapped' => false,
                     'required' => !$isEdit || !$note,

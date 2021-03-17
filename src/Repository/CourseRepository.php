@@ -33,12 +33,33 @@ class CourseRepository extends ServiceEntityRepository
 
         if($term)
         {
-            $qb->andWhere('LOWER(c.title) LIKE LOWER(:term) OR LOWER(c.title) LIKE LOWER(:term) OR LOWER(s.title) LIKE LOWER(:term) OR
+            $qb->andWhere('LOWER(c.title) LIKE LOWER(:term) OR LOWER(c.code) LIKE LOWER(:term) OR LOWER(s.title) LIKE LOWER(:term) OR
             LOWER(y.title) LIKE LOWER(:term)')
                 ->setParameter('term', '%'.$term.'%');
         }
 
         $qb->orderBy('c.title', 'ASC');
         return $qb;
+    }
+
+    public function getByTitleOrCode(string $term, int $limit = 5) : iterable
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('LOWER(c.title) LIKE LOWER(:term) OR LOWER(c.code) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->setMaxResults($limit)
+            ->orderBy('c.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getByTitleAndCode(string $code, string $title) : ?Course
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('LOWER(c.title) LIKE LOWER(:title) AND LOWER(c.code) LIKE LOWER(:code)')
+            ->setParameter('code', '%'.$code.'%')
+            ->setParameter('title', '%'.$title.'%')
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

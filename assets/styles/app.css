@@ -216,15 +216,24 @@
     }
 
     input[type=file] {
+        @apply opacity-0;
+        @apply h-12;
         @apply inline-block;
-        @apply mb-4;
         @apply w-full;
+    }
+
+    .file {
+        @apply inline-block;
+        @apply w-full;
+        @apply h-12;
+        @apply p-2;
+        @apply mb-4;
         @apply resize-none;
         @apply rounded-lg;
-        @apply text-black;
-        @apply dark:text-white;
+        @apply text-gray-300;
+        @apply dark:text-gray-600;
+        @apply bg-white;
         @apply dark:bg-gray-800;
-        @apply dark:text-green-400;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
