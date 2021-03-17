@@ -2,10 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Course;
 use App\Entity\Note;
-use App\Form\DataTransformer\TextToCourseTransformer;
-use App\Repository\CourseRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,13 +13,6 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 class NoteType extends AbstractType
 {
-    private CourseRepository $courseRepository;
-
-    public function __construct(CourseRepository $courseRepository)
-    {
-        $this->courseRepository = $courseRepository;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /** @var Note|Null $note */
@@ -48,10 +38,26 @@ class NoteType extends AbstractType
         }
 
         $builder
-            ->add('title')
-            ->add('shortDescription')
-            ->add('description')
-            ->add('course', CourseSelectTextType::class)
+            ->add('title', null, [
+                'attr' => [
+                    'placeholder' => 'Title'
+                ]
+            ])
+            ->add('shortDescription', null, [
+                'attr' => [
+                    'placeholder' => 'A small text to describe my note which will be displayed on the note card'
+                ]
+            ])
+            ->add('description', null, [
+                'attr' => [
+                    'placeholder' => 'A longer text to describe in detail my note which will be displayed on the note view page'
+                ]
+            ])
+            ->add('course', CourseSelectTextType::class, [
+                'attr' => [
+                    'placeholder' => 'CODE - Course name'
+                ]
+            ])
             ->add('noteFile', FileType::class, array(
                     'mapped' => false,
                     'required' => !$isEdit || !$note,
