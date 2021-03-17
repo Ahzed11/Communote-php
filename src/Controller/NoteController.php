@@ -8,6 +8,7 @@ use App\Entity\NoteFile;
 use App\Form\CommentType;
 use App\Form\NoteType;
 use App\Repository\CommentRepository;
+use App\Repository\NoteRepository;
 use App\Repository\ReviewRepository;
 use App\Service\S3Helper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -136,10 +137,12 @@ class NoteController extends BaseController
     }
 
     #[Route('/view/{slug}', name: 'note_view')]
-    public function view(Note $note, CommentRepository $commentRepository, ReviewRepository $reviewRepository,
-                         PaginatorInterface $paginator, Request $request, EntityManagerInterface $em)
+    public function view(string $slug,NoteRepository $noteRepository, CommentRepository $commentRepository,
+                         ReviewRepository $reviewRepository, PaginatorInterface $paginator, Request $request,
+                         EntityManagerInterface $em)
         : Response
     {
+        $note = $noteRepository->getNoteBySlug($slug);
         if(!$note) {
             throw $this->createNotFoundException();
         }
