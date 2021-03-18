@@ -217,6 +217,7 @@
 
     input[type=file] {
         @apply opacity-0;
+        @apply mb-4;
         @apply h-12;
         @apply inline-block;
         @apply w-full;

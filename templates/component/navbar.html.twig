@@ -1,6 +1,6 @@
 <nav class="flex flex-row justify-between">
     <div class="flex flex-rows">
-        <a class="hidden lg:block">
+        <a href="{{ path('home') }}" class="hidden lg:block">
             <img
                     class="mr-8"
                     src="{{ asset('build/images/logo-communote.png') }}"
@@ -23,8 +23,8 @@
 
     {% if is_granted("ROLE_USER") %}
     <ul class="inline-flex py-2 content-center gap-x-2 text-md font-medium">
-        <li class="button primary light">
-            <a href="{{ path('note_create') }}" class="inline-flex">
+        <li>
+            <a href="{{ path('note_create') }}" class="button primary light inline-flex">
                 <svg class="lg:hidden" style="width:24px;height:24px" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
                 </svg>
@@ -61,10 +61,10 @@
     {% else %}
 
     <div class="flex justify-center h-10 mt-2 mr-2">
-        <span class="button primary flex flex-wrap space-x-2">
+        <a href="{{ path('azure_connect') }}" class="button primary flex flex-wrap space-x-2 font-semibold">
             <img src="{{ asset('build/images/ms.png') }}" alt="Microsoft Logo" class="w-6 h-6"/>
-            <a href="{{ path('azure_connect') }}" class="font-semibold">Sign In</a>
-        </span>
+        <span>Sign In</span>
+        </a>
     </div>
 
     {% endif %}
