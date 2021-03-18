@@ -6,6 +6,9 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use App\Security\Authenticator;
 use Doctrine\ORM\EntityManagerInterface;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\MicrosoftClient;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +19,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route(path: "/auth")]
 class AuthController extends BaseController
 {
+    /*
     #[Route(path: "/register", name: "register")]
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em,
                             GuardAuthenticatorHandler $guardAuthenticatorHandler, Authenticator $authenticator): Response
@@ -24,9 +28,6 @@ class AuthController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            /**
-             * @var $user User
-             */
             $user = $form->getData();
 
             $user->setFirstName(ucfirst($user->getFirstName()));
@@ -52,6 +53,7 @@ class AuthController extends BaseController
             "form" => $form->createView(),
         ]);
     }
+    */
 
     #[Route(path: "/login", name: "login")]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -62,6 +64,13 @@ class AuthController extends BaseController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    #[Route(path: "/connect/azure", name: "azure_connect")]
+    public function connect(ClientRegistry $clientRegistry): RedirectResponse
+    {
+        $client = $clientRegistry->getClient('azure');
+        return $client->redirect(['openid', 'email', 'profile'], []);
     }
 
     #[Route(path: "/logout", name: "logout")]

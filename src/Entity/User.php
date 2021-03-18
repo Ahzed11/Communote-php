@@ -90,6 +90,11 @@ class User implements UserInterface
      */
     private DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $azureOID;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -364,6 +369,18 @@ class User implements UserInterface
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAzureOID(): ?string
+    {
+        return $this->azureOID;
+    }
+
+    public function setAzureOID(?string $azureOID): self
+    {
+        $this->azureOID = $azureOID;
 
         return $this;
     }

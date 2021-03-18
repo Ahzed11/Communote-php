@@ -1,25 +1,25 @@
 {% extends 'form-center.html.twig' %}
 
-{% block Title %}Log in{% endblock %}
+{% block Title %}Sign in{% endblock %}
 
-{% block formTitle %}Log in{% endblock %}
+{% block formTitle %}Sign in{% endblock %}
 
 {% block form %}
+    {% if error %}
+        <div class="">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="">
+            You are Signed In as {{ app.user.username }}, <a href="{{ path('logout') }}">Sign Out</a>
+        </div>
+    {% endif %}
+    <!--
     <form method="post">
-        {% if error %}
-            <div class="">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-        {% if app.user %}
-            <div class="">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
-            </div>
-        {% endif %}
-
         <label for="inputEmail">Email</label><br/>
         <input
                 type="email"
-                value="{{ last_username }}"
+                value="{# {{ last_username }} #}"
                 name="email" id="inputEmail"
                 placeholder="firstname.lastname@student.school.com"
                 required autofocus>
@@ -30,7 +30,7 @@
         <input type="password" name="password" id="inputPassword" placeholder="********" required>
 
         <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
+               value="{# {{ csrf_token('authenticate') }} #}"
         >
 
         <label>
@@ -43,4 +43,11 @@
             Sign in
         </button>
     </form>
+    -->
+    <div class="flex justify-center">
+        <span class="button primary flex flex-wrap space-x-2">
+            <img src="{{ asset('build/images/ms.png') }}" alt="Microsoft Logo"/>
+            <a href="{{ path('azure_connect') }}" class="font-semibold">Sign In with Microsoft</a>
+        </span>
+    </div>
 {% endblock %}
