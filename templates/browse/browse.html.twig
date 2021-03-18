@@ -15,7 +15,7 @@
                            placeholder="{{ title }}"/>
                     <button type="submit" class="pl-2 font-semibold bg-white dark:bg-gray-900 text-purple-700
                                                 dark:text-green-400 absolute right-3 top-2.5">
-                        Search
+                        <i class="fas fa-search"></i> Search
                     </button>
                 </div>
             </form>
@@ -33,7 +33,7 @@
                     {% else %}
                         {% set path = path('note_view', { 'slug':item.slug }) %}
                     {% endif %}
-                    
+
                     {% include cardComponent with {
                         'path': path
                     }%}

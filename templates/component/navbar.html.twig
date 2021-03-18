@@ -11,12 +11,14 @@
         </a>
 
         <ul class="inline-flex content-center gap-x-2 text-md font-medium">
-            <li>
-                <a href="{{ path('home') }}" class="py-4 px-2 block">Home</a>
+            <li class="block py-4 px-2">
+                <i class="fas fa-home"></i>
+                <a href="{{ path('home') }}">Home</a>
             </li>
 
-            <li>
-                <a href="{{ path('browse_faculty') }}" class="py-4 px-2 block">Browse</a>
+            <li class="block py-4 px-2">
+                <i class="fas fa-folder-open"></i>
+                <a href="{{ path('browse_faculty') }}">Browse</a>
             </li>
         </ul>
     </div>
@@ -24,11 +26,9 @@
     {% if is_granted("ROLE_USER") %}
     <ul class="inline-flex py-2 content-center gap-x-2 text-md font-medium">
         <li>
-            <a href="{{ path('note_create') }}" class="button primary light inline-flex">
-                <svg class="lg:hidden" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                </svg>
-                <span class="hidden lg:inline">Write a note</span>
+            <a href="{{ path('note_create') }}" class="button primary light block">
+                <i class="fas fa-pen"></i>
+                <span>Write a note</span>
             </a>
         </li>
 

@@ -14,7 +14,10 @@
             <div class="px-8 h-full {{ isDeletable ? 'pb-6' : 'py-6' }}">
                 <h2 class="text-2xl font-bold">{{ item.title }}</h2>
                 <div class="flex justify-between text-gray-600 text-sm font-medium flex mb-4 mt-2">
-                    <p class="text-purple-700 dark:text-green-400">{{ item.code }}</p>
+                    <p class="text-purple-700 dark:text-green-400">
+                        <i class="fas fa-book"></i>
+                        <span>{{ item.code }}</span>
+                    </p>
                     <p>{{ item.notes | length }} notes</p>
                 </div>
             </div>

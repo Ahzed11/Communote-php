@@ -6,16 +6,18 @@
     <section class="text-center mb-8">
         <h1 class="text-5xl text-bold mb-2">{{ note.title | capitalize }}</h1>
         <div class="flex justify-center mb-2">
-            <a class="pill primary">
-                {{ note.author.firstName | capitalize }} {{ note.author.lastName | capitalize }}
+            <a class="pill primary block">
+                <i class="fas fa-user-edit"></i>
+                <span>{{ note.author.firstName | capitalize }} {{ note.author.lastName | capitalize }}</span>
             </a>
             <a href="{{ path('browse_note', {
                 'faculty':note.course.study.faculty.title,
                 'study':note.course.study.title,
                 'year':note.course.year.title,
                 'course':note.course.title,
-            }) }}" class="pill primary light">
-                {{ note.course.code }} - {{ note.createdAt | date('Y') }}
+            }) }}" class="pill primary light block">
+                <i class="fas fa-book"></i>
+                <span>{{ note.course.code }} - {{ note.createdAt | date('Y') }}</span>
             </a>
         </div>
     </section>
@@ -26,18 +28,22 @@
         </article>
         <div class="flex pb-4 flex-wrap sm:justify-between justify-around">
             <div class="flex space-x-2">
-                <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary">
-                    Download
+                <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary block">
+                    <i class="fas fa-download"></i>
+                    <span>Download</span>
                 </a>
-                <a href="{{ path('report_create', {'slug': note.slug}) }}" class="button primary light">
-                    Report
+                <a href="{{ path('report_create', {'slug': note.slug}) }}" class="button primary light block">
+                    <i class="fas fa-flag"></i>
+                    <span>Report</span>
                 </a>
                 {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}
-                <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="button danger">
-                    Edit
+                <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="button danger block">
+                    <i class="fas fa-pen"></i>
+                    <span>Edit</span>
                 </a>
-                <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light">
-                    Delete
+                <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light block">
+                    <i class="fas fa-trash"></i>
+                    <span>Delete</span>
                 </a>
                 {% endif %}
             </div>
