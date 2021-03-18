@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -29,6 +30,7 @@ class Course
      */
     #[NotBlank]
     #[Length(max: 127)]
+    #[Groups(["course:read"])]
     private string $title;
 
     /**
@@ -36,6 +38,7 @@ class Course
      */
     #[NotBlank]
     #[Length(max: 31)]
+    #[Groups(["course:read"])]
     private string $code;
 
     /**

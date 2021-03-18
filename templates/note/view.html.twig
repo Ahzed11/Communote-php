@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note View{% endblock %}
+
+{% block body %}
+    <section class="text-center mb-8">
+        <h1 class="text-5xl text-bold mb-2">{{ note.title | capitalize }}</h1>
+        <div class="flex justify-center mb-2">
+            <a class="pill primary">
+                {{ note.author.firstName | capitalize }} {{ note.author.lastName | capitalize }}
+            </a>
+            <a href="{{ path('browse_note', {
+                'faculty':note.course.study.faculty.title,
+                'study':note.course.study.title,
+                'year':note.course.year.title,
+                'course':note.course.title,
+            }) }}" class="pill primary light">
+                {{ note.course.code }} - {{ note.createdAt | date('Y') }}
+            </a>
+        </div>
+    </section>
+    <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
+        <h2 class="text-3xl text-bold text-purple-700 dark:text-green-400">Description</h2>
+        <article class="content mt-2 mb-4">
+            {{ note.description | markdown }}
+        </article>
+        <div class="flex pb-4 flex-wrap sm:justify-between justify-around">
+            <div class="flex space-x-2">
+                <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary">
+                    Download
+                </a>
+                <a href="{{ path('report_create', {'slug': note.slug}) }}" class="button primary light">
+                    Report
+                </a>
+                {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}
+                <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="button danger">
+                    Edit
+                </a>
+                <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light">
+                    Delete
+                </a>
+                {% endif %}
+            </div>
+            {% if not note.author == app.user %}
+            <div class="button warning" data-controller="review">
+                {% if not userReview is defined %}
+                    <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                {% else %}
+                    <span class="hidden">{{ path('review_edit', {'id': userReview.id}) }}</span>
+                    {% for i in 0..4 %}
+                        {% if i <= userReview.score %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        <hr />
+    </section>
+
+    <section class="has-text-centered">
+        <embed
+                class="w-3/4 h mx-auto"
+                src="{{ uploaded_asset(note) }}"
+                type="{{ note.noteFile.mimeType }}"
+        />
+    </section>
+
+    <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
+        <hr class="mb-4" />
+        <div class="flex flex-col space-y-4">
+            {% for item in pagination %}
+                {% include ('/component/comment/comment.html.twig') %}
+            {% endfor %}
+        </div>
+        {{ knp_pagination_render(pagination) }}
+
+        <div class="mt-8">
+            <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl p-8">
+                <h2 class="text-3xl text-center text-bold text-purple-700 dark:text-white mb-4">
+                    Post a comment
+                </h2>
+                {{ form(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

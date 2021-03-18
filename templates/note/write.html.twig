@@ -1,0 +1,52 @@
+{% extends 'form-center.html.twig' %}
+
+{% block title %}Write a note{% endblock %}
+
+{% block formTitle %}Write a note{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+
+        {{ form_row(form.shortDescription) }}
+
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description,
+            { 'attr': {
+                'data-action': 'textarea-autogrow#autogrow',
+                'data-controller': 'textarea-autogrow',
+            } })
+        }}
+        {{ form_errors(form.description) }}
+
+    <div data-controller="course-autocomplete">
+        {{ form_label(form.course) }}
+        <span class="hidden" data-course-autocomplete-target="target">{{ path('course_get_api') }}</span>
+        {{ form_widget(form.course,
+            { 'attr': {
+                'data-action': 'course-autocomplete#fetch',
+                'data-course-autocomplete-target': 'input',
+            } })
+        }}
+        <ul class="block mb-2 shadow-inner bg-white dark:bg-gray-800 rounded-lg divide-y-4 divide-gray-100 dark:divide-gray-900 divide-solid"
+            data-course-autocomplete-target="output">
+        </ul>
+        {{ form_errors(form.course) }}
+    </div>
+
+    {{ form_label(form.noteFile) }}
+    <div data-controller="file" class="relative">
+        <span class="absolute inset-0">
+        {{ form_widget(form.noteFile, { 'attr': {
+            'data-action': 'file#updateCustomDiv',
+            'data-file-target': 'input',
+        }}) }}
+        </span>
+        <div class="file">
+            <span data-file-target="output">Click here or drop a file here</span>
+        </div>
+    </div>
+    {{ form_errors(form.noteFile) }}
+
+    {{ form_end(form) }}
+{% endblock %}

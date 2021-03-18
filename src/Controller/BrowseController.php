@@ -20,7 +20,6 @@ const COURSE_CARD_COMPONENT = "component/card/card-course.html.twig";
 const NOTE_CARD_COMPONENT = "component/card/card-note.html.twig";
 const PAGINATION_LIMIT = 20;
 
-
 /**
  * @IsGranted("ROLE_USER")
  */
@@ -128,6 +127,7 @@ class BrowseController extends BaseController
             'title' => 'Notes',
             'pagination' => $pagination,
             'cardComponent' => NOTE_CARD_COMPONENT,
+            'isNote' => true,
         ]);
     }
 }

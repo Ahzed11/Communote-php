@@ -21,6 +21,7 @@
         "autoprefixer": "^10.2.4",
         "postcss": ">=8.1",
         "postcss-loader": "^5.0.0",
+        "stimulus-use": "^0.23.0",
         "tailwindcss": "^2.0.3"
     }
 }

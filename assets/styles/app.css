@@ -20,6 +20,47 @@
         @apply rounded-lg;
         @apply hover:shadow;
         @apply cursor-pointer;
+        @apply font-semibold;
+    }
+
+    .content h1 {
+        @apply text-3xl;
+        @apply font-semibold;
+    }
+
+    .content h2 {
+        @apply text-2xl;
+        @apply font-semibold;
+    }
+
+    .content h3 {
+        @apply text-xl;
+        @apply font-semibold;
+    }
+
+    .content h4 {
+        @apply text-lg;
+        @apply font-semibold;
+    }
+
+    .content h5 {
+        @apply font-semibold;
+    }
+
+    .content a {
+        @apply underline;
+        @apply text-purple-700;
+        @apply dark:text-green-400;
+    }
+
+    .pill {
+        @apply rounded-full;
+        @apply py-1;
+        @apply px-4;
+        @apply shadow-md;
+        @apply mr-2;
+        @apply text-center;
+        @apply inline-block;
     }
 
     .pagination {
@@ -31,8 +72,7 @@
     }
 
     .pagination span {
-        @apply px-3;
-        @apply py-1;
+        @apply block;
         @apply rounded-lg;
         @apply shadow-lg;
         @apply font-bold;
@@ -42,12 +82,21 @@
         @apply dark:bg-gray-900;
     }
 
+    .pagination span a {
+        @apply inline-block;
+        @apply px-4;
+        @apply py-2;
+    }
+
     .pagination span:hover {
         @apply text-white;
         @apply dark:text-green-400;
     }
 
     .pagination .current {
+        @apply inline-block;
+        @apply px-4;
+        @apply py-2;
         @apply bg-purple-700;
         @apply dark:bg-green-400;
         @apply text-white;
@@ -61,17 +110,34 @@
         @apply dark:text-gray-900;
     }
 
-    .button.primary {
+    .primary {
         @apply bg-purple-700;
         @apply dark:bg-green-600;
         @apply text-white;
     }
 
-    .button.primary.light {
+    .primary.light {
         @apply bg-purple-200;
         @apply dark:bg-green-200;
         @apply text-purple-700;
         @apply dark:text-green-800;
+    }
+
+    .danger {
+        @apply bg-red-700;
+        @apply text-white;
+    }
+
+    .danger.light {
+        @apply bg-red-200;
+        @apply text-red-700;
+    }
+
+    .warning {
+        @apply bg-yellow-400;
+        @apply dark:bg-yellow-200;
+        @apply text-white;
+        @apply dark:text-yellow-600;
     }
 
     .browse-search {
@@ -81,7 +147,9 @@
     }
 
     label {
-        @apply font-semibold
+        @apply font-semibold;
+        @apply text-purple-700;
+        @apply dark:text-green-400;
     }
 
     form input {
@@ -92,6 +160,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -105,6 +175,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -118,6 +190,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -131,6 +205,35 @@
         @apply ml-2;
         @apply rounded-lg;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
+        @apply border-gray-200;
+        @apply dark:border-gray-800;
+        @apply border-2;
+        @apply outline-none;
+        @apply focus:border-purple-700;
+        @apply dark:focus:border-green-600;
+    }
+
+    input[type=file] {
+        @apply opacity-0;
+        @apply h-12;
+        @apply inline-block;
+        @apply w-full;
+    }
+
+    .file {
+        @apply inline-block;
+        @apply w-full;
+        @apply h-12;
+        @apply p-2;
+        @apply mb-4;
+        @apply resize-none;
+        @apply rounded-lg;
+        @apply text-gray-300;
+        @apply dark:text-gray-600;
+        @apply bg-white;
+        @apply dark:bg-gray-800;
         @apply border-gray-200;
         @apply dark:border-gray-800;
         @apply border-2;
@@ -143,6 +246,8 @@
         @apply w-full;
         @apply mb-3;
         @apply text-black;
+        @apply dark:text-white;
+        @apply dark:bg-gray-800;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
@@ -155,7 +260,6 @@
     select {
         @apply w-full;
         @apply mb-3;
-        @apply text-black;
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;

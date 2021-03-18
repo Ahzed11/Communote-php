@@ -41,7 +41,6 @@ class CourseType extends AbstractType
             ->add("submit", SubmitType::class, [
                 "attr" => ["class" => "button primary w-full"]
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

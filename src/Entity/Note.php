@@ -38,10 +38,17 @@ class Note
     private string $title;
 
     /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    #[NotBlank]
+    #[Length(max: 127)]
+    private string $shortDescription;
+
+    /**
      * @ORM\Column(type="text")
      */
     #[NotBlank]
-    #[Length(max: 800)]
+    #[Length(max: 2000)]
     private string $description;
 
     /**
@@ -63,7 +70,7 @@ class Note
     private NoteFile $noteFile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Note", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="note", orphanRemoval=true)
      */
     private iterable $comments;
 
@@ -118,6 +125,18 @@ class Note
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(string $shortDescription): self
+    {
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
@@ -239,6 +258,16 @@ class Note
         return $this;
     }
 
+    public function getAverageScore(): float
+    {
+        $sum = 0.0;
+        foreach ($this->reviews as $review) {
+            $sum += $review->getScore();
+        }
+
+        return sizeof($this->reviews) > 0 ? $sum / sizeof($this->reviews) : 0;
+    }
+
     public function removeReview(Review $review): self
     {
         if ($this->reviews->removeElement($review)) {
@@ -285,5 +314,14 @@ class Note
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function getPath() : string
+    {
+        $path = $this->course->getStudy()->getFaculty()->getSchool()->getTitle() . '/' .
+            $this->course->getStudy()->getFaculty()->getTitle() . '/' .
+            $this->course->getStudy()->getTitle() . '/' .
+            $this->course->getTitle();
+        return str_replace(' ', '-', $path);
     }
 }

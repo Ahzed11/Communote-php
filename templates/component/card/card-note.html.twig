@@ -1,4 +1,5 @@
-<li class="rounded-lg shadow overflow-hidden h-full hover:shadow-lg transform hover:scale-105 transition duration-300 dark:bg-gray-900">
+<li class="rounded-lg shadow overflow-hidden h-full hover:shadow-lg transform hover:scale-105 transition duration-300
+           bg-purple-100 dark:bg-gray-900">
     <a href="{{ path }}" class="relative h-full">
         <div class="py-10 px-8 flex flex-col justify-between h-full">
             <div>
@@ -8,12 +9,12 @@
                 </div>
             </div>
 
-            <p class="font-light">
-                {{ item.description }}
+            <p class="break-all">
+                {{ item.shortDescription }}
             </p>
 
             <div class="mt-10 flex justify-between items-center">
-                <p>Review</p>
+                <p class="text-yellow-500 dark:text-yellow-200">Score: {{ item.averageScore }}</p>
                 <span class="mr-4 text-purple-700 dark:text-green-400">{{ item.createdAt | ago }}</span>
             </div>
         </div>
