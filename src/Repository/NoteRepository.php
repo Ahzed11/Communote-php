@@ -40,6 +40,20 @@ class NoteRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function queryByUser(string $email) : QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('n')
+            ->leftJoin('n.course', 'c')
+            ->addSelect('c')
+            ->leftJoin('n.author', 'a')
+            ->addSelect('a')
+            ->andWhere('a.email = :email')
+            ->setParameter('email', $email);
+
+        $qb->orderBy('n.createdAt', 'DESC');
+        return $qb;
+    }
+
     public function getNoteBySlug(string $slug) : Note
     {
         return $this->createQueryBuilder('n')
