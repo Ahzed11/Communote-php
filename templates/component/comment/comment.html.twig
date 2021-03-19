@@ -15,18 +15,21 @@
             </span>
         </div>
         <p class="break-all">{{ item.body }}</p>
-        {#{% if is_granted("ROLE_USER") or is_granted("COMMENT_EDIT") %}#}
+        {% if is_granted("ROLE_USER") or is_granted("COMMENT_EDIT") %}
         <div class="flex justify-end">
             <div class="relative">
                 <button class="text-xl font-bold text-purple-700 dark:text-green-400 px-4">...</button>
-                <nav class="absolute p-4 rounded-2xl bg-purple-700 dark:bg-green-400 dark:text-white top-0 right-0 hidden"
+                <nav class="absolute p-4 rounded-2xl bg-purple-700 dark:bg-green-400 dark:text-white top-0 right-0 invisible"
                 >
                     <ul class="text-gray-100 dark:text-gray-900">
-                        <li><a href="{{ path('comment_delete', { id: item.id }) }}">Delete</a></li>
+                        <li class="block flex space-x-1">
+                            <i class="fas fa-trash mt-1"></i>
+                            <a href="{{ path('comment_delete', { id: item.id }) }}" class="font-semibold">Delete</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
         </div>
-        {# {% endif %} #}
+        {% endif %}
     </div>
 </div>
