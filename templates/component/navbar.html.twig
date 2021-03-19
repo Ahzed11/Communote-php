@@ -4,7 +4,9 @@
             <img
                     class="mr-8"
                     src="{{ asset('build/images/logo-communote.png') }}"
-                    alt="Un site de partage de notes pour étudiants du supérieur"
+                    alt="
+                    {% trans %}A note sharing website for college students{% endtrans %}
+                    "
                     width="200"
                     height="144"
             >
@@ -13,12 +15,16 @@
         <ul class="inline-flex content-center gap-x-2 text-md font-medium">
             <li class="block py-4 px-2">
                 <i class="fas fa-home"></i>
-                <a href="{{ path('home') }}">Home</a>
+                <a href="{{ path('home') }}">
+                    {% trans %}Home{% endtrans %}
+                </a>
             </li>
 
             <li class="block py-4 px-2">
                 <i class="fas fa-folder-open"></i>
-                <a href="{{ path('browse_faculty') }}">Browse</a>
+                <a href="{{ path('browse_faculty') }}">
+                    {% trans %}Browse{% endtrans %}
+                </a>
             </li>
         </ul>
     </div>
@@ -28,7 +34,9 @@
         <li>
             <a href="{{ path('note_create') }}" class="button primary light block">
                 <i class="fas fa-pen"></i>
-                <span>Write a note</span>
+                <span>
+                    {% trans %}Write a note{% endtrans %}
+                </span>
             </a>
         </li>
 
@@ -47,13 +55,13 @@
                     w-30 text-black dark:text-white invisible"
             >
                 <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('my_notes') }}">My notes</a>
+                    <a href="{{ path('my_notes') }}">{% trans %}My notes{% endtrans %}</a>
                 </li>
                 <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('my_account') }}">My account</a>
+                    <a href="{{ path('my_account') }}">{% trans %}My account{% endtrans %}</a>
                 </li>
                 <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('logout') }}">Sign out</a>
+                    <a href="{{ path('logout') }}">{% trans %}Sign Out{% endtrans %}</a>
                 </li>
             </ul>
         </li>
@@ -64,7 +72,7 @@
     <div class="flex justify-center h-10 mt-2 mr-2">
         <a href="{{ path('azure_connect') }}" class="button primary flex flex-wrap space-x-2 font-semibold">
             <img src="{{ asset('build/images/ms.png') }}" alt="Microsoft Logo" class="w-6 h-6"/>
-        <span>Sign In</span>
+        <span>{% trans %}Sign In{% endtrans %}</span>
         </a>
     </div>
 

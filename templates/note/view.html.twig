@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Note View{% endblock %}
+{% block title %}{{ note.title }}{% endblock %}
 
 {% block body %}
     <section class="text-center mb-8">
@@ -22,7 +22,11 @@
         </div>
     </section>
     <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
-        <h2 class="text-3xl text-bold text-purple-700 dark:text-green-400">Description</h2>
+        <h2 class="text-3xl text-bold text-purple-700 dark:text-green-400">
+            {% trans %}
+            Description
+            {% endtrans %}
+        </h2>
         <article class="content mt-2 mb-4">
             {{ note.description | markdown }}
         </article>
@@ -30,20 +34,36 @@
             <div class="flex space-x-2">
                 <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary block">
                     <i class="fas fa-download"></i>
-                    <span>Download</span>
+                    <span>
+                        {% trans %}
+                        Download
+                        {% endtrans %}
+                    </span>
                 </a>
                 <a href="{{ path('report_create', {'slug': note.slug}) }}" class="button primary light block">
                     <i class="fas fa-flag"></i>
-                    <span>Report</span>
+                    <span>
+                        {% trans %}
+                        Report
+                        {% endtrans %}
+                    </span>
                 </a>
                 {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}
                 <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="button danger block">
                     <i class="fas fa-pen"></i>
-                    <span>Edit</span>
+                    <span>
+                        {% trans %}
+                            Edit
+                        {% endtrans %}
+                    </span>
                 </a>
                 <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light block">
                     <i class="fas fa-trash"></i>
-                    <span>Delete</span>
+                    <span>
+                        {% trans %}
+                            Delete
+                        {% endtrans %}
+                    </span>
                 </a>
                 {% endif %}
             </div>
@@ -92,7 +112,9 @@
         <div class="mt-8">
             <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl p-8">
                 <h2 class="text-3xl text-center text-bold text-purple-700 dark:text-white mb-4">
-                    Post a comment
+                    {% trans %}
+                        Post a comment
+                    {% endtrans %}
                 </h2>
                 {{ form(form) }}
             </div>

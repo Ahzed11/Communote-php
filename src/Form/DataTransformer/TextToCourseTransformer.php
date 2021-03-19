@@ -36,7 +36,11 @@ class TextToCourseTransformer implements DataTransformerInterface
         if (!$value) {
             return null;
         }
+
         $codeAndTitle = explode("-", str_replace(" ", "", $value));
+        if (count($codeAndTitle) < 2) {
+            return null;
+        }
 
         $course = $this->courseRepository->getByTitleAndCode($codeAndTitle[0], $codeAndTitle[1]);
         if ($course === null) {

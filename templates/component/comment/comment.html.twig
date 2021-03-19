@@ -24,7 +24,11 @@
                     <ul class="text-gray-100 dark:text-gray-900">
                         <li class="block flex space-x-1">
                             <i class="fas fa-trash mt-1"></i>
-                            <a href="{{ path('comment_delete', { id: item.id }) }}" class="font-semibold">Delete</a>
+                            <a href="{{ path('comment_delete', { id: item.id }) }}" class="font-semibold">
+                                {% trans %}
+                                Delete
+                                {% endtrans %}
+                            </a>
                         </li>
                     </ul>
                 </nav>

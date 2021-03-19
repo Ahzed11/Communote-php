@@ -1,8 +1,8 @@
 {% extends 'form-center.html.twig' %}
 
-{% block Title %}Sign in{% endblock %}
+{% block Title %}{% trans %}Sign In{% endtrans %}{% endblock %}
 
-{% block formTitle %}Sign in{% endblock %}
+{% block formTitle %}{% trans %}Sign In{% endtrans %}{% endblock %}
 
 {% block form %}
     {% if error %}
@@ -11,7 +11,10 @@
 
     {% if app.user %}
         <div class="">
-            You are Signed In as {{ app.user.username }}, <a href="{{ path('logout') }}">Sign Out</a>
+            {% trans %}You are Signed In as{% endtrans %} {{ app.user.username }},
+            <a href="{{ path('logout') }}">
+                {% trans %}Sign Out{% endtrans %}
+            </a>
         </div>
     {% endif %}
     <!--
@@ -47,7 +50,11 @@
     <div class="flex justify-center">
         <span class="button primary flex flex-wrap space-x-2">
             <img src="{{ asset('build/images/ms.png') }}" alt="Microsoft Logo"/>
-            <a href="{{ path('azure_connect') }}" class="font-semibold">Sign In with Microsoft</a>
+            <a href="{{ path('azure_connect') }}" class="font-semibold">
+                {% trans %}
+                Sign In with Microsoft
+                {% endtrans %}
+            </a>
         </span>
     </div>
 {% endblock %}

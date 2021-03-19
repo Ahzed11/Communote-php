@@ -1,8 +1,12 @@
 {% extends 'form-center.html.twig' %}
 
-{% block title %}Write a note{% endblock %}
+{% block title %}
+    {% trans %}Write a note{% endtrans %}
+{% endblock %}
 
-{% block formTitle %}Write a note{% endblock %}
+{% block formTitle %}
+    {% trans %}Write a note{% endtrans %}
+{% endblock %}
 
 {% block form %}
     {{ form_start(form) }}
@@ -43,7 +47,11 @@
         }}) }}
         </span>
         <div class="file">
-            <span data-file-target="output">Click here or drop a file here</span>
+            <span data-file-target="output">
+                {% trans %}
+                Click here or drop a file
+                {% endtrans %}
+            </span>
         </div>
     </div>
     {{ form_errors(form.noteFile) }}

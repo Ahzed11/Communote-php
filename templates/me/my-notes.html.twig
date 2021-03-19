@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My notes{% endblock %}
+{% block title %}
+    {% trans %}My notes{% endtrans %}
+{% endblock %}
 
 {% block body %}
     <section class="container mx-auto">
         <nav class="pb-4">
             <ul class="block w-full text-2xl font-bold flex flex-col md:flex-row justify-center md:mx-0 md:inline-flex gap-1">
                 <li class="text-purple-700 dark:text-green-400">
-                    <span>My notes</span>
+                    <span>{% trans %}My notes{% endtrans %}</span>
                     <span class="hidden md:inline text-purple-700 dark:text-green-400 font-medium">|</span>
                 </li>
-                <li><a href="{{ path('my_account') }}" class="hover:text-purple-700 dark:hover:text-green-400">My account</a></li>
+                <li>
+                    <a href="{{ path('my_account') }}" class="hover:text-purple-700 dark:hover:text-green-400">
+                        {% trans %}My account{% endtrans %}
+                    </a>
+                </li>
             </ul>
         </nav>
         <hr class="mb-4"/>
-        <h1 class="text-4xl font-extrabold mb-4">My notes</h1>
+        <h1 class="text-4xl font-extrabold mb-4">
+            {% trans %}My notes{% endtrans %}
+        </h1>
         <ul class="list-none grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6">
             {% for item in pagination %}
                 {% set path = path('note_view', { 'slug':item.slug }) %}

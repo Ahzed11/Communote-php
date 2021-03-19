@@ -45,12 +45,12 @@ class NoteType extends AbstractType
             ])
             ->add('shortDescription', null, [
                 'attr' => [
-                    'placeholder' => 'A small text to describe my note which will be displayed on the note card'
+                    'placeholder' => 'A short text to describe my note. It will be displayed on the note card'
                 ]
             ])
             ->add('description', null, [
                 'attr' => [
-                    'placeholder' => 'A longer text to describe in detail my note which will be displayed on the note view page'
+                    'placeholder' => 'A longer text to describe in detail your note. It will be displayed on the note view page'
                 ]
             ])
             ->add('course', CourseSelectTextType::class, [
