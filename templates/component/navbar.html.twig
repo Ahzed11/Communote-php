@@ -33,22 +33,26 @@
         </li>
 
         <!-- TODO: Fix the dropdown on mobile -->
-        <li class="inline-block relative px-4 py-2 text-md rounded-lg"
+        <li
+                data-controller="navbar-dropdown"
+                data-navbar-dropdown-target="parent"
+                class="inline-block relative px-4 py-2 text-md rounded-lg"
         >
-            <svg class="lg:hidden" style="width:24px;height:42px" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
-            </svg>
-            <span class="hidden lg:inline"></span>
+            <span data-navbar-dropdown-target="button" class="lg:inline font-semibold cursor-pointer">
+                {{ app.user.firstName }} {{ app.user.lastName }}
+            </span>
             <ul
-                    class="absolute p-4 -inset-x-32 lg:-inset-x-8 rounded-lg bg-white shadow"
+                    data-navbar-dropdown-target="dropdown"
+                    class="block absolute p-4 z-10 inset-y-10 left-0 rounded-lg bg-white dark:bg-gray-900 shadow h-32
+                    w-30 text-black dark:text-white invisible"
             >
-                <li class="py-1 hover:text-purple-700">
+                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
                     <a href="{{ path('my_notes') }}">My notes</a>
                 </li>
-                <li class="py-1 hover:text-purple-700">
+                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
                     <a href="{{ path('my_account') }}">My account</a>
                 </li>
-                <li class="py-1 hover:text-purple-700">
+                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
                     <a href="{{ path('logout') }}">Sign out</a>
                 </li>
             </ul>

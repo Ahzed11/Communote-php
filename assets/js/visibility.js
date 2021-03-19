@@ -1,6 +1,13 @@
 export default class Visibility {
     static toggle(e) {
-        e.classList.contains('hidden') ? e.classList.remove('hidden') : e.classList.add('hidden');
+        if(e.classList.contains('invisible')){
+            e.classList.remove('invisible');
+            e.classList.add('visible');
+        } else {
+            e.classList.remove('visible');
+            e.classList.add('invisible');
+        }
+
     }
 
     static replace(e, a, b) {
@@ -11,6 +18,6 @@ export default class Visibility {
     }
 
     static hide(e){
-        e.classList.add('hidden');
+        e.classList.add('invisible');
     }
 }
