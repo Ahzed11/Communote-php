@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="flex w-full space-x-2">
+        <section class="w-1/6 h-screen p-6 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900">
+            <h1 class="text-3xl mb-4 font-extrabold">
+                {% trans %}Sections{% endtrans %}
+            </h1>
+            <ul class="flex flex-col space-y-2 text-xl ">
+                <li class="w-full">
+                    <a href="{{ path('admin_overview') }}"
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Overview{% endtrans %}
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="{{ path('admin_schools') }}"
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Schools{% endtrans %}
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="{{ path('admin_faculties') }}"
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Faculties{% endtrans %}
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="{{ path('admin_studies') }}"
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Studies{% endtrans %}
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="{{ path('admin_courses') }}"
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Courses{% endtrans %}
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="{{ path('admin_years') }}"
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Years{% endtrans %}
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="{{ path('admin_notes') }}"
+
+                       class="inline-block w-full hover:text-purple-700 dark:hover:text-green-400 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                        {% trans %}Notes{% endtrans %}
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section class="w-5/6 h-screen p-8 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900">
+            {% block content %}
+
+            {% endblock %}
+        </section>
+    </div>
+{% endblock %}

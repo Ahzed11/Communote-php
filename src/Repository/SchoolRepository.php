@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\School;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,10 @@ class SchoolRepository extends ServiceEntityRepository
         parent::__construct($registry, School::class);
     }
 
-    // /**
-    //  * @return School[] Returns an array of School objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function querySchoolsAlphabetically() : QueryBuilder
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.title', 'ASC')
+            ->setMaxResults(10);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?School
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

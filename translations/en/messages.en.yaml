@@ -22,6 +22,7 @@ Browse: Parcourir
 
 Search: Search
 
+Schools: Schools
 Faculties: Faculties
 Studies: Studies
 Years: Years
@@ -51,3 +52,10 @@ Write a report: Écrire un signalement
 # Login
 You are Signed In as: Vous êtes connecté en tant que
 Sign In with Microsoft: Se connecter avec Microsoft
+
+# Admin
+Sections: Sections
+Overview: Overview
+Create a school: Créer une école
+CreatedAt: Created at
+UpdatedAt: UpdatedAt
