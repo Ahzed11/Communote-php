@@ -70,4 +70,13 @@ class NoteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function queryByCreatedAtDesc() : QueryBuilder
+    {
+        return $this->createQueryBuilder('n')
+            ->leftJoin('n.course', 'c')
+            ->leftJoin('n.author', 'a')
+            ->orderBy('n.createdAt', 'DESC')
+            ->setMaxResults(10);
+    }
 }

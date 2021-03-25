@@ -20,7 +20,7 @@ class SchoolRepository extends ServiceEntityRepository
         parent::__construct($registry, School::class);
     }
 
-    public function querySchoolsAlphabetically() : QueryBuilder
+    public function queryAlphabetically() : QueryBuilder
     {
         return $this->createQueryBuilder('s')
             ->orderBy('s.title', 'ASC')

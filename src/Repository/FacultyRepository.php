@@ -30,4 +30,11 @@ class FacultyRepository extends ServiceEntityRepository
         $qb->orderBy('f.title', 'ASC');
         return $qb;
     }
+
+    public function queryAlphabetically() : QueryBuilder
+    {
+        return $this->createQueryBuilder('f')
+            ->orderBy('f.title', 'ASC')
+            ->setMaxResults(10);
+    }
 }

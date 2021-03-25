@@ -62,4 +62,13 @@ class CourseRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function queryAlphabetically() : QueryBuilder
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.study', 's')
+            ->leftJoin('c.year', 'y')
+            ->orderBy('s.title', 'ASC')
+            ->setMaxResults(10);
+    }
 }

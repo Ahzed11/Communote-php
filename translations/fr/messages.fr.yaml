@@ -46,8 +46,26 @@ You are Signed In as: Vous êtes connecté en tant que
 Sign In with Microsoft: Se connecter avec Microsoft
 
 # Admin
+Admin section: Section admin
 Sections: Sections
 Overview: Aperçu
 Create a school: Créer une école
+Create a faculty: Créer une faculté
+Create a study: Créer une étude
+Create a year: Créer une année
+Create a course: Créer un cours
+Create a note: Créer une note
+Create a comment: Créer un commentaire
+Create a review: Créer une notation
+Create a report: Créer un signalement
+Comments: Commentaires
+Reviews: Notations
+Reports: Signalements
+Code: Code
+Study: Étude
+Year: Année
+Author: Auteur
+Note: Note
+Score: Score
 CreatedAt: Créé à
 UpdatedAt: Mis à jour à
