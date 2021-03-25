@@ -6,7 +6,7 @@
     <h1 class="text-4xl font-extrabold mb-2">{% trans %}Courses{% endtrans %}</h1>
     <div class="flex justify-end mb-4">
 
-        <a href="" class="button primary">
+        <a href="{{ path('course_create') }}" class="button primary">
             <i class="fas fa-plus"></i>
             <span>{% trans %}Create a course{% endtrans %}</span>
         </a>

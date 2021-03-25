@@ -1,14 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}{% trans %}Schools{% endtrans %}{% endblock %}
+{% block title %}{{ entities | trans }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-4xl font-extrabold mb-2">{% trans %}Schools{% endtrans %}</h1>
+    <h1 class="text-4xl font-extrabold mb-2">{{ entities | trans }}</h1>
     <div class="flex justify-end mb-4">
 
-        <a href="" class="button primary">
+        <a href="{{ path(createButtonPath) }}" class="button primary">
             <i class="fas fa-plus"></i>
-            <span>{% trans %}Create a school{% endtrans %}</span>
+            <span>{{ createButtonText | trans }}</span>
         </a>
     </div>
     <div class="p-4 rounded w-full shadow-lg bg-white dark:bg-gray-800">

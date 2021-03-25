@@ -46,7 +46,10 @@ class AdminController extends AbstractController
 
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'entities' => 'Schools',
+            'createButtonText' => 'Create a school',
+            'createButtonPath' => 'school_create'
         ]);
     }
 
@@ -62,7 +65,10 @@ class AdminController extends AbstractController
 
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'entities' => 'Faculties',
+            'createButtonText' => 'Create a faculty',
+            'createButtonPath' => 'faculty_create'
         ]);
     }
 
@@ -78,7 +84,10 @@ class AdminController extends AbstractController
 
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'entities' => 'Studies',
+            'createButtonText' => 'Create a study',
+            'createButtonPath' => 'study_create'
         ]);
     }
 
@@ -110,7 +119,10 @@ class AdminController extends AbstractController
 
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'entities' => 'Years',
+            'createButtonText' => 'Create a year',
+            'createButtonPath' => 'year_create'
         ]);
     }
 
