@@ -37,7 +37,6 @@ class CommentRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->leftJoin('c.note', 'n')
             ->leftJoin('c.author', 'a')
-            ->orderBy('c.createdAt', 'DESC')
-            ->setMaxResults(10);
+            ->orderBy('c.createdAt', 'DESC');
     }
 }

@@ -34,7 +34,6 @@ class FacultyRepository extends ServiceEntityRepository
     public function queryAlphabetically() : QueryBuilder
     {
         return $this->createQueryBuilder('f')
-            ->orderBy('f.title', 'ASC')
-            ->setMaxResults(10);
+            ->orderBy('f.title', 'ASC');
     }
 }

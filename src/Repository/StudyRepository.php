@@ -40,7 +40,6 @@ class StudyRepository extends ServiceEntityRepository
     public function queryAlphabetically() : QueryBuilder
     {
         return $this->createQueryBuilder('s')
-            ->orderBy('s.title', 'ASC')
-            ->setMaxResults(10);
+            ->orderBy('s.title', 'ASC');
     }
 }

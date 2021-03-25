@@ -68,7 +68,6 @@ class CourseRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->leftJoin('c.study', 's')
             ->leftJoin('c.year', 'y')
-            ->orderBy('s.title', 'ASC')
-            ->setMaxResults(10);
+            ->orderBy('s.title', 'ASC');
     }
 }

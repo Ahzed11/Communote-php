@@ -76,7 +76,6 @@ class NoteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('n')
             ->leftJoin('n.course', 'c')
             ->leftJoin('n.author', 'a')
-            ->orderBy('n.createdAt', 'DESC')
-            ->setMaxResults(10);
+            ->orderBy('n.createdAt', 'DESC');
     }
 }
