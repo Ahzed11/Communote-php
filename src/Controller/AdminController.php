@@ -10,6 +10,7 @@ use App\Repository\ReportRepository;
 use App\Repository\ReviewRepository;
 use App\Repository\SchoolRepository;
 use App\Repository\StudyRepository;
+use App\Repository\UserRepository;
 use App\Repository\YearRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -27,10 +28,22 @@ class AdminController extends AbstractController
     private int $paginationLimit = 20;
 
     #[Route('/overview', name: 'admin_overview')]
-    public function overview(): Response
+    public function overview(UserRepository $userRepository, NoteRepository $noteRepository, ReportRepository $reportRepository,
+                            ReviewRepository $reviewRepository, CommentRepository $commentRepository): Response
     {
+        $userCount = $userRepository->count([]);
+        $noteCount = $noteRepository->count([]);
+        $reportCount = $reportRepository->count([]);
+        $reviewCount = $reviewRepository->count([]);
+        $commentCount = $commentRepository->count([]);
+
         return $this->render('admin/overview.html.twig', [
             'controller_name' => 'AdminController',
+            'userCount' => $userCount,
+            'noteCount' => $noteCount,
+            'reportCount' => $reportCount,
+            'reviewCount' => $reviewCount,
+            'commentCount' => $commentCount,
         ]);
     }
 
