@@ -92,9 +92,9 @@
         <hr />
     </section>
 
-    <section class="has-text-centered">
+    <section id="embed-section" class="py-4 mx-auto 8lg:w-2/3 xl:w-2/5">
         <embed
-                class="w-3/4 h mx-auto"
+                class="h-full w-full"
                 src="{{ uploaded_asset(note) }}"
                 type="{{ note.noteFile.mimeType }}"
         />
@@ -109,7 +109,7 @@
         </div>
         {{ knp_pagination_render(pagination) }}
 
-        <div class="mt-8">
+        <div class="mt-4">
             <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl p-8">
                 <h2 class="text-3xl text-center text-bold text-purple-700 dark:text-white mb-4">
                     {% trans %}

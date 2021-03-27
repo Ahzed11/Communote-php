@@ -288,4 +288,8 @@
         @apply text-red-600;
         @apply font-normal
     }
+
+    #embed-section {
+        height: 80vh;
+    }
 }
