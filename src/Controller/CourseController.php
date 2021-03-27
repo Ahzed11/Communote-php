@@ -86,7 +86,7 @@ class CourseController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_VALIDATED", message="You are not allowed to delete this message")
+     * @IsGranted("ROLE_VALIDATED")
      */
     #[Route('/api/', name: 'course_get_api', methods: ['GET'])]
     public function getApi(CourseRepository $courseRepository, Request $request): Response

@@ -75,7 +75,7 @@ class Course
 
     public function __toString(): string
     {
-        return $this->title . " - " . $this->code;
+        return $this->code . " - " . $this->title;
     }
 
     public function getId(): int
