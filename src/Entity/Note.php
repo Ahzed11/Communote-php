@@ -75,7 +75,7 @@ class Note
     private iterable $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="Note", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="note", orphanRemoval=true)
      */
     private iterable $reports;
 

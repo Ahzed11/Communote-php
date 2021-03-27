@@ -31,4 +31,12 @@ class CommentRepository extends ServiceEntityRepository
             ->setParameter('slug', $slug)
             ->orderBy('c.createdAt', 'DESC');
     }
+
+    public function queryByCreatedAtDesc() : QueryBuilder
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.note', 'n')
+            ->leftJoin('c.author', 'a')
+            ->orderBy('c.createdAt', 'DESC');
+    }
 }

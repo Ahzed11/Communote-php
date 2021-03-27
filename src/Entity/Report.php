@@ -33,7 +33,7 @@ class Report
      * @ORM\ManyToOne(targetEntity=Note::class, inversedBy="reports")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Note $Note;
+    private Note $note;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports")
@@ -70,12 +70,12 @@ class Report
 
     public function getNote(): Note
     {
-        return $this->Note;
+        return $this->note;
     }
 
-    public function setNote(Note $Note): self
+    public function setNote(Note $note): self
     {
-        $this->Note = $Note;
+        $this->note = $note;
 
         return $this;
     }

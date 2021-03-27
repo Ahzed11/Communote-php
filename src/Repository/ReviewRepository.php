@@ -33,4 +33,12 @@ class ReviewRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function queryByCreatedAtDesc() : QueryBuilder
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.note', 'n')
+            ->leftJoin('r.author', 'a')
+            ->orderBy('r.createdAt', 'DESC');
+    }
 }

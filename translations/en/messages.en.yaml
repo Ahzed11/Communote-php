@@ -22,6 +22,7 @@ Browse: Parcourir
 
 Search: Search
 
+Schools: Schools
 Faculties: Faculties
 Studies: Studies
 Years: Years
@@ -51,3 +52,35 @@ Write a report: Écrire un signalement
 # Login
 You are Signed In as: Vous êtes connecté en tant que
 Sign In with Microsoft: Se connecter avec Microsoft
+
+# Admin
+Admin section: Admin section
+Sections: Sections
+Overview: Overview
+Create a school: Create a school
+Create a faculty: Create a faculty
+Create a study: Create a study
+Create a year: Create a year
+Create a course: Create a course
+Create a note: Create a note
+Create a comment: Create a comment
+Create a review: Create a review
+Create a report: Create a report
+Select a school: Select a school
+Select a faculty: Select a faculty
+Select a study: Select a study
+Select a year: Select a year
+Users: Utilisateurs
+Comments: Comments
+Reviews: Reviews
+Reports: Reports
+Code: Code
+School: School
+Faculty: faculty
+Study: Study
+Year: Year
+Author: Author
+Note: Note
+Score: Score
+CreatedAt: Created at
+UpdatedAt: UpdatedAt

@@ -1,27 +1,20 @@
 # Note Write
 Write a note: Écrire une note
-
 Title: Titre
-
 Short description: Courte description
 A short text to describe my note. It will be displayed on the note card: Un texte court pour décrire la note. Il sera affiché sur sa carte
-
 Description: Description
 A longer text to describe in detail your note. It will be displayed on the note view page: Un texte plus long pour décrire votre note. Il sera affiché sur la page de visionnage de votre note
-
 Course: Cours
 CODE - Course name: CODE - Nom du cours
-
 Note file: Fichier de la note
 Click here or drop a file: Cliquez ici ou déposez un fichier
-
 Submit: Soumettre
 
 # Browse
 Browse: Parcourir
-
 Search: Rechercher
-
+Schools: Écoles
 Faculties: Facultés
 Studies: Études
 Years: Années
@@ -52,4 +45,34 @@ Write a report: Écrire un signalement
 You are Signed In as: Vous êtes connecté en tant que
 Sign In with Microsoft: Se connecter avec Microsoft
 
-
+# Admin
+Admin section: Section admin
+Sections: Sections
+Overview: Aperçu
+Create a school: Créer une école
+Create a faculty: Créer une faculté
+Create a study: Créer une étude
+Create a year: Créer une année
+Create a course: Créer un cours
+Create a note: Créer une note
+Create a comment: Créer un commentaire
+Create a review: Créer une notation
+Create a report: Créer un signalement
+Select a school: Sélectionnez une école
+Select a faculty: Sélectionnez une faculté
+Select a study: Sélectionnez une étude
+Select a year: Sélectionnez une année
+Users: Utilisateurs
+Comments: Commentaires
+Reviews: Notations
+Reports: Signalements
+Code: Code
+Study: Étude
+School: École
+Faculty: Faculté
+Year: Année
+Author: Auteur
+Note: Note
+Score: Score
+CreatedAt: Créé à
+UpdatedAt: Mis à jour à
