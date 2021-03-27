@@ -28,12 +28,13 @@ export default class extends Controller {
                         Visibility.replace(stars[j], 'fas', 'far');
                     }
                     isSelected = true;
-                    fetch(target.textContent + '?score=' + (i+1)).then((response) => {
-                        if (!response.ok) {
-                            isSelected = false;
-                        }
-                    })
                 }
+
+                fetch(target.textContent + '?score=' + (i+1)).then((response) => {
+                    if (!response.ok) {
+                        isSelected = false;
+                    }
+                })
             })
         }
     }

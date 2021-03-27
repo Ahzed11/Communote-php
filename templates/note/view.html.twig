@@ -67,24 +67,24 @@
                 </a>
                 {% endif %}
             </div>
-            {% if not note.author == app.user %}
+            {% if note.author != app.user %}
             <div class="button warning" data-controller="review">
-                {% if not userReview is defined %}
+                {% if userReview is not null %}
+                    <span class="hidden">{{ path('review_edit', {'id': userReview.id}) }}</span>
+                    {% for i in 0..4 %}
+                        {% if i < userReview.score %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
                     <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
-                {% else %}
-                    <span class="hidden">{{ path('review_edit', {'id': userReview.id}) }}</span>
-                    {% for i in 0..4 %}
-                        {% if i <= userReview.score %}
-                            <i class="fas fa-star"></i>
-                        {% else %}
-                            <i class="far fa-star"></i>
-                        {% endif %}
-                    {% endfor %}
                 {% endif %}
             </div>
             {% endif %}

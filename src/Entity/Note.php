@@ -265,7 +265,7 @@ class Note
             $sum += $review->getScore();
         }
 
-        return sizeof($this->reviews) > 0 ? $sum / sizeof($this->reviews) : 0;
+        return count($this->reviews) > 0 ? $sum / count($this->reviews) : 0;
     }
 
     public function removeReview(Review $review): self
