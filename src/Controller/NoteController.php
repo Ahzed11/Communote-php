@@ -122,12 +122,7 @@ class NoteController extends BaseController
         $em->remove($note);
         $em->flush();
 
-        // TODO: Redirect to user's note page
-
-        return $this->render("home/index.html.twig", [
-            'controller_name' => 'NoteController',
-            'note' => $note,
-        ]);
+        return $this->redirectToRoute('my_notes');
     }
 
     #[Route('/download/{slug}', name: 'note_download')]
