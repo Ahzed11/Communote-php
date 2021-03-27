@@ -62,7 +62,7 @@ class AdminController extends AbstractController
             'pagination' => $pagination,
             'entities' => 'Schools',
             'createButtonText' => 'Create a school',
-            'createButtonPath' => 'school_create'
+            'targetController' => 'school'
         ]);
     }
 
@@ -81,7 +81,7 @@ class AdminController extends AbstractController
             'pagination' => $pagination,
             'entities' => 'Faculties',
             'createButtonText' => 'Create a faculty',
-            'createButtonPath' => 'faculty_create'
+            'targetController' => 'faculty'
         ]);
     }
 
@@ -100,7 +100,7 @@ class AdminController extends AbstractController
             'pagination' => $pagination,
             'entities' => 'Studies',
             'createButtonText' => 'Create a study',
-            'createButtonPath' => 'study_create'
+            'targetController' => 'study'
         ]);
     }
 
@@ -135,7 +135,7 @@ class AdminController extends AbstractController
             'pagination' => $pagination,
             'entities' => 'Years',
             'createButtonText' => 'Create a year',
-            'createButtonPath' => 'year_create'
+            'targetController' => 'year'
         ]);
     }
 

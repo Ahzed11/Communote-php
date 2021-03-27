@@ -5,8 +5,7 @@
 {% block content %}
     <h1 class="text-4xl font-extrabold mb-2">{{ entities | trans }}</h1>
     <div class="flex justify-end mb-4">
-
-        <a href="{{ path(createButtonPath) }}" class="button primary">
+        <a href="{{ path(targetController ~ '_create') }}" class="button primary">
             <i class="fas fa-plus"></i>
             <span>{{ createButtonText | trans }}</span>
         </a>
@@ -24,7 +23,11 @@
             <tbody>
             {% for item in pagination %}
                 <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
-                    <td class="py-2 font-semibold">{{ item.title }}</td>
+                    <td class="py-2 font-semibold">
+                        <a href="{{ path(targetController ~ '_edit', {'id': item.id}) }}">
+                            {{ item.title }}
+                        </a>
+                    </td>
                     <td class="py-2 font-semibold">{{ item.createdAt | date("m/d/Y H:i:s") }}</td>
                     <td class="py-2 font-semibold">{{ item.updatedAt | date("m/d/Y H:i:s") }}</td>
                 </tr>
