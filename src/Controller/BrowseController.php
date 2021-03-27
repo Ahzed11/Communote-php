@@ -18,7 +18,6 @@ const BROWSE_TEMPLATE = "browse/browse.html.twig";
 const SIMPLE_CARD_COMPONENT = "component/card/card-simple.html.twig";
 const COURSE_CARD_COMPONENT = "component/card/card-course.html.twig";
 const NOTE_CARD_COMPONENT = "component/card/card-note.html.twig";
-const PAGINATION_LIMIT = 20;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -26,6 +25,8 @@ const PAGINATION_LIMIT = 20;
 #[Route('/browse')]
 class BrowseController extends BaseController
 {
+    private int $paginationLimit = 20;
+
     #[Route('/', name: 'browse_faculty')]
     public function faculty(FacultyRepository $facultyRepository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -35,7 +36,7 @@ class BrowseController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            PAGINATION_LIMIT,
+            $this->paginationLimit,
         );
 
         return $this->render(BROWSE_TEMPLATE, [
@@ -56,7 +57,7 @@ class BrowseController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            PAGINATION_LIMIT,
+            $this->paginationLimit,
         );
 
         return $this->render(BROWSE_TEMPLATE, [
@@ -76,7 +77,7 @@ class BrowseController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            PAGINATION_LIMIT,
+            $this->paginationLimit,
         );
 
         return $this->render(BROWSE_TEMPLATE, [
@@ -97,7 +98,7 @@ class BrowseController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            PAGINATION_LIMIT,
+            $this->paginationLimit,
         );
 
         return $this->render(BROWSE_TEMPLATE, [
@@ -119,7 +120,7 @@ class BrowseController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            PAGINATION_LIMIT,
+            $this->paginationLimit,
         );
 
         return $this->render(BROWSE_TEMPLATE, [
