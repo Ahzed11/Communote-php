@@ -60,6 +60,11 @@
                 <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
                     <a href="{{ path('my_account') }}">{% trans %}My account{% endtrans %}</a>
                 </li>
+                {% if is_granted("ROLE_ADMIN") %}
+                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
+                    <a href="{{ path('admin_overview') }}">{% trans %}Admin section{% endtrans %}</a>
+                </li>
+                {% endif %}
                 <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
                     <a href="{{ path('logout') }}">{% trans %}Sign Out{% endtrans %}</a>
                 </li>

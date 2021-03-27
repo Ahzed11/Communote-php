@@ -30,4 +30,10 @@ class YearRepository extends ServiceEntityRepository
         $qb->orderBy('y.title', 'ASC');
         return $qb;
     }
+
+    public function queryAlphabetically() : QueryBuilder
+    {
+        return $this->createQueryBuilder('y')
+            ->orderBy('y.title', 'ASC');
+    }
 }
