@@ -37,7 +37,9 @@ class TextToCourseTransformer implements DataTransformerInterface
             return null;
         }
 
-        $codeAndTitle = explode("-", str_replace(" ", "", $value));
+        $codeAndTitle = explode("-", $value);
+        $codeAndTitle[0] = ltrim(rtrim($codeAndTitle[0]));
+        $codeAndTitle[1] = ltrim(rtrim($codeAndTitle[1]));
         if (count($codeAndTitle) < 2) {
             return null;
         }
