@@ -45,7 +45,7 @@ class NoteType extends AbstractType
             ])
             ->add('shortDescription', null, [
                 'attr' => [
-                    'placeholder' => 'A short text to describe my note. It will be displayed on the note card'
+                    'placeholder' => 'A short text to describe your note. It will be displayed on the note card'
                 ]
             ])
             ->add('description', null, [

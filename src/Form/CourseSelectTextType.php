@@ -31,7 +31,7 @@ class CourseSelectTextType extends AbstractType
     public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setDefaults([
-            'invalid_message' => 'No classes match',
+            'invalid_message' => 'No class match',
         ]);
     }
 }
