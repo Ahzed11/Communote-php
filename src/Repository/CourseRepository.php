@@ -29,6 +29,8 @@ class CourseRepository extends ServiceEntityRepository
             ->leftJoin('c.year', 'y')
             ->addSelect('y')
             ->andWhere('y.title = :year')
+            ->leftJoin('c.notes', 'n')
+            ->addSelect('n')
             ->setParameter('year', $year);
 
         if($term)
