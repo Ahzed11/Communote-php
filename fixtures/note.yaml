@@ -1,0 +1,19 @@
+App\Entity\NoteFile:
+    noteFile_{1..101}:
+        fileName: '1-singleton-5fdb4df95f4cf597501502.pdf'
+        originalFilename: 'single.pdf'
+        mimeType: 'application/pdf'
+
+App\Entity\Note:
+    note_{1..100}:
+        title: <sentence(3)>
+        description: <paragraph()>
+        course: '@course_*'
+        author: '@user_*'
+        noteFile: '@noteFile_<current()>'
+    note_101:
+        title: <sentence(3)>
+        description: <paragraph()>
+        course: '@course_1'
+        author: '@user_101'
+        noteFile: '@noteFile_101'

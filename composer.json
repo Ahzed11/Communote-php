@@ -52,6 +52,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "hautelook/alice-bundle": "^2.9",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
         "symfony/debug-bundle": "^5.2",

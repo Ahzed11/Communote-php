@@ -1,0 +1,4 @@
+App\Entity\Study:
+    study_{1..800}:
+        title: <sentence(3)>
+        faculty: '@faculty_*'

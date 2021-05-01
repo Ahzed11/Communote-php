@@ -15,8 +15,14 @@ class AuthorListener
         $this->security = $security;
     }
 
-    public function prePersist($e)
+    public function prePersist($e): void
     {
+        /* When using the fixtures
+        if ($e->getAuthor() === null){
+            $e->setAuthor($this->security->getUser());
+        }
+        */
+
         $e->setAuthor($this->security->getUser());
     }
 }

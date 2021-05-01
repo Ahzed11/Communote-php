@@ -1,0 +1,5 @@
+App\Entity\Review:
+    review_{1..50}:
+        score: <numberBetween(0, 5)>
+        note: '@note_*'
+        author: '@user_*'

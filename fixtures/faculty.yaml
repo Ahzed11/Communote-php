@@ -1,0 +1,5 @@
+App\Entity\Faculty:
+    faculty_{1..100}:
+        title: <word()>
+        school: '@school_*'
+

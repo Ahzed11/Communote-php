@@ -1,0 +1,5 @@
+App\Entity\Comment:
+    comment_{1..50}:
+        body: <paragraph()>
+        note: '@note_*'
+        author: '@user_*'

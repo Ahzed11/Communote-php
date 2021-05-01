@@ -1,0 +1,4 @@
+App\Entity\School:
+    school_{1..100}:
+        title: <word()>
+

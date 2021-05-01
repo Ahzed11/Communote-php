@@ -1,0 +1,6 @@
+App\Entity\Course:
+    course_{1..800}:
+        title: <sentence(3)>
+        code (unique): '<word()> <postcode()>'
+        study: '@study_*'
+        year:  '@year_*'

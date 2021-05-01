@@ -1,0 +1,14 @@
+App\Entity\User:
+    user_{1..100}:
+        email: <email()>
+        password: <password()>
+        firstName: <firstName()>
+        lastName: <lastName()>
+        roles: ['ROLE_VALIDATED']
+    user_101:
+        email: test@test.com
+        password: <("\$argon2id\$v=19\$m=65536,t=4,p=1\$MvtrCVKIN82NS10BBUwH3A\$ZGczwdfELYS1iHqU6JdJgI2Dq4hnNUvJAQEg794PxGM")>
+        firstName: <firstName()>
+        lastName: <lastName()>
+        # followedCourses: '20x @course_*'
+        roles: ['ROLE_VALIDATED']
