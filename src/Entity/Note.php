@@ -324,12 +324,12 @@ class Note
 
     public function getWroteAt(): ?DateTimeInterface
     {
-        return $this->wrote_at;
+        return $this->wroteAt;
     }
 
-    public function setWroteAt(?DateTimeInterface $wrote_at): self
+    public function setWroteAt(DateTimeInterface $wrote_at): self
     {
-        $this->wrote_at = $wrote_at;
+        $this->wroteAt = $wrote_at;
 
         return $this;
     }
