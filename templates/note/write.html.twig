@@ -38,6 +38,10 @@
         {{ form_errors(form.course) }}
     </div>
 
+    {{ form_label(form.wroteAt) }}
+    {{ form_widget(form.wroteAt) }}
+    {{ form_errors(form.wroteAt) }}
+
     {{ form_label(form.noteFile) }}
     <div data-controller="file" class="relative">
         <span class="absolute inset-0">

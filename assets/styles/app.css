@@ -231,8 +231,7 @@
         @apply mb-4;
         @apply resize-none;
         @apply rounded-lg;
-        @apply text-gray-300;
-        @apply dark:text-gray-600;
+        @apply text-gray-500;
         @apply bg-white;
         @apply dark:bg-gray-800;
         @apply border-gray-200;
@@ -264,11 +263,12 @@
         @apply rounded-lg;
         @apply border-gray-200;
         @apply dark:border-gray-800;
+        @apply dark:bg-gray-800;
         @apply border-2;
         @apply outline-none;
         @apply focus:border-purple-700;
         @apply dark:focus:border-green-600;
-        @apply text-black;
+        @apply text-gray-500;
     }
 
     select[multiple] {

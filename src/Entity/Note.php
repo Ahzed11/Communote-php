@@ -100,6 +100,11 @@ class Note
      */
     private DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $wrote_at;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -312,6 +317,18 @@ class Note
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getWroteAt(): ?DateTimeInterface
+    {
+        return $this->wrote_at;
+    }
+
+    public function setWroteAt(?DateTimeInterface $wrote_at): self
+    {
+        $this->wrote_at = $wrote_at;
 
         return $this;
     }
