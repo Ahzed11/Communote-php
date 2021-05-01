@@ -103,7 +103,8 @@ class Note
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $wrote_at;
+    #[NotNull]
+    private $wroteAt;
 
     public function __construct()
     {
