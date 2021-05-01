@@ -101,10 +101,10 @@ class Note
     private DateTimeInterface $updatedAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     #[NotNull]
-    private $wroteAt;
+    private DateTimeInterface $wroteAt;
 
     public function __construct()
     {
@@ -322,7 +322,7 @@ class Note
         return $this;
     }
 
-    public function getWroteAt(): ?DateTimeInterface
+    public function getWroteAt(): DateTimeInterface
     {
         return $this->wroteAt;
     }
