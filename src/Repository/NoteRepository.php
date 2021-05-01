@@ -38,7 +38,7 @@ class NoteRepository extends ServiceEntityRepository
                 ->setParameter('term', '%'.$term.'%');
         }
 
-        $qb->orderBy('n.createdAt', 'DESC');
+        $qb->orderBy('n.wrote_at', 'DESC');
         return $qb;
     }
 
@@ -81,5 +81,13 @@ class NoteRepository extends ServiceEntityRepository
             ->leftJoin('n.course', 'c')
             ->leftJoin('n.author', 'a')
             ->orderBy('n.createdAt', 'DESC');
+    }
+
+    public function queryByWroteAtDesc() : QueryBuilder
+    {
+        return $this->createQueryBuilder('n')
+            ->leftJoin('n.course', 'c')
+            ->leftJoin('n.author', 'a')
+            ->orderBy('n.wrote_at', 'DESC');
     }
 }

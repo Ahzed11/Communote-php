@@ -123,7 +123,7 @@ class BrowseController extends BaseController
             $this->paginationLimit,
         );
 
-        return $this->render(BROWSE_TEMPLATE, [
+        return $this->render("browse/browse-note.html.twig", [
             'controller_name' => 'BrowseController',
             'title' => 'Notes',
             'pagination' => $pagination,
