@@ -17,7 +17,12 @@
                 'course':note.course.title,
             }) }}" class="pill primary light block">
                 <i class="fas fa-book"></i>
-                <span>{{ note.course.code }} - {{ note.createdAt | date('Y') }}</span>
+                <span>{{ note.course.code }}</span>
+            </a>
+            <a class="pill primary block">
+                {% set year = note.wroteAt | date('Y') %}
+                <i class="fas fa-calendar"></i>
+                <span>{{ year }} - {{ year + 1 }}</span>
             </a>
         </div>
     </section>
