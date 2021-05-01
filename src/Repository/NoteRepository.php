@@ -27,6 +27,8 @@ class NoteRepository extends ServiceEntityRepository
             ->addSelect('c')
             ->leftJoin('n.author', 'a')
             ->addSelect('a')
+            ->leftJoin('n.reviews', 'r')
+            ->addSelect('r')
             ->andWhere('c.title LIKE :course')
             ->setParameter('course', '%'.$course.'%');
 
@@ -47,6 +49,8 @@ class NoteRepository extends ServiceEntityRepository
             ->addSelect('c')
             ->leftJoin('n.author', 'a')
             ->addSelect('a')
+            ->leftJoin('n.reviews', 'r')
+            ->addSelect('r')
             ->andWhere('a.email = :email')
             ->setParameter('email', $email);
 
