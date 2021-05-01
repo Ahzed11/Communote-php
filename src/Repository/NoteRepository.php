@@ -38,7 +38,7 @@ class NoteRepository extends ServiceEntityRepository
                 ->setParameter('term', '%'.$term.'%');
         }
 
-        $qb->orderBy('n.wrote_at', 'DESC');
+        $qb->orderBy('n.wroteAt', 'DESC');
         return $qb;
     }
 
