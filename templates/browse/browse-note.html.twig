@@ -15,7 +15,7 @@
                 {% set isUnclosed = true %}
             {% endif %}
 
-            <h1 class="text-2xl text-black dark:text-green-400 font-bold mb-2"> {{ year }}</h1>
+            <h1 class="text-2xl text-black dark:text-green-400 font-bold mb-2">{{ year }} - {{ year + 1 }}</h1>
             <ul class="list-none grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6 mb-6">
                 {% include cardComponent with {
                     'path': path
