@@ -32,6 +32,8 @@ class MeController extends AbstractController
     #[Route('/my-account', name: 'my_account')]
     public function myAccount(): Response
     {
-        return $this->json('myAccount');
+        return $this->render('me/my-account.html.twig', [
+            'controller_name' => 'MeController',
+        ]);
     }
 }

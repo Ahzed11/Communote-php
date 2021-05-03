@@ -1,5 +1,5 @@
 <li class="inline-block rounded-lg shadow overflow-hidden h-full hover:shadow-lg transform hover:scale-105 transition duration-300
-           bg-purple-100 dark:bg-gray-900">
+           bg-purple-800 dark:bg-gray-900">
     <div class="h-full">
         {% if isDeletable %}
         <div class="flex flex-row-reverse">
@@ -12,13 +12,13 @@
         {% endif %}
         <a href="{{ path }}">
             <div class="px-8 h-full {{ isDeletable ? 'pb-6' : 'py-6' }}">
-                <h2 class="text-2xl font-bold">{{ item.title }}</h2>
+                <h2 class="text-white text-2xl font-bold">{{ item.title }}</h2>
                 <div class="flex justify-between text-gray-600 text-sm font-medium flex mb-4 mt-2">
                     <p class="text-purple-700 dark:text-green-400">
-                        <i class="fas fa-book"></i>
-                        <span>{{ item.code }}</span>
+                        <i class="text-purple-300 dark:text-green-400 fas fa-book"></i>
+                        <span class="text-purple-300 dark:text-green-400">{{ item.code }}</span>
                     </p>
-                    <p>{{ item.notes | length }} {% trans %}notes{% endtrans %}</p>
+                    <p class="text-purple-300 dark:text-green-400">{{ item.notes | length }} {% trans %}notes{% endtrans %}</p>
                 </div>
             </div>
         </a>
