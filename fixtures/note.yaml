@@ -11,6 +11,7 @@ App\Entity\Note:
         course: '@course_*'
         author: '@user_*'
         noteFile: '@noteFile_<current()>'
+        wroteAt: '<dateTime()>'
     note_101:
         title: <sentence(3)>
         description: <paragraph()>
