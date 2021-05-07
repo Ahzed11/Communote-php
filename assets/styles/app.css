@@ -53,6 +53,58 @@
         @apply dark:text-green-400;
     }
 
+    .content ul li {
+        @apply list-disc;
+        @apply list-inside;
+    }
+
+    .content ol li {
+        @apply list-decimal;
+        @apply list-inside;
+    }
+
+    .content pre {
+        @apply p-4;
+        @apply rounded-sm;
+        @apply bg-purple-200;
+        @apply dark:bg-gray-700;
+    }
+
+    .content table {
+        @apply mx-auto;
+        @apply table-auto;
+        @apply border;
+        @apply border-2;
+        @apply border-collapse;
+        @apply border-purple-800;
+        @apply dark:border-green-600;
+    }
+
+    .content th {
+        @apply border;
+        @apply border-2;
+        @apply border-purple-800;
+        @apply px-4;
+        @apply py-2;
+        @apply dark:border-green-600;
+    }
+
+    .content td {
+        @apply border;
+        @apply border-2;
+        @apply border-purple-800;
+        @apply px-2;
+        @apply py-2;
+        @apply dark:border-gray-600;
+    }
+
+    .content blockquote {
+        @apply border-l-8;
+        @apply border-purple-800;
+        @apply dark:border-gray-600;
+        @apply pl-4;
+    }
+
     .pill {
         @apply rounded-full;
         @apply py-1;
