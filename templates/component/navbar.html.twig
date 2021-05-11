@@ -12,21 +12,17 @@
             >
         </a>
 
-        <ul class="inline-flex content-center gap-x-2 text-md font-medium">
-            <li class="block py-4 px-2">
+        <div class="inline-flex content-center gap-x-2 text-md font-medium">
+            <a href="{{ path('home') }}" class="py-4 px-2">
                 <i class="fas fa-home"></i>
-                <a href="{{ path('home') }}">
-                    {% trans %}Home{% endtrans %}
-                </a>
-            </li>
+                <span>{% trans %}Home{% endtrans %}</span>
+            </a>
 
-            <li class="block py-4 px-2">
+            <a href="{{ path('browse_faculty') }}" class="py-4 px-2">
                 <i class="fas fa-folder-open"></i>
-                <a href="{{ path('browse_faculty') }}">
-                    {% trans %}Browse{% endtrans %}
-                </a>
-            </li>
-        </ul>
+                <span>{% trans %}Browse{% endtrans %}</span>
+            </a>
+        </div>
     </div>
 
     {% if is_granted("ROLE_USER") %}
