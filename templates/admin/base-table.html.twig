@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+<div class="p-4 rounded w-full shadow-lg bg-white dark:bg-gray-800">
+    <h1 class="text-4xl font-extrabold mb-2">
+        {% block tableTitle %}{% endblock %}
+    </h1>
+
+    {% block button %}
+
+    {% endblock %}
+
+    <table class="table-fixed w-full border-collapse">
+        <thead class="text-left text-bold text-xl text-purple-700 dark:text-green-400 border-b-2 border-purple-700
+                dark:border-green-400">
+            {% block thead %}{% endblock %}
+        </thead>
+
+        <tbody>
+            {% block tbody %}{% endblock %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

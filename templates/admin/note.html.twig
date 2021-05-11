@@ -1,35 +1,30 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'admin/base-table.html.twig' %}
 
 {% block title %}{% trans %}Notes{% endtrans %}{% endblock %}
 
-{% block content %}
-    <h1 class="text-4xl font-extrabold mb-2">{% trans %}Notes{% endtrans %}</h1>
-    <div class="p-4 rounded w-full shadow-lg bg-white dark:bg-gray-800">
-        <table class="table-fixed w-full border-collapse">
-            <thead class="text-left text-bold text-xl text-purple-700 dark:text-green-400 border-b-2 border-purple-700
-            dark:border-green-400">
-            <tr>
-                <th class="w-3/12 pb-2">{% trans %}Title{% endtrans %}</th>
-                <th class="w-3/12 pb-2">{% trans %}Description{% endtrans %}</th>
-                <th class="w-3/12 pb-2">{% trans %}Course{% endtrans %}</th>
-                <th class="w-1/12 pb-2">{% trans %}Author{% endtrans %}</th>
-                <th class="w-1/12 pb-2">{% trans %}CreatedAt{% endtrans %}</th>
-                <th class="w-1/12 pb-2">{% trans %}UpdatedAt{% endtrans %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in pagination %}
-                <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
-                    <td class="py-2 font-semibold">{{ item.title }}</td>
-                    <td class="py-2 font-semibold">{{ item.description }}</td>
-                    <td class="py-2 font-semibold">{{ item.course.title }}</td>
-                    <td class="py-2 font-semibold">{{ item.author.firstName }} {{ item.author.lastName }}</td>
-                    <td class="py-2 font-semibold">{{ item.createdAt | date("m/d/Y H:i:s") }}</td>
-                    <td class="py-2 font-semibold">{{ item.updatedAt | date("m/d/Y H:i:s") }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {{ knp_pagination_render(pagination) }}
-    </div>
+{% block tableTitle %}
+{% trans %}Notes{% endtrans %}
+{% endblock %}
+
+{% block thead %}
+    <tr>
+        <th class="w-3/12 pb-2">{% trans %}Title{% endtrans %}</th>
+        <th class="w-3/12 pb-2">{% trans %}Description{% endtrans %}</th>
+        <th class="w-3/12 pb-2">{% trans %}Course{% endtrans %}</th>
+        <th class="w-1/12 pb-2">{% trans %}Author{% endtrans %}</th>
+        <th class="w-1/12 pb-2">{% trans %}CreatedAt{% endtrans %}</th>
+        <th class="w-1/12 pb-2">{% trans %}UpdatedAt{% endtrans %}</th>
+    </tr>
+{% endblock %}
+{% block tbody %}
+    {% for item in pagination %}
+        <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
+            <td class="py-2 font-semibold">{{ item.title }}</td>
+            <td class="py-2 font-semibold">{{ item.description }}</td>
+            <td class="py-2 font-semibold">{{ item.course.title }}</td>
+            <td class="py-2 font-semibold">{{ item.author.firstName }} {{ item.author.lastName }}</td>
+            <td class="py-2 font-semibold">{{ item.createdAt | date("m/d/Y H:i:s") }}</td>
+            <td class="py-2 font-semibold">{{ item.updatedAt | date("m/d/Y H:i:s") }}</td>
+        </tr>
+    {% endfor %}
 {% endblock %}

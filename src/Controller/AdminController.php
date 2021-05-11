@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
-    private int $paginationLimit = 20;
+    private int $paginationLimit = 14;
 
     #[Route('/overview', name: 'admin_overview')]
     public function overview(UserRepository $userRepository, NoteRepository $noteRepository, ReportRepository $reportRepository,
@@ -151,6 +151,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/note.html.twig', [
             'controller_name' => 'AdminController',
+            'entities' => 'Notes',
             'pagination' => $pagination
         ]);
     }
@@ -199,7 +200,8 @@ class AdminController extends AbstractController
 
         return $this->render('admin/comment.html.twig', [
             'controller_name' => 'AdminController',
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'entities' => 'Reports',
         ]);
     }
 }

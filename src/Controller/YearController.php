@@ -40,7 +40,7 @@ class YearController extends BaseController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'study_edit')]
+    #[Route('/edit/{id}', name: 'year_edit')]
     public function edit(Year $year, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(YearType::class, $year);
