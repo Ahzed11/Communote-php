@@ -48,6 +48,8 @@ Write a report: Écrire un signalement
 # Login
 You are Signed In as: Vous êtes connecté en tant que
 Sign In with Microsoft: Se connecter avec Microsoft
+Register: S'enregistrer
+Login: Se connecter
 
 # Admin
 Admin section: Section admin
@@ -80,3 +82,11 @@ Note: Note
 Score: Score
 CreatedAt: Créé à
 UpdatedAt: Mis à jour à
+
+home-subtitle: Un site de partage de notes par les étudiants pour les étudiants.
+why-communote: Pourquoi utiliser Communoté ?
+why-communote-opensource: Communoté a toujours été Open Source et le sera toujours. Tout est disponible sur Github si vous êtes curieux ou si vous voulez contribuer.
+why-communote-personal-data-title: Respect des données personnelles.
+why-communote-personal-data: Communoté collecte le minimum de données possibles à propos de vous, se limite aux cookies de session et n'utilise pas de trackers.
+why-communote-ease-of-use-title: Facilité d'utilisation
+why-communote-ease-of-use: Communoté a été pensé avec la facilité d'utilisation comme premier critère d'importance.

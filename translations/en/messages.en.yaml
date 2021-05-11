@@ -23,7 +23,7 @@ No file has been uploaded: No file has been uploaded
 Submit: Submit
 
 # Browse
-Browse: Parcourir
+Browse: Browse
 
 Search: Search
 
@@ -52,11 +52,12 @@ Sign Out: Sign Out
 Sign In: Sign In
 
 # Report
-Write a report: Écrire un signalement
+Write a report: Write a report
 
 # Login
-You are Signed In as: Vous êtes connecté en tant que
-Sign In with Microsoft: Se connecter avec Microsoft
+You are Signed In as: You are connected as
+Sign In with Microsoft: Sign in with Microsoft
+Register: Register
 
 # Admin
 Admin section: Admin section
@@ -89,3 +90,11 @@ Note: Note
 Score: Score
 CreatedAt: Created at
 UpdatedAt: UpdatedAt
+
+home-subtitle: A website to share notes mady by students for students.
+why-communote: Why use Communoté ?
+why-communote-opensource: Communoté has always been Open Source and will always be. Everything is available on Github if you are curious or if you want to contribute.
+why-communote-personal-data-title: Respect of personal data.
+why-communote-personal-data: Communoté collects as less of its user's data as possible, only uses session cookies and does not use trackers.
+why-communote-ease-of-use-title: Ease of use
+why-communote-ease-of-use: Communoté has been thought with the ease of use as a primary importance criteria.

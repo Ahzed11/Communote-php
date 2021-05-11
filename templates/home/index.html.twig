@@ -5,38 +5,85 @@
 {% endblock %}
 
 {% block body %}
-    <section class="h-screen flex flex-col justify-center">
-        <div class="flex flex-col lg:flex-row justify-between w-4/5 lg:w-2/3 mx-auto">
-            <div>
-                <h1 class="text-5xl font-semibold lg:hidden text-center mb-6">Communoté</h1>
-                <img
-                        class="hidden sm:block"
-                        src="{{ asset('build/images/home.png') }}"
-                        alt="Un étudiant devant son ordinateur" width="700"
-                />
+    <section class="w-full lg:h-screen bg-gradient-to-t from-purple-400 to-purple-800 dark:from-green-600
+                    dark:to-green-900 p-8">
+        <div class="h-full flex flex-col justify-center">
+            <h1 class="text-7xl font-bold text-center mb-1 text-white break-all">
+                Communoté
+            </h1>
+            <p class="text-center text-xl font-semibold text-white mb-4">
+                {% trans %} home-subtitle {% endtrans %}
+            </p>
+            <div class="flex justify-center gap-x-4">
+                <a class="button primary" href="{{ path('azure_connect') }}">
+                    {% trans %} Register {% endtrans %}
+                </a>
+                <a class="button primary light" href="{{ path('azure_connect') }}">
+                    {% trans %} Sign In {% endtrans %}
+                </a>
             </div>
-            <div class="flex justify-around flex-col gap-y-4 lg:gap-y-0">
-                <div>
-                    <h1 class="text-3xl font-semibold">S'enregistrer / Se connecter</h1>
-                    <p class="subtitle">Pour prendre part au partage ou récupérer des notes.</p>
-                    <div class="mt-2 flex gap-x-2">
-                        <a class="button primary" href="{{ path('azure_connect') }}">
-                            S'enregistrer
-                        </a>
-                        <a class="button primary light" href="{{ path('azure_connect') }}">
-                            Se connecter
-                        </a>
+        </div>
+    </section>
+
+    <section class="w-full lg:h-screen p-8">
+        <div class="h-full lg:p-0 flex flex-col lg:justify-center">
+            <h1 class="text-7xl font-bold text-center mb-1 text-white mb-16">
+                {% trans %} why-communote {% endtrans %}
+            </h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto container">
+                <a href="https://github.com/Ahzed11/Communote"
+                   target="_blank"
+                   class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
+                            bg-purple-800 dark:bg-gray-900">
+                    <div class="flex justify-center mb-2">
+                        <i class="fab fa-github text-6xl"></i>
                     </div>
+                    <h2 class="text-center font-semibold text-3xl mb-4">
+                        Open Source
+                    </h2>
+                    <p class="text-justify">
+                        {% trans %} why-communote-opensource {% endtrans %}
+                    </p>
+                </a>
+
+                <div class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
+                            bg-purple-800 dark:bg-gray-900">
+                    <div class="flex justify-center mb-2">
+                        <i class="fas fa-user-shield text-6xl"></i>
+                    </div>
+                    <h2 class="text-center font-semibold text-3xl mb-4">
+                        {% trans %} why-communote-personal-data-title {% endtrans %}
+                    </h2>
+                    <p class="text-justify">
+                        {% trans %} why-communote-personal-data {% endtrans %}
+                    </p>
                 </div>
 
-                <div>
-                    <h1 class="text-3xl font-semibold">Parcourir</h1>
-                    <p class="subtitle">Parcourez, trouvez ce qu'il vous faut et c'est parti !</p>
-                    <div class="mt-2 flex gap-x-2">
-                        <a class="button primary" href="{#{{ path('browse') }}#}">
-                            Parcourir les notes
-                        </a>
+                <div class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
+                            bg-purple-800 dark:bg-gray-900">
+                    <div class="flex justify-center mb-2">
+                        <i class="far fa-hand-peace text-6xl"></i>
                     </div>
+                    <h2 class="text-center font-semibold text-3xl mb-4">
+                        {% trans %} why-communote-ease-of-use-title {% endtrans %}
+                    </h2>
+                    <p class="text-justify">
+                        {% trans %} why-communote-ease-of-use {% endtrans %}
+                    </p>
+                </div>
+
+                <div class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
+                            bg-purple-800 dark:bg-gray-900">
+                    <div class="flex justify-center mb-2">
+                        <i class="fas fa-user text-6xl"></i>
+                    </div>
+                    <h2 class="text-center font-semibold text-3xl mb-4">
+                        Placeholder
+                    </h2>
+                    <p class="text-justify">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet, massa nec malesuada
+                        tincidunt, erat tortor dignissim tellus, vitae faucibus sem ipsum ultricies leo.
+                    </p>
                 </div>
             </div>
         </div>
