@@ -98,3 +98,4 @@ why-communote-personal-data-title: Respect of personal data.
 why-communote-personal-data: Communoté collects as less of its user's data as possible, only uses session cookies and does not use trackers.
 why-communote-ease-of-use-title: Ease of use
 why-communote-ease-of-use: Communoté has been thought with the ease of use as a primary importance criteria.
+why-communote-api: Communoté offers a read-only API to access the notes if you want to integrate it to your app.

@@ -30,7 +30,7 @@ class Course
      */
     #[NotBlank]
     #[Length(max: 127)]
-    #[Groups(["course:read"])]
+    #[Groups(["course:read", "note:read"])]
     private string $title;
 
     /**
@@ -38,7 +38,7 @@ class Course
      */
     #[NotBlank]
     #[Length(max: 31)]
-    #[Groups(["course:read"])]
+    #[Groups(["course:read", "note:read"])]
     private string $code;
 
     /**

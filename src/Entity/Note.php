@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\NoteRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use ApiPlatform\Core\Annotation\ApiResource;
+
 
 /**
  * @ORM\Entity(repositoryClass=NoteRepository::class)
@@ -21,6 +27,27 @@ use Symfony\Component\Validator\Constraints\NotNull;
  *     })
  */
 #[UniqueEntity(fields: ["slug"], message: "This slug is already used")]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['note:read']],
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['note:read']],
+        ],
+    ],
+)]
+#[ApiFilter(SearchFilter::class, properties: [
+    'title' => 'ipartial',
+    'slug' => 'iexact',
+    'course.title' => 'ipartial',
+    'course.code' => 'iexact',
+    'author.firstName' => 'ipartial',
+    'author.lastName' => 'ipartial',
+    ])]
+#[ApiFilter(DateFilter::class, properties: ['wroteAt'])]
 class Note
 {
     /**
@@ -35,6 +62,7 @@ class Note
      */
     #[NotBlank]
     #[Length(max: 127)]
+    #[Groups(["note:read"])]
     private string $title;
 
     /**
@@ -42,6 +70,7 @@ class Note
      */
     #[NotBlank]
     #[Length(max: 127)]
+    #[Groups(["note:read"])]
     private string $shortDescription;
 
     /**
@@ -49,11 +78,13 @@ class Note
      */
     #[NotBlank]
     #[Length(max: 2000)]
+    #[Groups(["note:read"])]
     private string $description;
 
     /**
      * @ORM\Column(type="string", length=127, unique=true)
      */
+    #[Groups(["note:read"])]
     private string $slug;
 
     /**
@@ -61,6 +92,7 @@ class Note
      * @ORM\JoinColumn(nullable=false)
      */
     #[NotNull]
+    #[Groups(["note:read"])]
     private Course $course;
 
     /**
@@ -82,12 +114,14 @@ class Note
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="note", orphanRemoval=true)
      */
+    #[Groups(["note:read"])]
     private iterable $reviews;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notes")
      * @ORM\JoinColumn(nullable=false)
      */
+    #[Groups(["note:read"])]
     private User $author;
 
     /**
@@ -104,6 +138,7 @@ class Note
      * @ORM\Column(type="datetime")
      */
     #[NotNull]
+    #[Groups(["note:read"])]
     private DateTimeInterface $wroteAt;
 
     public function __construct()

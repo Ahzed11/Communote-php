@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReviewRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Range;
 
@@ -25,6 +26,7 @@ class Review
      * @ORM\Column(type="smallint")
      */
     #[Range(min:1, max: 5)]
+    #[Groups(["note:read"])]
     private int $score;
 
     /**

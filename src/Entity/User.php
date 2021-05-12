@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Email;
 
 /**
@@ -48,11 +49,13 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=64)
      */
+    #[Groups(["note:read"])]
     private string $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
+    #[Groups(["note:read"])]
     private string $lastName;
 
     /**

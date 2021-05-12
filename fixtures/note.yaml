@@ -8,6 +8,7 @@ App\Entity\Note:
     note_{1..100}:
         title: <sentence(3)>
         description: <paragraph()>
+        shortDescription: <sentence()>
         course: '@course_*'
         author: '@user_*'
         noteFile: '@noteFile_<current()>'
@@ -15,6 +16,7 @@ App\Entity\Note:
     note_101:
         title: <sentence(3)>
         description: <paragraph()>
+        shortDescription: <sentence()>
         course: '@course_1'
         author: '@user_101'
         noteFile: '@noteFile_101'
