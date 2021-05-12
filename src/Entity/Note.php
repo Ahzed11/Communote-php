@@ -114,7 +114,6 @@ class Note
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="note", orphanRemoval=true)
      */
-    #[Groups(["note:read"])]
     private iterable $reviews;
 
     /**
@@ -299,6 +298,7 @@ class Note
         return $this;
     }
 
+    #[Groups(["note:read"])]
     public function getAverageScore(): float
     {
         $sum = 0.0;
@@ -369,6 +369,7 @@ class Note
         return $this;
     }
 
+    #[Groups(["note:read"])]
     public function getPath() : string
     {
         $path = $this->course->getStudy()->getFaculty()->getSchool()->getTitle() . '/' .
