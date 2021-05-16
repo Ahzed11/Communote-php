@@ -26,46 +26,49 @@
     </div>
 
     {% if is_granted("ROLE_USER") %}
-    <ul class="inline-flex py-2 content-center gap-x-2 text-md font-medium">
-        <li>
+    <div class="inline-flex py-2 content-center gap-x-2 text-md font-medium">
+        <div>
             <a href="{{ path('note_create') }}" class="button primary light block">
                 <i class="fas fa-pen"></i>
                 <span>
                     {% trans %}Write a note{% endtrans %}
                 </span>
             </a>
-        </li>
+        </div>
 
-        <li
+        <div
                 data-controller="navbar-dropdown"
                 data-navbar-dropdown-target="parent"
-                class="inline-block relative px-4 py-2 text-md rounded-lg"
+                class="inline-block px-4 py-2 text-md rounded-lg"
         >
             <span data-navbar-dropdown-target="button" class="lg:inline font-semibold cursor-pointer">
                 {{ app.user.firstName }} {{ app.user.lastName }}
+                <i class="fas fa-chevron-down text-purple-800 dark:text-green-400"></i>
             </span>
-            <ul
-                    data-navbar-dropdown-target="dropdown"
-                    class="block absolute p-4 z-10 inset-y-10 left-0 rounded-lg bg-white dark:bg-gray-900 shadow h-32
-                    w-30 text-black dark:text-white invisible"
-            >
-                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('my_notes') }}">{% trans %}My notes{% endtrans %}</a>
-                </li>
-                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('my_account') }}">{% trans %}My account{% endtrans %}</a>
-                </li>
-                {% if is_granted("ROLE_ADMIN") %}
-                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('admin_overview') }}">{% trans %}Admin section{% endtrans %}</a>
-                </li>
-                {% endif %}
-                <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                    <a href="{{ path('logout') }}">{% trans %}Sign Out{% endtrans %}</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
+            <div class="absolute">
+                <ul
+                        data-navbar-dropdown-target="dropdown"
+                        class="flex flex-col p-4 z-10 top-0 left-0 right-0 rounded-lg bg-white dark:bg-gray-900 shadow
+                           text-black dark:text-white invisible relative"
+                >
+                    <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
+                        <a href="{{ path('my_notes') }}">{% trans %}My notes{% endtrans %}</a>
+                    </li>
+                    <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
+                        <a href="{{ path('my_account') }}">{% trans %}My account{% endtrans %}</a>
+                    </li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
+                        <a href="{{ path('admin_overview') }}">{% trans %}Admin section{% endtrans %}</a>
+                    </li>
+                    {% endif %}
+                    <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
+                        <a href="{{ path('logout') }}">{% trans %}Sign Out{% endtrans %}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     {% else %}
 
