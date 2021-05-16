@@ -14,6 +14,7 @@
             <p class="text-center text-xl font-semibold text-white mb-4">
                 {% trans %} home-subtitle {% endtrans %}
             </p>
+            {% if not is_granted('ROLE_USER') %}
             <div class="flex justify-center gap-x-4">
                 <a class="button primary" href="{{ path('azure_connect') }}">
                     {% trans %} Register {% endtrans %}
@@ -22,15 +23,16 @@
                     {% trans %} Sign In {% endtrans %}
                 </a>
             </div>
+            {% endif %}
         </div>
     </section>
 
     <section class="w-full lg:h-screen p-8">
         <div class="h-full lg:p-0 flex flex-col lg:justify-center">
-            <h1 class="text-7xl font-bold text-center mb-1 text-white mb-16">
+            <h1 class="text-7xl font-bold text-center mb-1 text-black dark:text-white mb-16">
                 {% trans %} why-communote {% endtrans %}
             </h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto container">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto container text-white">
                 <a href="https://github.com/Ahzed11/Communote"
                    target="_blank"
                    class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
