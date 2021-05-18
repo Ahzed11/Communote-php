@@ -66,7 +66,11 @@ class NoteType extends AbstractType
             ->add('noteFile', FileType::class, array(
                     'mapped' => false,
                     'required' => !$isEdit || !$note,
-                    'constraints' => $fileConstraints
+                    'constraints' => $fileConstraints,
+                    'auto_initialize' => true,
+                    'attr' => [
+                        'placeholder' => $note !== null ? $note->getNoteFile()->getOriginalFilename() : '',
+                    ],
                 )
             )
             ->add("submit", SubmitType::class, [
