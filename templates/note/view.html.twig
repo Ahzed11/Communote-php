@@ -74,8 +74,8 @@
             </div>
             {% if note.author != app.user %}
             <div class="button warning" data-controller="review">
+                <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
                 {% if userReview is not null %}
-                    <span class="hidden">{{ path('review_edit', {'id': userReview.id}) }}</span>
                     {% for i in 0..4 %}
                         {% if i < userReview.score %}
                             <i class="fas fa-star"></i>
@@ -84,7 +84,6 @@
                         {% endif %}
                     {% endfor %}
                 {% else %}
-                    <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>

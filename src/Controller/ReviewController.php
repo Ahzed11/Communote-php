@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Entity\Review;
+use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,32 +21,18 @@ class ReviewController extends BaseController
      * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
      */
     #[Route('/create/{slug}', name: 'review_create')]
-    public function create(Note $note, EntityManagerInterface $em, Request $request): Response
+    public function create(Note $note, EntityManagerInterface $em, Request $request, ReviewRepository $reviewRepository): Response
     {
         $score = $request->query->get('score');
         if (!$score) {
             return new Response("Score is missing", 400);
         }
 
-        $review = new Review();
-        $review->setNote($note);
-        $review->setScore($score);
+        $review = $reviewRepository->getByNoteSlugAndUser($note->getSlug(), $this->getUser()->getId());
 
-        $em->persist($review);
-        $em->flush();
-
-        return new Response("ok", 200);
-    }
-
-    /**
-     * @IsGranted("REVIEW_EDIT", subject="review", message="You do not own this review")
-     */
-    #[Route('/edit/{id}', name: 'review_edit')]
-    public function edit(Review $review, EntityManagerInterface $em, Request $request): Response
-    {
-        $score = $request->query->get('score');
-        if (!$score) {
-            return new Response("Score is missing", 400);
+        if ($review === null) {
+            $review = new Review();
+            $review->setNote($note);
         }
 
         $review->setScore($score);
