@@ -4,7 +4,7 @@ Title: Titre
 Short description: Courte description
 A short text to describe your note. It will be displayed on the note card: Un texte court pour décrire la note. Il sera affiché sur sa carte
 Description: Description
-A longer text to describe in detail your note. It will be displayed on the note view page: Un texte plus long pour décrire votre note. Il sera affiché sur la page de visionnage de votre note
+A longer text to describe in detail your note. It will be displayed on the note view page: Un texte plus long pour décrire votre note. Il sera affiché sur la page de visionnage de votre note. Le format Markdown est supporté.
 Wrote at: Année académique
 Choose an academic year: Choisissez une année académique
 Course: Cours
