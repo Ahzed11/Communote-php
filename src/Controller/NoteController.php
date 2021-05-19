@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Download;
 use App\Entity\Note;
 use App\Entity\NoteFile;
 use App\Form\CommentType;
@@ -126,8 +127,14 @@ class NoteController extends BaseController
     }
 
     #[Route('/download/{slug}', name: 'note_download')]
-    public function download(Note $note, S3Helper $s3Helper): RedirectResponse
+    public function download(Note $note, S3Helper $s3Helper, EntityManagerInterface $em): RedirectResponse
     {
+        $downLoad = new Download();
+        $downLoad->setNote($note);
+
+        $em->persist($downLoad);
+        $em->flush();
+
         return $s3Helper->getDownloadRedirectResponse($note);
     }
 
