@@ -13,25 +13,31 @@ use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use TheNetworg\OAuth2\Client\Provider\AzureResourceOwner;
 
 class AzureAuthenticator extends SocialAuthenticator
 {
+    use TargetPathTrait;
 
     private RouterInterface $router;
     private ClientRegistry $clientRegistry;
     private UserRepository $userRepository;
+    private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(RouterInterface $router, ClientRegistry $clientRegistry, UserRepository $userRepository)
+    public function __construct(RouterInterface $router, ClientRegistry $clientRegistry, UserRepository $userRepository,
+                                UrlGeneratorInterface $urlGenerator)
     {
         $this->router = $router;
         $this->clientRegistry = $clientRegistry;
         $this->userRepository = $userRepository;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -83,7 +89,11 @@ class AzureAuthenticator extends SocialAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): ?Response
     {
-        return new RedirectResponse('/');
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     private function getAzureClient(): OAuth2ClientInterface
