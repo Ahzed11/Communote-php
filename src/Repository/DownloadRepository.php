@@ -33,6 +33,7 @@ class DownloadRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
             ->select('DATE(d.createdAt) as date, count(d.id) as counter')
             ->groupBy('date')
+            ->orderBy('d.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
