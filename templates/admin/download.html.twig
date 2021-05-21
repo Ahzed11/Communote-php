@@ -1,0 +1,27 @@
+{% extends 'admin/base-table.html.twig' %}
+
+{% block title %}{% trans %}Downloads{% endtrans %}{% endblock %}
+
+{% block tableTitle %}
+    {% trans %}Downloads{% endtrans %}
+{% endblock %}
+
+{% block thead %}
+    <tr>
+        <th class="w-3/12 pb-2">{% trans %}Title{% endtrans %}</th>
+        <th class="w-1/12 pb-2">{% trans %}Author{% endtrans %}</th>
+        <th class="w-2/12 pb-2">{% trans %}CreatedAt{% endtrans %}</th>
+        <th class="w-2/12 pb-2">{% trans %}UpdatedAt{% endtrans %}</th>
+    </tr>
+{% endblock %}
+
+{% block tbody %}
+    {% for item in pagination %}
+        <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
+            <td class="py-2 font-semibold">{{ item.note.title }}</td>
+            <td class="py-2 font-semibold">{{ item.author.firstName }} {{ item.author.lastName }}</td>
+            <td class="py-2 font-semibold">{{ item.createdAt | date("m/d/Y H:i:s") }}</td>
+            <td class="py-2 font-semibold">{{ item.updatedAt | date("m/d/Y H:i:s") }}</td>
+        </tr>
+    {% endfor %}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CommentRepository;
 use App\Repository\CourseRepository;
+use App\Repository\DownloadRepository;
 use App\Repository\FacultyRepository;
 use App\Repository\NoteRepository;
 use App\Repository\ReportRepository;
@@ -152,6 +153,23 @@ class AdminController extends AbstractController
         return $this->render('admin/note.html.twig', [
             'controller_name' => 'AdminController',
             'entities' => 'Notes',
+            'pagination' => $pagination
+        ]);
+    }
+
+    #[Route('/downloads', name: 'admin_downloads')]
+    public function downloads(DownloadRepository $downloadRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $query = $downloadRepository->queryByCreatedAtDesc();
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $this->paginationLimit,
+        );
+
+        return $this->render('admin/download.html.twig', [
+            'controller_name' => 'AdminController',
+            'entities' => 'Downloads',
             'pagination' => $pagination
         ]);
     }
