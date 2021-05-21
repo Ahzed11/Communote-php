@@ -28,6 +28,15 @@ class DownloadRepository extends ServiceEntityRepository
             ->orderBy('n.createdAt', 'DESC');
     }
 
+    public function getNumberOfDownloadByDate()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('DATE(d.createdAt) as date, count(d.id) as counter')
+            ->groupBy('date')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Download[] Returns an array of Download objects
     //  */

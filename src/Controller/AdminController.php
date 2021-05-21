@@ -19,6 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 /**
  * @IsGranted("ROLE_ADMIN")
@@ -30,13 +32,43 @@ class AdminController extends AbstractController
 
     #[Route('/overview', name: 'admin_overview')]
     public function overview(UserRepository $userRepository, NoteRepository $noteRepository, ReportRepository $reportRepository,
-                            ReviewRepository $reviewRepository, CommentRepository $commentRepository): Response
+                            ReviewRepository $reviewRepository, CommentRepository $commentRepository,
+                             DownloadRepository $downloadRepository, ChartBuilderInterface $chartBuilder): Response
     {
         $userCount = $userRepository->count([]);
         $noteCount = $noteRepository->count([]);
         $reportCount = $reportRepository->count([]);
         $reviewCount = $reviewRepository->count([]);
         $commentCount = $commentRepository->count([]);
+
+        $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $downloadStats = $downloadRepository->getNumberOfDownloadByDate();
+
+        $dates = [];
+        $scores = [];
+        foreach ($downloadStats as $stat) {
+            $dates[] = $stat["date"];
+            $scores[] = $stat["counter"];
+        }
+
+        $chart->setData([
+            'labels' => $dates,
+            'datasets' => [
+                [
+                    'label' => 'Downloads',
+                    'borderColor' => '#34d399',
+                    'data' => $scores,
+                ],
+            ],
+        ]);
+
+        $chart->setOptions([
+            'scales' => [
+                'yAxes' => [
+                    ['ticks' => ['min' => 0, 'max' => max($scores)]],
+                ],
+            ],
+        ]);
 
         return $this->render('admin/overview.html.twig', [
             'controller_name' => 'AdminController',
@@ -45,6 +77,7 @@ class AdminController extends AbstractController
             'reportCount' => $reportCount,
             'reviewCount' => $reviewCount,
             'commentCount' => $commentCount,
+            'chart' => $chart,
         ]);
     }
 

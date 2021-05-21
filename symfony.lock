@@ -224,6 +224,9 @@
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
+    "oro/doctrine-extensions": {
+        "version": "2.0.0"
+    },
     "paragonie/random_compat": {
         "version": "v9.99.100"
     },
@@ -629,6 +632,9 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/ux-chartjs": {
+        "version": "v1.2.0"
     },
     "symfony/validator": {
         "version": "4.3",
