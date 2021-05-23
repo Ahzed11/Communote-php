@@ -219,7 +219,8 @@ class AdminController extends AbstractController
 
         return $this->render('admin/comment.html.twig', [
             'controller_name' => 'AdminController',
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'entities' => 'Comments',
         ]);
     }
 

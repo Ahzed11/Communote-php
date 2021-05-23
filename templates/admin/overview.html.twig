@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1 class="text-4xl font-extrabold mb-8">{% trans %}Overview{% endtrans %}</h1>
-    <div class="flex flex-wrap gap-x-4 mb-8">
+    <div class="flex justify-between flex-wrap gap-x-4 mb-8">
         <div class="inline-block rounded-lg shadow overflow-hidden h-full hover:shadow-lg
            bg-purple-100 dark:bg-gray-800 dark:text-gray-100 w-1/6 p-8">
             <div class="h-full">
@@ -46,7 +46,9 @@
         </div>
     </div>
 
-    <div class="flex gap-x-4">
-        {{ render_chart(chart, {'class': 'my-chart'}) }}
+    <div class="grid grid-cols-3 grid-flow-col">
+        <div class="w-full">
+            {{ render_chart(chart) }}
+        </div>
     </div>
 {% endblock %}
