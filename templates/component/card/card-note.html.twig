@@ -21,7 +21,7 @@
 
                 {% if item.averageScore != 0 %}
                 <span class="text-yellow-500 dark:text-yellow-200">
-                    {{ item.averageScore }}
+                    {{ item.averageScore | round }}
                     <i class="fas fa-star"></i>
                     ({{ item.reviews | length }})
                 </span>
