@@ -77,15 +77,23 @@ Select a faculty: Select a faculty
 Select a study: Select a study
 Select a year: Select a year
 Users: Utilisateurs
+comment: Comments
 Comments: Comments
+review: Reviews
 Reviews: Reviews
+report: Reports
 Reports: Reports
 Code: Code
+school: Schools
 School: School
-Faculty: faculty
+faculty: Faculties
+Faculty: Faculty
+study: Studies
 Study: Study
+year: Years
 Year: Year
 Author: Author
+note: Notes
 Note: Note
 Score: Score
 CreatedAt: Created at

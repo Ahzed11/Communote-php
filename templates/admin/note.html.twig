@@ -18,7 +18,11 @@
 {% block tbody %}
     {% for item in pagination %}
         <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
-            <td class="py-2 font-semibold hover:text-purple-800 dark:hover:text-green-400">{{ item.title }}</td>
+            <td class="py-2 font-semibold hover:text-purple-800 dark:hover:text-green-400">
+                <a href="{{ path('note_edit', {'slug': item.slug}) }}">
+                    {{ item.title }}
+                </a>
+            </td>
             <td class="py-2 font-semibold text-justify">{{ item.description }}</td>
             <td class="py-2 font-semibold">{{ item.course.title }}</td>
             <td class="py-2 font-semibold">{{ item.author.firstName }} {{ item.author.lastName }}</td>

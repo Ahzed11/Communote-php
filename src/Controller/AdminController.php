@@ -94,7 +94,7 @@ class AdminController extends AbstractController
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
             'pagination' => $pagination,
-            'entities' => 'Schools',
+            'entities' => 'school',
             'createButtonText' => 'Create a school',
             'targetController' => 'school'
         ]);
@@ -113,7 +113,7 @@ class AdminController extends AbstractController
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
             'pagination' => $pagination,
-            'entities' => 'Faculties',
+            'entities' => 'faculty',
             'createButtonText' => 'Create a faculty',
             'targetController' => 'faculty'
         ]);
@@ -132,7 +132,7 @@ class AdminController extends AbstractController
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
             'pagination' => $pagination,
-            'entities' => 'Studies',
+            'entities' => 'study',
             'createButtonText' => 'Create a study',
             'targetController' => 'study'
         ]);
@@ -167,7 +167,7 @@ class AdminController extends AbstractController
         return $this->render('admin/only-title.html.twig', [
             'controller_name' => 'AdminController',
             'pagination' => $pagination,
-            'entities' => 'Years',
+            'entities' => 'year',
             'createButtonText' => 'Create a year',
             'targetController' => 'year'
         ]);
@@ -185,7 +185,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/note.html.twig', [
             'controller_name' => 'AdminController',
-            'entities' => 'Notes',
+            'entities' => 'note',
             'pagination' => $pagination
         ]);
     }
@@ -202,7 +202,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/download.html.twig', [
             'controller_name' => 'AdminController',
-            'entities' => 'Downloads',
+            'entities' => 'download',
             'pagination' => $pagination
         ]);
     }
@@ -220,7 +220,7 @@ class AdminController extends AbstractController
         return $this->render('admin/comment.html.twig', [
             'controller_name' => 'AdminController',
             'pagination' => $pagination,
-            'entities' => 'Comments',
+            'entities' => 'comment',
         ]);
     }
 
@@ -253,7 +253,7 @@ class AdminController extends AbstractController
         return $this->render('admin/comment.html.twig', [
             'controller_name' => 'AdminController',
             'pagination' => $pagination,
-            'entities' => 'Reports',
+            'entities' => 'report',
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Note;
+use App\Entity\Report;
 use App\Entity\Review;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,5 +42,17 @@ class ReviewController extends BaseController
         $em->flush();
 
         return new Response("ok", 200);
+    }
+
+    /**
+     * @IsGranted("REVIEW_DELETE", subject="review", message="You are not allowed to delete this review")
+     */
+    #[Route('/delete/{id}', name: 'review_delete')]
+    public function delete(Review $review, EntityManagerInterface $em): Response
+    {
+        $em->remove($review);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_reviews');
     }
 }
