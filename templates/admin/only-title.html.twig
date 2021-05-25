@@ -7,7 +7,10 @@
 {% endblock %}
 
 {% block button %}
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-between mb-4">
+        <div class="w-1/4">
+            {% include 'component/searchbar.html.twig' with {'placeholder': entities} %}
+        </div>
         <a href="{{ path(targetController ~ '_create') }}" class="button primary">
             <i class="fas fa-plus"></i>
             <span>{{ createButtonText | trans }}</span>

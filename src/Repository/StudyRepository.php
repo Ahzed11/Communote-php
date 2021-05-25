@@ -22,9 +22,8 @@ class StudyRepository extends ServiceEntityRepository
 
     public function queryByTitleAndFaculty(?string $term, string $faculty) : QueryBuilder
     {
-        $qb = $this->createQueryBuilder('s');
-
-        $qb->leftJoin('s.faculty', 'f')
+        $qb = $this->createQueryBuilder('s')
+            ->leftJoin('s.faculty', 'f')
             ->andWhere('f.title = :faculty')
             ->setParameter('faculty', $faculty);
 
@@ -35,6 +34,14 @@ class StudyRepository extends ServiceEntityRepository
 
         $qb->orderBy('s.title', 'ASC');
         return $qb;
+    }
+
+    public function queryByTitle(string $term) : QueryBuilder
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('LOWER(s.title) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('s.title', 'ASC');
     }
 
     public function queryAlphabetically() : QueryBuilder

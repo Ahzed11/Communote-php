@@ -42,6 +42,20 @@ class NoteRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function queryByTitle(string $term) : QueryBuilder
+    {
+        return $this->createQueryBuilder('n')
+            ->leftJoin('n.course', 'c')
+            ->addSelect('c')
+            ->leftJoin('n.author', 'a')
+            ->addSelect('a')
+            ->leftJoin('n.reviews', 'r')
+            ->addSelect('r')
+            ->andWhere('LOWER(n.title) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('n.title', 'ASC');
+    }
+
     public function queryByUser(string $email) : QueryBuilder
     {
         $qb = $this->createQueryBuilder('n')

@@ -1,0 +1,14 @@
+<form method="get" class="full">
+    <label class="hidden" for="search">
+        Search
+    </label>
+    <div class="relative">
+        <input class="browse-search bg-white dark:bg-gray-900"
+               type="text" id="search" name="search" value="{{ app.request.get('search') }}"
+               placeholder="{{ placeholder | trans }}"/>
+        <button type="submit" class="pl-2 font-semibold bg-white dark:bg-gray-900 text-purple-700
+                                                        dark:text-green-400 absolute right-3 top-2.5">
+            <i class="fas fa-search"></i> {% trans %}Search{% endtrans %}
+        </button>
+    </div>
+</form>

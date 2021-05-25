@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block button %}
-    <div class="flex justify-end mb-4">
-
+    <div class="flex justify-between mb-4">
+        <div class="w-1/4">
+            {% include 'component/searchbar.html.twig' with {'placeholder': 'Course'} %}
+        </div>
         <a href="{{ path('course_create') }}" class="button primary">
             <i class="fas fa-plus"></i>
             <span>{% trans %}Create a course{% endtrans %}</span>

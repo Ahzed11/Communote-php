@@ -6,6 +6,14 @@
 {% trans %}Notes{% endtrans %}
 {% endblock %}
 
+{% block button %}
+    <div class="flex justify-between mb-4">
+        <div class="w-1/4">
+            {% include 'component/searchbar.html.twig' with {'placeholder': 'Notes'} %}
+        </div>
+    </div>
+{% endblock %}
+
 {% block thead %}
     <th class="w-3/12 pb-2">{% trans %}Title{% endtrans %}</th>
     <th class="w-3/12 pb-2">{% trans %}Description{% endtrans %}</th>

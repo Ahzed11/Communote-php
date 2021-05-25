@@ -103,7 +103,9 @@ class AdminController extends AbstractController
     #[Route('/faculties', name: 'admin_faculties')]
     public function faculties(FacultyRepository $facultyRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $facultyRepository->queryAlphabetically();
+        $term = $request->query->get('search');
+        $query = $term === null ? $facultyRepository->queryAlphabetically() : $facultyRepository->queryByTitle($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -122,7 +124,9 @@ class AdminController extends AbstractController
     #[Route('/studies', name: 'admin_studies')]
     public function studies(StudyRepository $studyRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $studyRepository->queryAlphabetically();
+        $term = $request->query->get('search');
+        $query = $term === null ? $studyRepository->queryAlphabetically() : $studyRepository->queryByTitle($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -141,7 +145,9 @@ class AdminController extends AbstractController
     #[Route('/courses', name: 'admin_courses')]
     public function courses(CourseRepository $courseRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $courseRepository->queryAlphabetically();
+        $term = $request->query->get('search');
+        $query = $term === null ? $courseRepository->queryAlphabetically() : $courseRepository->queryByTitle($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -157,7 +163,9 @@ class AdminController extends AbstractController
     #[Route('/years', name: 'admin_years')]
     public function years(YearRepository $yearRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $yearRepository->queryAlphabetically();
+        $term = $request->query->get('search');
+        $query = $term === null ? $yearRepository->queryAlphabetically() : $yearRepository->queryByTitle($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -176,7 +184,9 @@ class AdminController extends AbstractController
     #[Route('/notes', name: 'admin_notes')]
     public function notes(NoteRepository $noteRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $noteRepository->queryByCreatedAtDesc();
+        $term = $request->query->get('search');
+        $query = $term === null ? $noteRepository->queryByCreatedAtDesc() : $noteRepository->queryByTitle($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -210,7 +220,10 @@ class AdminController extends AbstractController
     #[Route('/comments', name: 'admin_comments')]
     public function comments(CommentRepository $commentRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $commentRepository->queryByCreatedAtDesc();
+        $term = $request->query->get('search');
+        $query = $term === null ? $commentRepository->queryByCreatedAtDesc()
+            : $commentRepository->queryCommentsByAuthorOrNote($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -243,7 +256,10 @@ class AdminController extends AbstractController
     #[Route('/reports', name: 'admin_reports')]
     public function reports(ReportRepository $reportRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $reportRepository->queryByCreatedAtDesc();
+        $term = $request->query->get('search');
+        $query = $term === null ? $reportRepository->queryByCreatedAtDesc()
+            : $reportRepository->queryReportsByAuthorOrNote($term);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
