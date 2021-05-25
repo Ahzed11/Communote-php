@@ -198,6 +198,10 @@
         @apply font-semibold;
     }
 
+    .admin .browse-search {
+        @apply mb-0 !important
+    }
+
     label {
         @apply font-semibold;
         @apply text-purple-700;
