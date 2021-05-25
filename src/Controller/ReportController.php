@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Note;
 use App\Entity\Report;
 use App\Form\ReportType;
@@ -21,7 +22,7 @@ class ReportController extends BaseController
      * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
      */
     #[Route('/create/{slug}', name: 'report_create')]
-    public function delete(Note $note, EntityManagerInterface $em, Request $request): Response
+    public function create(Note $note, EntityManagerInterface $em, Request $request): Response
     {
         $form = $this->createForm(ReportType::class);
         $form->handleRequest($request);
@@ -45,5 +46,17 @@ class ReportController extends BaseController
             'controller_name' => 'ReportController',
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @IsGranted("REPORT_CREATE", subject="report", message="You are not allowed to delete this report")
+     */
+    #[Route('/delete/{id}', name: 'report_delete')]
+    public function delete(Report $report, EntityManagerInterface $em, Request $request): Response
+    {
+        $em->remove($report);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_reports');
     }
 }

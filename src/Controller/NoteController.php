@@ -115,13 +115,17 @@ class NoteController extends BaseController
      * @IsGranted("NOTE_DELETE", subject="note", message="You do not own this note")
      */
     #[Route('/delete/{slug}', name: 'note_delete')]
-    public function delete(Note $note, EntityManagerInterface $em,
-                           S3Helper $uploaderHelper): Response
+    public function delete(Note $note, EntityManagerInterface $em, S3Helper $uploaderHelper, Request $request): Response
     {
         $uploaderHelper->deleteNoteFile($note);
 
         $em->remove($note);
         $em->flush();
+
+        $referer = $request->headers->get('referer');
+        if (strpos($referer, "admin")) {
+            return $this->redirectToRoute('admin_notes');
+        }
 
         return $this->redirectToRoute('my_notes');
     }

@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block button %}
-    <div class="flex justify-end mb-4">
-
+    <div class="flex justify-between mb-4">
+        <div class="w-1/4">
+            {% include 'component/searchbar.html.twig' with {'placeholder': 'Course'} %}
+        </div>
         <a href="{{ path('course_create') }}" class="button primary">
             <i class="fas fa-plus"></i>
             <span>{% trans %}Create a course{% endtrans %}</span>
@@ -17,25 +19,33 @@
 {% endblock %}
 
 {% block thead %}
-    <tr>
-        <th class="w-3/12 pb-2">{% trans %}Title{% endtrans %}</th>
-        <th class="w-1/12 pb-2">{% trans %}Code{% endtrans %}</th>
-        <th class="w-3/12 pb-2">{% trans %}Study{% endtrans %}</th>
-        <th class="w-1/12 pb-2">{% trans %}Year{% endtrans %}</th>
-        <th class="w-2/12 pb-2">{% trans %}CreatedAt{% endtrans %}</th>
-        <th class="w-2/12 pb-2">{% trans %}UpdatedAt{% endtrans %}</th>
-    </tr>
+    <th class="w-3/12 pb-2">{% trans %}Title{% endtrans %}</th>
+    <th class="w-1/12 pb-2">{% trans %}Code{% endtrans %}</th>
+    <th class="w-3/12 pb-2">{% trans %}Study{% endtrans %}</th>
+    <th class="w-1/12 pb-2">{% trans %}Year{% endtrans %}</th>
+    <th class="w-2/12 pb-2">{% trans %}CreatedAt{% endtrans %}</th>
+    <th class="w-2/12 pb-2">{% trans %}UpdatedAt{% endtrans %}</th>
+    <th class="w-1/12 pb-2 text-center"><i class="fas fa-trash"></i></th>
 {% endblock %}
 
 {% block tbody %}
     {% for item in pagination %}
         <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
-            <td class="py-2 font-semibold">{{ item.title }}</td>
+            <td class="py-2 font-semibold hover:text-purple-800 dark:hover:text-green-400">
+                <a href="{{ path('course_edit', {'id':item.id}) }}">
+                    {{ item.title }}
+                </a>
+            </td>
             <td class="py-2 font-semibold">{{ item.code }}</td>
             <td class="py-2 font-semibold">{{ item.study.title }}</td>
             <td class="py-2 font-semibold">{{ item.year.title }}</td>
             <td class="py-2 font-semibold">{{ item.createdAt | date("m/d/Y H:i:s") }}</td>
             <td class="py-2 font-semibold">{{ item.updatedAt | date("m/d/Y H:i:s") }}</td>
+            <td class="py-2 font-semibold text-center hover:text-purple-800 dark:hover:text-green-400">
+                <a href="{{ path('course_delete', {'id':item.id}) }}">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
         </tr>
     {% endfor %}
 {% endblock %}

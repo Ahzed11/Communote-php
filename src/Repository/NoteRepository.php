@@ -42,6 +42,20 @@ class NoteRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function queryByTitle(string $term) : QueryBuilder
+    {
+        return $this->createQueryBuilder('n')
+            ->leftJoin('n.course', 'c')
+            ->addSelect('c')
+            ->leftJoin('n.author', 'a')
+            ->addSelect('a')
+            ->leftJoin('n.reviews', 'r')
+            ->addSelect('r')
+            ->andWhere('LOWER(n.title) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('n.title', 'ASC');
+    }
+
     public function queryByUser(string $email) : QueryBuilder
     {
         $qb = $this->createQueryBuilder('n')
@@ -89,5 +103,15 @@ class NoteRepository extends ServiceEntityRepository
             ->leftJoin('n.course', 'c')
             ->leftJoin('n.author', 'a')
             ->orderBy('n.wrote_at', 'DESC');
+    }
+
+    public function getNumberOfDownloadByDate()
+    {
+        return $this->createQueryBuilder('n')
+            ->select('DATE(n.createdAt) AS date, COUNT(n.id) AS counter')
+            ->orderBy('date')
+            ->groupBy('date')
+            ->getQuery()
+            ->getResult();
     }
 }
