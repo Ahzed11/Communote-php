@@ -41,4 +41,14 @@ class ReviewRepository extends ServiceEntityRepository
             ->leftJoin('r.author', 'a')
             ->orderBy('r.createdAt', 'DESC');
     }
+
+    public function getReviewsGroupedByScore()
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) AS counter')
+            ->orderBy('r.score')
+            ->groupBy('r.score')
+            ->getQuery()
+            ->getResult();
+    }
 }

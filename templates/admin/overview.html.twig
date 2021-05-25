@@ -48,7 +48,13 @@
 
     <div class="grid grid-cols-3 grid-flow-col">
         <div class="w-full">
-            {{ render_chart(chart) }}
+            {{ render_chart(downloadChart) }}
+        </div>
+        <div class="w-full">
+            {{ render_chart(reviewChart) }}
+        </div>
+        <div class="w-full">
+            {{ render_chart(noteChart) }}
         </div>
     </div>
 {% endblock %}

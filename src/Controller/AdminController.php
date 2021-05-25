@@ -41,34 +41,98 @@ class AdminController extends AbstractController
         $reviewCount = $reviewRepository->count([]);
         $commentCount = $commentRepository->count([]);
 
-        $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        // ==== Start Download Chart ====
+        $downloadChart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $downloadStats = $downloadRepository->getNumberOfDownloadByDate();
 
-        $dates = [];
-        $scores = [];
+        $downloadDates = [];
+        $downloadCounter = [];
         foreach ($downloadStats as $stat) {
-            $dates[] = $stat["date"];
-            $scores[] = $stat["counter"];
+            $downloadDates[] = $stat["date"];
+            $downloadCounter[] = $stat["counter"];
         }
 
-        $chart->setData([
-            'labels' => $dates,
+        $downloadChart->setData([
+            'labels' => $downloadDates,
             'datasets' => [
                 [
                     'label' => 'Downloads',
                     'borderColor' => '#34d399',
-                    'data' => $scores,
+                    'data' => $downloadCounter,
                 ],
             ],
         ]);
 
-        $chart->setOptions([
+        $downloadChart->setOptions([
             'scales' => [
                 'yAxes' => [
-                    ['ticks' => ['min' => 0, 'max' => max($scores)]],
+                    ['ticks' => ['min' => 0, 'max' => max($downloadCounter)]],
                 ],
             ],
         ]);
+        // ==== End Download Chart ====
+
+        // ==== Start Reviews Chart ====
+        $reviewChart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $reviewStats = $reviewRepository->getReviewsGroupedByScore();
+
+        $reviewCounter = [];
+        foreach ($reviewStats as $stat) {
+            $reviewCounter[] = $stat["counter"];
+        }
+
+        $colors = [
+            'rgba(255, 0, 0, 0.2)',
+            'rgba(200, 50, 0, 0.2)',
+            'rgba(150, 100, 0, 0.2)',
+            'rgba(100, 150, 0, 0.2)',
+            'rgba(50, 200, 0, 0.2)',
+            'rgba(0, 255, 0, 0.2)',
+        ];
+
+        $reviewChart->setData([
+            'labels' => range(0, 5),
+            'datasets' => [
+                [
+                    'label' => 'Reviews score',
+                    'borderColor' => $colors,
+                    'backgroundColor' => $colors,
+                    'data' => $reviewCounter,
+                ],
+            ],
+        ]);
+        // ==== End Reviews Chart ====
+
+        // ==== Start Note Chart ====
+        $noteChart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $noteStats = $noteRepository->getNumberOfDownloadByDate();
+
+        $creationDates = [];
+        $noteCounter = [];
+        foreach ($noteStats as $stat) {
+            $creationDates[] = $stat["date"];
+            $noteCounter[] = $stat["counter"];
+        }
+
+        $noteChart->setData([
+            'labels' => $creationDates,
+            'datasets' => [
+                [
+                    'label' => 'Downloads',
+                    'borderColor' => '#34d399',
+                    'data' => $noteCounter,
+                ],
+            ],
+        ]);
+
+        $noteChart->setOptions([
+            'scales' => [
+                'yAxes' => [
+                    ['ticks' => ['min' => 0, 'max' => max($noteCounter)]],
+                ],
+            ],
+        ]);
+        // ==== End Note Chart ====
 
         return $this->render('admin/overview.html.twig', [
             'controller_name' => 'AdminController',
@@ -77,7 +141,9 @@ class AdminController extends AbstractController
             'reportCount' => $reportCount,
             'reviewCount' => $reviewCount,
             'commentCount' => $commentCount,
-            'chart' => $chart,
+            'downloadChart' => $downloadChart,
+            'reviewChart' => $reviewChart,
+            'noteChart' => $noteChart
         ]);
     }
 

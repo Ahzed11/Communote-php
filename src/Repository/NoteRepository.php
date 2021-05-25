@@ -104,4 +104,14 @@ class NoteRepository extends ServiceEntityRepository
             ->leftJoin('n.author', 'a')
             ->orderBy('n.wrote_at', 'DESC');
     }
+
+    public function getNumberOfDownloadByDate()
+    {
+        return $this->createQueryBuilder('n')
+            ->select('DATE(n.createdAt) AS date, COUNT(n.id) AS counter')
+            ->orderBy('date')
+            ->groupBy('date')
+            ->getQuery()
+            ->getResult();
+    }
 }
