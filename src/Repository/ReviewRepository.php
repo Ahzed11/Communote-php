@@ -45,7 +45,7 @@ class ReviewRepository extends ServiceEntityRepository
     public function getReviewsGroupedByScore()
     {
         return $this->createQueryBuilder('r')
-            ->select('COUNT(r.id) AS counter')
+            ->select('COUNT(r.id) AS counter, r.score')
             ->orderBy('r.score')
             ->groupBy('r.score')
             ->getQuery()

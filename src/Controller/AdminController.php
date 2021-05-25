@@ -76,8 +76,10 @@ class AdminController extends AbstractController
         $reviewChart = $chartBuilder->createChart(Chart::TYPE_PIE);
         $reviewStats = $reviewRepository->getReviewsGroupedByScore();
 
+        $reviewScore = [];
         $reviewCounter = [];
         foreach ($reviewStats as $stat) {
+            $reviewScore[] = $stat["score"];
             $reviewCounter[] = $stat["counter"];
         }
 
@@ -91,7 +93,7 @@ class AdminController extends AbstractController
         ];
 
         $reviewChart->setData([
-            'labels' => range(0, 5),
+            'labels' => $reviewScore,
             'datasets' => [
                 [
                     'label' => 'Reviews score',
@@ -118,7 +120,7 @@ class AdminController extends AbstractController
             'labels' => $creationDates,
             'datasets' => [
                 [
-                    'label' => 'Downloads',
+                    'label' => 'Notes',
                     'borderColor' => '#34d399',
                     'data' => $noteCounter,
                 ],
