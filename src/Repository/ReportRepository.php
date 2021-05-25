@@ -20,6 +20,19 @@ class ReportRepository extends ServiceEntityRepository
         parent::__construct($registry, Report::class);
     }
 
+    public function queryReportsByAuthorOrNote(string $term) : QueryBuilder
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.note', 'n')
+            ->addSelect('n')
+            ->leftJoin('r.author', 'a')
+            ->addSelect('a')
+            ->andWhere('LOWER(n.title) LIKE LOWER(:term) OR LOWER(a.firstName) LIKE LOWER(:term) 
+                        OR LOWER(a.lastName) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('r.createdAt', 'DESC');
+    }
+
     public function queryByCreatedAtDesc() : QueryBuilder
     {
         return $this->createQueryBuilder('r')

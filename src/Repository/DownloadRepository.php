@@ -31,7 +31,7 @@ class DownloadRepository extends ServiceEntityRepository
     public function getNumberOfDownloadByDate()
     {
         return $this->createQueryBuilder('d')
-            ->select('DATE(d.createdAt) as date, count(d.id) as counter')
+            ->select('DATE(d.createdAt) AS date, COUNT(d.id) AS counter')
             ->orderBy('date')
             ->groupBy('date')
             ->getQuery()

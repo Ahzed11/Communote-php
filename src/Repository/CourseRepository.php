@@ -44,6 +44,20 @@ class CourseRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function queryByTitle(string $term) : QueryBuilder
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.study', 's')
+            ->addSelect('c')
+            ->leftJoin('c.year', 'y')
+            ->addSelect('y')
+            ->leftJoin('c.notes', 'n')
+            ->addSelect('n')
+            ->andWhere('LOWER(c.title) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('c.title', 'ASC');
+    }
+
     public function getByTitleOrCode(string $term, int $limit = 5) : iterable
     {
         return $this->createQueryBuilder('c')

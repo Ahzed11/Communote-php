@@ -32,6 +32,19 @@ class CommentRepository extends ServiceEntityRepository
             ->orderBy('c.createdAt', 'DESC');
     }
 
+    public function queryCommentsByAuthorOrNote(string $term) : QueryBuilder
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.note', 'n')
+            ->addSelect('n')
+            ->leftJoin('c.author', 'a')
+            ->addSelect('a')
+            ->andWhere('LOWER(n.title) LIKE LOWER(:term) OR LOWER(a.firstName) LIKE LOWER(:term) 
+                        OR LOWER(a.lastName) LIKE LOWER(:term)')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('c.createdAt', 'DESC');
+    }
+
     public function queryByCreatedAtDesc() : QueryBuilder
     {
         return $this->createQueryBuilder('c')
