@@ -6,7 +6,7 @@
     <section class="text-center mb-8">
         <h1 class="text-5xl text-bold mb-2">{{ note.title | capitalize }}</h1>
         <div class="flex justify-center mb-2">
-            <a class="pill primary block">
+            <a href="{{ path('profile', {'id': note.author.id}) }}" class="pill primary block">
                 <i class="fas fa-user-edit"></i>
                 <span>{{ note.author.firstName | capitalize }} {{ note.author.lastName | capitalize }}</span>
             </a>

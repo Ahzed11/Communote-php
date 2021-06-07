@@ -1,0 +1,16 @@
+<div class="rounded-lg shadow overflow-hidden h-full p-8
+            {{ isDark is defined and isDark ?
+                "dark:bg-gray-900 bg-purple-800" : "bg-purple-100 dark:bg-gray-800 dark:text-gray-100" }}">
+    <div class="h-full">
+        <h2 class="text-3xl font-bold
+                {{ isDark is defined and isDark
+                    ? "text-white dark:text-green-400" : "text-purple-700 dark:text-green-400" }}">
+            {{ title | trans }}
+        </h2>
+        <p class="text-xl font-semibold
+                {{ isDark is defined and isDark
+                    ? "text-purple-300 dark:text-white" : "" }}">
+            {{ data }}
+        </p>
+    </div>
+</div>
