@@ -23,8 +23,8 @@
                 </a>
             </td>
             <td class="py-2 font-semibold">{{ item.author.firstName }} {{ item.author.lastName }}</td>
-            <td class="py-2 font-semibold">{{ item.createdAt | date("m/d/Y H:i:s") }}</td>
-            <td class="py-2 font-semibold">{{ item.updatedAt | date("m/d/Y H:i:s") }}</td>
+            <td class="py-2 font-semibold">{{ item.createdAt | date("d/m/Y H:i:s") }}</td>
+            <td class="py-2 font-semibold">{{ item.updatedAt | date("d/m/Y H:i:s") }}</td>
         </tr>
     {% endfor %}
 {% endblock %}
