@@ -67,6 +67,6 @@ class ReviewRepository extends ServiceEntityRepository
             $sum += $value->getScore();
         }
 
-        return $sum / sizeof($result);
+        return sizeof($result) == 0 ? 0 : $sum / sizeof($result);
     }
 }

@@ -38,7 +38,7 @@ Body: Corps
 Home: Accueil
 A note sharing website for college students: Un site de partage de notes pour étudiants du supérieur
 My notes: Mes notes
-My profile: Mon compte
+My profile: Mon profil
 Sign Out: Se déconnecter
 Sign In: Se connecter
 
@@ -93,8 +93,8 @@ UpdatedAt: Mis à jour à
 Downloads: Téléchargements
 
 #Profile
-Created notes: Created notes
-Average score: Average score
+Created notes: Notes créées
+Average score: Score moyen
 
 #Home
 home-subtitle: Un site de partage de notes par les étudiants pour les étudiants.

@@ -21,12 +21,13 @@
         <section class="mb-4">
             <h2 class="text-3xl font-extrabold mb-4">Statistiques</h2>
             <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6">
+                {% set reviewAverageFormated = reviewAverage == 0 ? "-" : reviewAverage %}
 
                 {% include 'component/card/card-stat.html.twig'
                     with{'title': 'Created notes', 'data': numberOfCreatedNotes, 'isDark':true} %}
 
                 {% include 'component/card/card-stat.html.twig'
-                    with{'title': 'Average score', 'data': reviewAverage, 'isDark':true} %}
+                    with{'title': 'Average score', 'data': reviewAverageFormated, 'isDark':true} %}
 
             </div>
         </section>
