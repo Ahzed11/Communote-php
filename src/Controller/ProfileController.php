@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\DownloadRepository;
 use App\Repository\NoteRepository;
 use App\Repository\ReviewRepository;
+use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +19,8 @@ use Symfony\UX\Chartjs\Model\Chart;
 class ProfileController extends BaseController
 {
     #[Route('/user/{id}', name: 'profile')]
-    public function index(User $user, NoteRepository $noteRepository, PaginatorInterface $paginator,
-                            ReviewRepository $reviewRepository, Request $request): Response
+    public function index(User $user, NoteRepository $noteRepository,
+                          PaginatorInterface $paginator, ReviewRepository $reviewRepository, Request $request): Response
     {
         $reviewAverage = $reviewRepository->getAverageOfNotesByUserId($user->getId());
 
@@ -35,7 +36,8 @@ class ProfileController extends BaseController
             'controller_name' => 'MeController',
             'pagination' => $pagination,
             'reviewAverage' => $reviewAverage,
-            'numberOfCreatedNotes' => $pagination->getTotalItemCount()
+            'numberOfCreatedNotes' => $pagination->getTotalItemCount(),
+            'user' => $user
         ]);
     }
 
