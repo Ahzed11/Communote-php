@@ -15,7 +15,10 @@ use Symfony\Component\Validator\Constraints\Email;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
+ * @ORM\EntityListeners({
+ *     "App\EntityListener\CreatedAtListener",
+ *     "App\EntityListener\SlugListener"
+ * })
  */
 #[UniqueEntity(fields: ["email"], message: "This email is already used")]
 class User implements UserInterface
@@ -57,6 +60,11 @@ class User implements UserInterface
      */
     #[Groups(["note:read"])]
     private string $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=127, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
@@ -105,6 +113,11 @@ class User implements UserInterface
         $this->reviews = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->schools = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->firstName . " " . $this->lastName;
     }
 
     public function getId(): ?int
@@ -219,6 +232,18 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

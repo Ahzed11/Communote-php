@@ -18,7 +18,7 @@ use Symfony\UX\Chartjs\Model\Chart;
 #[Route('/profile')]
 class ProfileController extends BaseController
 {
-    #[Route('/user/{id}', name: 'profile')]
+    #[Route('/user/{slug}', name: 'profile')]
     public function index(User $user, NoteRepository $noteRepository,
                           PaginatorInterface $paginator, ReviewRepository $reviewRepository, Request $request): Response
     {

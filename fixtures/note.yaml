@@ -20,3 +20,4 @@ App\Entity\Note:
         course: '@course_1'
         author: '@user_101'
         noteFile: '@noteFile_101'
+        wroteAt: '<dateTime()>'
