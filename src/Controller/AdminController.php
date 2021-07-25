@@ -40,6 +40,7 @@ class AdminController extends AbstractController
         $reportCount = $reportRepository->count([]);
         $reviewCount = $reviewRepository->count([]);
         $commentCount = $commentRepository->count([]);
+        $downloadCount = $downloadRepository->count([]);
 
         // ==== Start Download Chart ====
         $downloadChart = $chartBuilder->createChart(Chart::TYPE_LINE);
@@ -142,6 +143,7 @@ class AdminController extends AbstractController
             'noteCount' => $noteCount,
             'reportCount' => $reportCount,
             'reviewCount' => $reviewCount,
+            'downloadCount' => $downloadCount,
             'commentCount' => $commentCount,
             'downloadChart' => $downloadChart,
             'reviewChart' => $reviewChart,

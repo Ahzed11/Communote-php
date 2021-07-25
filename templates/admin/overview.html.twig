@@ -5,45 +5,17 @@
 {% block content %}
     <h1 class="text-4xl font-extrabold mb-8">{% trans %}Overview{% endtrans %}</h1>
     <div class="flex justify-between flex-wrap gap-x-4 mb-8">
-        <div class="inline-block rounded-lg shadow overflow-hidden h-full
-           bg-purple-100 dark:bg-gray-800 dark:text-gray-100 w-1/6 p-8">
-            <div class="h-full">
-                <h2 class="text-3xl font-bold text-purple-700 dark:text-green-400">{% trans %}Users{% endtrans %}</h2>
-                <p class="text-xl font-semibold">{{ userCount }}</p>
-            </div>
-        </div>
+        {% include 'component/card/card-stat.html.twig' with {'title':'Users', 'data': userCount} %}
 
-        <div class="inline-block rounded-lg shadow overflow-hidden h-full
-           bg-purple-100 dark:bg-gray-800 dark:text-gray-100 w-1/6 p-8">
-            <div class="h-full">
-                <h2 class="text-3xl font-bold text-purple-700 dark:text-green-400">{% trans %}Notes{% endtrans %}</h2>
-                <p class="text-xl font-semibold">{{ noteCount }}</p>
-            </div>
-        </div>
+        {% include 'component/card/card-stat.html.twig' with {'title':'Notes', 'data': noteCount} %}
 
-        <div class="inline-block rounded-lg shadow overflow-hidden h-full
-           bg-purple-100 dark:bg-gray-800 dark:text-gray-100 w-1/6 p-8">
-            <div class="h-full">
-                <h2 class="text-3xl font-bold text-purple-700 dark:text-green-400">{% trans %}Reports{% endtrans %}</h2>
-                <p class="text-xl font-semibold">{{ reportCount }}</p>
-            </div>
-        </div>
+        {% include 'component/card/card-stat.html.twig' with {'title':'Reports', 'data': reportCount} %}
 
-        <div class="inline-block rounded-lg shadow overflow-hidden h-full
-           bg-purple-100 dark:bg-gray-800 dark:text-gray-100 w-1/6 p-8">
-            <div class="h-full">
-                <h2 class="text-3xl font-bold text-purple-700 dark:text-green-400">{% trans %}Reviews{% endtrans %}</h2>
-                <p class="text-xl font-semibold">{{ reviewCount }}</p>
-            </div>
-        </div>
+        {% include 'component/card/card-stat.html.twig' with {'title':'Reviews', 'data': reviewCount} %}
 
-        <div class="inline-block rounded-lg shadow overflow-hidden h-full
-           bg-purple-100 dark:bg-gray-800 dark:text-gray-100 w-1/6 p-8">
-            <div class="h-full">
-                <h2 class="text-3xl font-bold text-purple-700 dark:text-green-400">{% trans %}Comments{% endtrans %}</h2>
-                <p class="text-xl font-semibold">{{ commentCount }}</p>
-            </div>
-        </div>
+        {% include 'component/card/card-stat.html.twig' with {'title':'Comments', 'data': commentCount} %}
+
+        {% include 'component/card/card-stat.html.twig' with {'title':'Downloads', 'data': downloadCount} %}
     </div>
 
     <div class="grid grid-cols-3 grid-flow-col">

@@ -52,10 +52,7 @@
                            text-black dark:text-white invisible relative"
                 >
                     <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                        <a href="{{ path('my_notes') }}">{% trans %}My notes{% endtrans %}</a>
-                    </li>
-                    <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">
-                        <a href="{{ path('my_account') }}">{% trans %}My account{% endtrans %}</a>
+                        <a href="{{ path('profile_me') }}">{% trans %}My profile{% endtrans %}</a>
                     </li>
                     {% if is_granted("ROLE_ADMIN") %}
                     <li class="py-1 hover:text-purple-700 dark:hover:text-green-400">

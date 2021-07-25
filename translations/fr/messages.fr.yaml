@@ -38,7 +38,7 @@ Body: Corps
 Home: Accueil
 A note sharing website for college students: Un site de partage de notes pour étudiants du supérieur
 My notes: Mes notes
-My account: Mon compte
+My profile: Mon profil
 Sign Out: Se déconnecter
 Sign In: Se connecter
 
@@ -92,6 +92,11 @@ CreatedAt: Créé à
 UpdatedAt: Mis à jour à
 Downloads: Téléchargements
 
+#Profile
+Created notes: Notes créées
+Average score: Score moyen
+
+#Home
 home-subtitle: Un site de partage de notes par les étudiants pour les étudiants.
 why-communote: Pourquoi utiliser Communoté ?
 why-communote-opensource: Communoté a toujours été Open Source et le sera toujours. Tout est disponible sur Github si vous êtes curieux ou si vous voulez contribuer.

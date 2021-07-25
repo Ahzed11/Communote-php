@@ -51,4 +51,22 @@ class ReviewRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getAverageOfNotesByUserId(int $userId) : float
+    {
+        $result = $this->createQueryBuilder('r')
+            ->leftJoin('r.note', 'n')
+            ->leftJoin('n.author', 'a')
+            ->andWhere('a.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+
+        $sum = 0;
+        foreach ($result as $value) {
+            $sum += $value->getScore();
+        }
+
+        return sizeof($result) == 0 ? 0 : $sum / sizeof($result);
+    }
 }
