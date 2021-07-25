@@ -127,7 +127,7 @@ class NoteController extends BaseController
             return $this->redirectToRoute('admin_notes');
         }
 
-        return $this->redirectToRoute('my_notes');
+        return $this->redirectToRoute('profile_me');
     }
 
     #[Route('/download/{slug}', name: 'note_download')]

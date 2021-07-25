@@ -1,20 +1,21 @@
 <div class="p-4 mt-2 bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl flex shadow" data-controller="comment">
     <div class="rounded-full bg-purple-700 text-white dark:text-black dark:bg-green-400 w-14 h-12
     w-min-14 h-min-12 mr-4 flex items-center justify-center">
-        <span class="text-center text-gray-100 dark:text-gray-900">
+        <a href="{{ path('profile', {'slug': item.author.slug}) }}" class="text-center text-gray-100 dark:text-gray-900">
             {{ item.author.firstname | slice(0, 1) }}{{ item.author.lastName | slice(0, 1) }}
-        </span>
+        </a>
     </div>
     <div class="w-full">
         <div class="w-full flex justify-between">
-            <span class="text-lg font-semibold block">
+            <a href="{{ path('profile', {'slug': item.author.slug}) }}" class="text-lg font-semibold block">
                 {{ item.author.firstname }} {{ item.author.lastName }}
-            </span>
+            </a>
             <span class="block text-sm font-light text-purple-700 dark:text-green-400">
                 {{ item.createdAt | ago }}
             </span>
         </div>
         <p class="break-all">{{ item.body }}</p>
+
         {% if is_granted("ROLE_USER") or is_granted("COMMENT_EDIT") %}
         <div class="flex justify-end">
             <div class="relative">
