@@ -3,7 +3,7 @@
     <a href="{{ path }}" class="relative h-full">
         <div class="py-10 px-8 flex flex-col justify-between h-full">
             <div>
-                <h2 class="text-2xl font-bold text-white">{{ item.title }}</h2>
+                <h2 class="text-2xl font-bold text-white truncate">{{ item.title }}</h2>
                 <div class="text-purple-300 dark:text-green-400 text-sm font-medium flex mb-4">
                     <span>
                         {{ item.author.firstName }} {{ item.author.lastName }}
@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <p class="break-all text-white">
+            <p class="break-words text-white text-justify">
                 {{ item.shortDescription }}
             </p>
 

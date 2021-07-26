@@ -23,6 +23,12 @@
         @apply font-semibold;
     }
 
+    .content p {
+        @apply overflow-x-hidden;
+        @apply break-words;
+        @apply text-justify;
+    }
+
     .content h1 {
         @apply text-3xl;
         @apply font-semibold;
