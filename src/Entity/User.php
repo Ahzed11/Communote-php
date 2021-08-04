@@ -62,7 +62,7 @@ class User implements UserInterface
     private string $lastName;
 
     /**
-     * @ORM\Column(type="string", length=127, unique=true, nullable=true)
+     * @ORM\Column(type="string", length=127, unique=true)
      */
     private $slug;
 
