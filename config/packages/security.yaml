@@ -1,4 +1,5 @@
 security:
+    enable_authenticator_manager: true
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -15,14 +16,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
             provider: app_user_provider
-            guard:
-                # entry_point: App\Security\Authenticator
-                authenticators:
-                    - App\Security\AzureAuthenticator
-                    # - App\Security\Authenticator
+            custom_authenticators:
+                - App\Security\AzureAuthenticator
             logout:
                 path: logout
                 # where to redirect after logout

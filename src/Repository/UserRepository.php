@@ -39,12 +39,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findOrCreateFromOAuth(AzureResourceOwner $owner): User
+    public function findOrCreateFromAzureOAuth(AzureResourceOwner $oauthUser): User
     {
         // If User already exist and has oid
         $user = $this->createQueryBuilder('u')
             ->where('u.azureOID = :oid')
-            ->setParameter('oid', $owner->getId())
+            ->setParameter('oid', $oauthUser->getId())
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -53,17 +53,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $em = $this->getEntityManager();
-        $names = explode(' ', $owner->claim('name'));
+        $names = explode(' ', $oauthUser->claim('name'));
 
         // if User already exist but doesn't have an oid
         $user = $this->createQueryBuilder('u')
             ->where('u.email = :email')
-            ->setParameter('email', $owner->claim('email'))
+            ->setParameter('email', $oauthUser->claim('email'))
             ->getQuery()
             ->getOneOrNullResult();
 
         if ($user) {
-            $user->setAzureOID($owner->getId())
+            $user->setAzureOID($oauthUser->getId())
                 ->setRoles(['ROLE_VALIDATED'])
                 ->setFirstName($names[0])
                 ->setLastName($names[1]);
@@ -73,8 +73,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         // If User doesn't exist
-        $user = (new User())->setAzureOID($owner->getId())
-                            ->setEmail($owner->claim('email'))
+        $user = (new User())->setAzureOID($oauthUser->getId())
+                            ->setEmail($oauthUser->claim('email'))
                             ->setPassword(null)
                             ->setRoles(['ROLE_VALIDATED'])
                             ->setFirstName($names[0])
