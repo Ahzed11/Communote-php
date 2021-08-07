@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
 use App\Entity\Note;
 use App\Entity\Report;
 use App\Form\ReportType;
@@ -12,15 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @IsGranted("ROLE_USER")
- */
 #[Route('/report')]
 class ReportController extends BaseController
 {
-    /**
-     * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
-     */
+    #[IsGranted("REPORT_CREATE", message: "Your account is not validated")]
     #[Route('/create/{slug}', name: 'report_create')]
     public function create(Note $note, EntityManagerInterface $em, Request $request): Response
     {
@@ -48,9 +42,7 @@ class ReportController extends BaseController
         ]);
     }
 
-    /**
-     * @IsGranted("REPORT_CREATE", subject="report", message="You are not allowed to delete this report")
-     */
+    #[IsGranted("REPORT_DELETE", subject: "report", message: "You are not allowed to delete this report")]
     #[Route('/delete/{id}', name: 'report_delete')]
     public function delete(Report $report, EntityManagerInterface $em, Request $request): Response
     {

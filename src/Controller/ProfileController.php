@@ -6,15 +6,13 @@ use App\Entity\User;
 use App\Repository\DownloadRepository;
 use App\Repository\NoteRepository;
 use App\Repository\ReviewRepository;
-use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
-use Symfony\UX\Chartjs\Model\Chart;
 
+#[IsGranted("ROLE_USER")]
 #[Route('/profile')]
 class ProfileController extends BaseController
 {

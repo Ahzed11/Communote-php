@@ -15,24 +15,21 @@ use App\Repository\UserRepository;
 use App\Repository\YearRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
-/**
- * @IsGranted("ROLE_ADMIN")
- */
+#[IsGranted("ROLE_ADMIN")]
 #[Route('/admin')]
-class AdminController extends AbstractController
+class AdminController extends BaseController
 {
     private int $paginationLimit = 14;
 
     #[Route('/overview', name: 'admin_overview')]
     public function overview(UserRepository $userRepository, NoteRepository $noteRepository, ReportRepository $reportRepository,
-                            ReviewRepository $reviewRepository, CommentRepository $commentRepository,
+                             ReviewRepository $reviewRepository, CommentRepository $commentRepository,
                              DownloadRepository $downloadRepository, ChartBuilderInterface $chartBuilder): Response
     {
         $userCount = $userRepository->count([]);

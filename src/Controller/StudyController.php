@@ -10,10 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted("ROLE_ADMIN")]
 #[Route('/study')]
-/**
- * @IsGranted("ROLE_ADMIN")
- */
 class StudyController extends BaseController
 {
     #[Route('/create', name: 'study_create')]
