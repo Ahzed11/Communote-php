@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[IsGranted("ROLE_USER")]
 #[Route('/note')]
 class NoteController extends BaseController
 {
@@ -122,6 +121,7 @@ class NoteController extends BaseController
         return $this->redirectToRoute('profile_me');
     }
 
+    #[IsGranted("ROLE_VALIDATED", message: "Your account is not validated")]
     #[Route('/download/{slug}', name: 'note_download')]
     public function download(Note $note, S3Helper $s3Helper, EntityManagerInterface $em): RedirectResponse
     {
@@ -134,6 +134,7 @@ class NoteController extends BaseController
         return $s3Helper->getDownloadRedirectResponse($note);
     }
 
+    #[IsGranted("ROLE_USER", message: "Your account is not validated")]
     #[Route('/view/{slug}', name: 'note_view')]
     public function view(string $slug,NoteRepository $noteRepository, CommentRepository $commentRepository,
                          ReviewRepository $reviewRepository, PaginatorInterface $paginator, Request $request,

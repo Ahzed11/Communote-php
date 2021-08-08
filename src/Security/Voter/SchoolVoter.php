@@ -10,10 +10,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class SchoolVoter extends Voter
 {
-    const CREATE = 'YEAR_CREATE';
-    const READ = 'YEAR_READ';
-    const EDIT = 'YEAR_EDIT';
-    const DELETE = 'YEAR_DELETE';
+    const CREATE = 'SCHOOL_CREATE';
+    const READ = 'SCHOOL_READ';
+    const EDIT = 'SCHOOL_EDIT';
+    const DELETE = 'SCHOOL_DELETE';
 
     private Security $security;
 
@@ -24,10 +24,8 @@ class SchoolVoter extends Voter
 
     protected function supports($attribute, $subject) : bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::CREATE, self::READ, self::EDIT, self::DELETE])
-            && $subject instanceof School;
+            && ($subject instanceof School || $subject === null);
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token) : bool

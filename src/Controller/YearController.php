@@ -10,11 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[IsGranted("ROLE_ADMIN")]
 #[Route('/year')]
 class YearController extends BaseController
 {
     #[Route('/create', name: 'year_create')]
+    #[IsGranted("YEAR_CREATE")]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(YearType::class);
@@ -39,6 +39,7 @@ class YearController extends BaseController
     }
 
     #[Route('/edit/{id}', name: 'year_edit')]
+    #[IsGranted("YEAR_EDIT")]
     public function edit(Year $year, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(YearType::class, $year);
@@ -63,6 +64,7 @@ class YearController extends BaseController
     }
 
     #[Route('/delete/{id}', name: 'year_delete')]
+    #[IsGranted("YEAR_DELETE")]
     public function delete(Year $year, EntityManagerInterface $em): Response
     {
         $em->remove($year);
