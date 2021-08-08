@@ -3,108 +3,71 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Utils\NameableTrait;
+use App\Utils\TimestampableTrait;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Email;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
- * @ORM\EntityListeners({
- *     "App\EntityListener\CreatedAtListener",
- *     "App\EntityListener\SlugListener"
- * })
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table("`user`")]
 #[UniqueEntity(fields: ["email"], message: "This email is already used")]
+#[ORM\EntityListeners(["App\EntityListener\TimestampListener", "App\EntityListener\SlugListener"])]
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    use TimestampableTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: "string", length: 180,  unique: true)]
     #[Email]
     private string $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: "json")]
     private iterable $roles = [];
 
-    /**
-     * @var ?string The hashed password
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: "string", nullable: true)]
     private ?string $password;
 
     private ?string $plainPassword;
 
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
+    #[ORM\Column(type: "string", length: 64)]
     #[Groups(["note:read"])]
     private string $firstName;
 
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
+    #[ORM\Column(type: "string", length: 64)]
     #[Groups(["note:read"])]
     private string $lastName;
 
-    /**
-     * @ORM\Column(type="string", length=127, unique=true)
-     */
-    private $slug;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "author", targetEntity: Comment::class, orphanRemoval: true)]
     private iterable $comments;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="author", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "author", targetEntity: Report::class, orphanRemoval: true)]
     private iterable $reports;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="author", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "author", targetEntity: Review::class, orphanRemoval: true)]
     private iterable $reviews;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="author", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "author", targetEntity: Note::class, orphanRemoval: true)]
     private iterable $notes;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=School::class, inversedBy="students")
-     */
+    #[ORM\ManyToMany(targetEntity: School::class, inversedBy: "students")]
     private iterable $schools;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $updatedAt;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $azureOID;
+
+    #[ORM\Column(type: "string", length: 127, unique: true)]
+    private string $slug;
 
     public function __construct()
     {
@@ -232,18 +195,6 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -377,30 +328,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getAzureOID(): ?string
     {
         return $this->azureOID;
@@ -411,5 +338,15 @@ class User implements UserInterface
         $this->azureOID = $azureOID;
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

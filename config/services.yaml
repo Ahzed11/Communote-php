@@ -41,7 +41,7 @@ services:
             - '%env(AWS_S3_ACCESS_SECRET)%'
             - '%env(AWS_S3_REGION)%'
 
-    App\EntityListener\CreatedAtListener:
+    App\EntityListener\TimestampListener:
         tags: [ doctrine.orm.entity_listener ]
 
     App\EntityListener\AuthorListener:
