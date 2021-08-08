@@ -18,10 +18,6 @@ class TextToCourseTransformer implements DataTransformerInterface
         $this->courseRepository = $courseRepository;
     }
 
-    /**
-     * @param Course $value
-     * @return ?string
-     */
     public function transform($value) : ?string
     {
         if ($value === null) {
