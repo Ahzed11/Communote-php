@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Security;
+namespace App\Security\Authenticator;
 
 
 use App\Repository\UserRepository;
@@ -44,12 +44,12 @@ class AzureAuthenticator extends OAuth2Authenticator
      */
     public function supports(Request $request): bool
     {
-       return 'oauth_check' === $request->attributes->get('_route') && $request->get('service') === 'azure';
+       return $request->attributes->get('_route') === 'connect_azure_check';
     }
 
     public function authenticate(Request $request): PassportInterface
     {
-        $client = $this->getAzureClient();
+        $client = $this->clientRegistry->getClient('azure_main');
         $accessToken = $this->fetchAccessToken($client);
 
         return new SelfValidatingPassport(
@@ -79,10 +79,5 @@ class AzureAuthenticator extends OAuth2Authenticator
         $message = strtr($exception->getMessageKey(), $exception->getMessageData());
 
         return new Response($message, Response::HTTP_FORBIDDEN);
-    }
-
-    private function getAzureClient(): OAuth2ClientInterface
-    {
-        return $this->clientRegistry->getClient('azure');
     }
 }

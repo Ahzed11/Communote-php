@@ -19,7 +19,7 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticators:
-                - App\Security\AzureAuthenticator
+                - App\Security\Authenticator\AzureAuthenticator
             logout:
                 path: logout
                 # where to redirect after logout
