@@ -16,6 +16,9 @@
             "src/Entity/.gitignore"
         ]
     },
+    "aws/aws-crt-php": {
+        "version": "v1.0.2"
+    },
     "aws/aws-sdk-php": {
         "version": "3.173.25"
     },
@@ -486,6 +489,9 @@
     },
     "symfony/orm-pack": {
         "version": "v2.1.0"
+    },
+    "symfony/password-hasher": {
+        "version": "v5.3.8"
     },
     "symfony/phpunit-bridge": {
         "version": "5.1",
