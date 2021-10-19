@@ -328,15 +328,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAzureOID(): ?string
+    public function getOpenID(): ?string
     {
-        return $this->azureOID;
+        return $this->openID;
     }
 
-    public function setAzureOID(?string $azureOID): self
+    public function setOpenID(?string $openID): self
     {
-        $this->azureOID = $azureOID;
-
+        $this->openID = $openID;
         return $this;
     }
 

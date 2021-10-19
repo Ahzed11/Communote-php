@@ -43,8 +43,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         // If User already exist and has oid
         $user = $this->createQueryBuilder('u')
-            ->where('u.azureOID = :oid')
-            ->setParameter('oid', $oauthUser->getId())
+            ->where('u.openID = :openID')
+            ->setParameter('openID', 'azure-' . $oauthUser->getId())
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -63,7 +63,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult();
 
         if ($user) {
-            $user->setAzureOID($oauthUser->getId())
+            $user->setOpenID('azure-'.$oauthUser->getId())
                 ->setRoles(['ROLE_VALIDATED'])
                 ->setFirstName($names[0])
                 ->setLastName($names[1]);
@@ -73,7 +73,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         // If User doesn't exist
-        $user = (new User())->setAzureOID($oauthUser->getId())
+        $user = (new User())->setOpenID('azure-'.$oauthUser->getId())
                             ->setEmail($oauthUser->claim('email'))
                             ->setPassword(null)
                             ->setRoles(['ROLE_VALIDATED'])
