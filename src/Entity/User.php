@@ -64,7 +64,7 @@ class User implements UserInterface
     private iterable $schools;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $azureOID;
+    private ?string $openID;
 
     #[ORM\Column(type: "string", length: 127, unique: true)]
     private string $slug;
