@@ -20,6 +20,7 @@ security:
             provider: app_user_provider
             custom_authenticators:
                 - App\Security\Authenticator\AzureAuthenticator
+                - App\Security\Authenticator\GoogleAuthenticator
             logout:
                 path: logout
                 # where to redirect after logout

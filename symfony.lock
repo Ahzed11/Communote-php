@@ -184,6 +184,9 @@
     "league/oauth2-client": {
         "version": "2.6.0"
     },
+    "league/oauth2-google": {
+        "version": "4.0.0"
+    },
     "michelf/php-markdown": {
         "version": "1.9.0"
     },

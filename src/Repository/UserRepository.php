@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use League\OAuth2\Client\Provider\GoogleUser;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,12 +40,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findOrCreateFromAzureOAuth(AzureResourceOwner $oauthUser): User
+    public function findOrCreate($user, string $client) : User {
+        return match ($client) {
+            'azure_main' => $this->findOrCreateFromAzureOAuth($user),
+            'google_main' => $this->findOrCreateFromGoogleOAuth($user),
+            default => throw new \Error("Invalid client given"),
+        };
+    }
+
+    private function findOrCreateFromAzureOAuth(AzureResourceOwner $azureUser): User
     {
         // If User already exist and has oid
         $user = $this->createQueryBuilder('u')
             ->where('u.openID = :openID')
-            ->setParameter('openID', 'azure-' . $oauthUser->getId())
+            ->setParameter('openID', 'azure-' . $azureUser->getId())
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -53,18 +62,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $em = $this->getEntityManager();
-        $names = explode(' ', $oauthUser->claim('name'));
+        $names = explode(' ', $azureUser->claim('name'));
 
         // if User already exist but doesn't have an oid
         $user = $this->createQueryBuilder('u')
             ->where('u.email = :email')
-            ->setParameter('email', $oauthUser->claim('email'))
+            ->setParameter('email', $azureUser->claim('email'))
             ->getQuery()
             ->getOneOrNullResult();
 
         if ($user) {
-            $user->setOpenID('azure-'.$oauthUser->getId())
-                ->setRoles(['ROLE_VALIDATED'])
+            $user->setOpenID('azure-'.$azureUser->getId())
+                ->addRole('ROLE_VALIDATED')
                 ->setFirstName($names[0])
                 ->setLastName($names[1]);
             $em->persist($user);
@@ -73,12 +82,57 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         // If User doesn't exist
-        $user = (new User())->setOpenID('azure-'.$oauthUser->getId())
-                            ->setEmail($oauthUser->claim('email'))
+        $user = (new User())->setOpenID('azure-'.$azureUser->getId())
+                            ->setEmail($azureUser->claim('email'))
                             ->setPassword(null)
-                            ->setRoles(['ROLE_VALIDATED'])
+                            ->addRole('ROLE_VALIDATED')
                             ->setFirstName($names[0])
                             ->setLastName($names[1]);
+        $em->persist($user);
+        $em->flush();
+
+        return $user;
+    }
+
+    private function findOrCreateFromGoogleOAuth(GoogleUser $googleUser): User
+    {
+        // If User already exist and has oid
+        $user = $this->createQueryBuilder('u')
+            ->where('u.openID = :openID')
+            ->setParameter('openID', 'google-' . $googleUser->getId())
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if ($user) {
+            return $user;
+        }
+
+        $em = $this->getEntityManager();
+
+        // if User already exist but doesn't have an oid
+        $user = $this->createQueryBuilder('u')
+            ->where('u.email = :email')
+            ->setParameter('email', $googleUser->getEmail())
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if ($user) {
+            $user->setOpenID('google-'.$googleUser->getId())
+                ->addRole('ROLE_VALIDATED')
+                ->setFirstName($googleUser->getFirstName())
+                ->setLastName($googleUser->getLastName());
+            $em->persist($user);
+            $em->flush();
+            return $user;
+        }
+
+        // If User doesn't exist
+        $user = (new User())->setOpenID('google-'.$googleUser->getId())
+            ->setEmail($googleUser->getEmail())
+            ->setPassword(null)
+            ->addRole('ROLE_VALIDATED')
+            ->setFirstName($googleUser->getFirstName())
+            ->setLastName($googleUser->getLastName());
         $em->persist($user);
         $em->flush();
 

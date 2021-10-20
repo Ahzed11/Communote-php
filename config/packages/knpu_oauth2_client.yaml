@@ -7,3 +7,9 @@ knpu_oauth2_client:
             redirect_route: connect_azure_check
             redirect_params: {}
             default_end_point_version: '2.0'
+        google_main:
+            type: google
+            client_id: '%env(OAUTH_GOOGLE_ID)%'
+            client_secret: '%env(OAUTH_GOOGLE_SECRET)%'
+            redirect_route: connect_google_check
+            redirect_params: { }
