@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Faculty;
 use App\Repository\CourseRepository;
 use App\Repository\FacultyRepository;
 use App\Repository\NoteRepository;
@@ -19,9 +18,7 @@ const SIMPLE_CARD_COMPONENT = "component/card/card-simple.html.twig";
 const COURSE_CARD_COMPONENT = "component/card/card-course.html.twig";
 const NOTE_CARD_COMPONENT = "component/card/card-note.html.twig";
 
-/**
- * @IsGranted("ROLE_USER")
- */
+#[IsGranted("ROLE_USER")]
 #[Route('/browse')]
 class BrowseController extends BaseController
 {

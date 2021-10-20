@@ -3,53 +3,34 @@
 namespace App\Entity;
 
 use App\Repository\FacultyRepository;
-use DateTimeInterface;
+use App\Utils\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
-/**
- * @ORM\Entity(repositoryClass=FacultyRepository::class)
- * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
- */
+#[ORM\Entity(repositoryClass: FacultyRepository::class)]
+#[ORM\EntityListeners(["App\EntityListener\TimestampListener"])]
 class Faculty
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    use TimestampableTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=127)
-     */
+    #[ORM\Column(type: "string", length: 127)]
     #[NotBlank]
     #[Length(max: 127)]
     private string $title;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Study::class, mappedBy="faculty", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "faculty", targetEntity: Study::class, orphanRemoval: true)]
     private iterable $studies;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $updatedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=School::class, inversedBy="faculties")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: School::class, inversedBy: "faculties")]
+    #[ORM\JoinColumn(nullable: false)]
     private School $school;
 
     public function __construct()
@@ -102,30 +83,6 @@ class Faculty
                 $study->setFaculty(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

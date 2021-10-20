@@ -3,6 +3,7 @@
 
 namespace App\EntityListener;
 
+
 use App\Utils\StringUtils;
 
 class SlugListener

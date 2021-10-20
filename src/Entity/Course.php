@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
-use DateTimeInterface;
+use App\Utils\NameableTrait;
+use App\Utils\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,61 +13,39 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-/**
- * @ORM\Entity(repositoryClass=CourseRepository::class)
- * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener"})
- */
+#[ORM\Entity(repositoryClass: CourseRepository::class)]
+#[ORM\EntityListeners(["App\EntityListener\TimestampListener"])]
 class Course
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    use TimestampableTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=127)
-     */
+    #[ORM\Column(type: "string", length: 127)]
     #[NotBlank]
     #[Length(max: 127)]
     #[Groups(["course:read", "note:read"])]
     private string $title;
 
-    /**
-     * @ORM\Column(type="string", length=31)
-     */
+    #[ORM\Column(type: "string", length: 31)]
     #[NotBlank]
     #[Length(max: 31)]
     #[Groups(["course:read", "note:read"])]
     private string $code;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Study::class, inversedBy="courses")
-     */
+    #[ORM\ManyToOne(targetEntity: Study::class, inversedBy: "courses")]
     private ?Study $study;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Year::class, inversedBy="courses")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Year::class, inversedBy: "courses")]
+    #[ORM\JoinColumn(nullable: false)]
     #[NotNull]
     private Year $year;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="course", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "course", targetEntity: Note::class, orphanRemoval: true)]
     private iterable $notes;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -154,30 +133,6 @@ class Course
                 $note->setCourse(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

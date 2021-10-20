@@ -3,52 +3,34 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use DateTimeInterface;
+use App\Utils\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
-/**
- * @ORM\Entity(repositoryClass=CommentRepository::class)
- * @ORM\EntityListeners({"App\EntityListener\CreatedAtListener", "App\EntityListener\AuthorListener"})
- */
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ORM\EntityListeners(["App\EntityListener\TimestampListener", "App\EntityListener\AuthorListener"])]
 class Comment
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    use TimestampableTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private int $id;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: "text")]
     #[NotBlank]
     #[Length(max: 800)]
     private string $body;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Note::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Note::class, inversedBy: "comments")]
+    #[ORM\JoinColumn(nullable: false)]
     private Note $note;
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "comments")]
+    #[ORM\JoinColumn(nullable: false)]
     private User $author;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $updatedAt;
 
     public function getId(): int
     {
@@ -87,30 +69,6 @@ class Comment
     public function setAuthor(User $author): self
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

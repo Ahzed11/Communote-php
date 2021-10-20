@@ -6,7 +6,7 @@ namespace App\EntityListener;
 
 use DateTime;
 
-class CreatedAtListener
+class TimestampListener
 {
     public function prePersist($e)
     {

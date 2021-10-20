@@ -24,10 +24,8 @@ class ReviewVoter extends Voter
 
     protected function supports($attribute, $subject) : bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::CREATE, self::READ, self::EDIT, self::DELETE])
-            && $subject instanceof Review;
+            && ($subject instanceof Review || $subject === null);
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token) : bool

@@ -1,10 +1,9 @@
 knpu_oauth2_client:
     clients:
-        azure:
+        azure_main:
             type: azure
             client_id: '%env(AZURE_ID)%'
             client_secret: '%env(AZURE_SECRET)%'
-            redirect_route: oauth_check
-            redirect_params:
-                service: azure
+            redirect_route: connect_azure_check
+            redirect_params: {}
             default_end_point_version: '2.0'

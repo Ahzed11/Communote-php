@@ -11,12 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/study')]
-/**
- * @IsGranted("ROLE_ADMIN")
- */
 class StudyController extends BaseController
 {
     #[Route('/create', name: 'study_create')]
+    #[IsGranted("STUDY_CREATE")]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(StudyType::class);
@@ -41,6 +39,7 @@ class StudyController extends BaseController
     }
 
     #[Route('/edit/{id}', name: 'study_edit')]
+    #[IsGranted("STUDY_EDIT")]
     public function edit(Study $study, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(StudyType::class, $study);
@@ -65,6 +64,7 @@ class StudyController extends BaseController
     }
 
     #[Route('/delete/{id}', name: 'study_delete')]
+    #[IsGranted("STUDY_DELETE")]
     public function delete(Study $study, EntityManagerInterface $em): Response
     {
         $em->remove($study);

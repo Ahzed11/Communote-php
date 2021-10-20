@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Note;
-use App\Entity\Report;
 use App\Entity\Review;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,15 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @IsGranted("ROLE_USER")
- */
 #[Route('/review')]
 class ReviewController extends BaseController
 {
-    /**
-     * @IsGranted("ROLE_VALIDATED", message="Your account is not validated")
-     */
+    #[IsGranted("REVIEW_CREATE", message: "Your account is not validated")]
     #[Route('/create/{slug}', name: 'review_create')]
     public function create(Note $note, EntityManagerInterface $em, Request $request, ReviewRepository $reviewRepository): Response
     {
@@ -44,9 +38,7 @@ class ReviewController extends BaseController
         return new Response("ok", 200);
     }
 
-    /**
-     * @IsGranted("REVIEW_DELETE", subject="review", message="You are not allowed to delete this review")
-     */
+    #[IsGranted("REVIEW_DELETE", message: "You are not allowed to delete this review")]
     #[Route('/delete/{id}', name: 'review_delete')]
     public function delete(Review $review, EntityManagerInterface $em): Response
     {

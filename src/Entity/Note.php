@@ -3,39 +3,38 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\NoteRepository;
+use App\Utils\NameableTrait;
+use App\Utils\TimestampableTrait;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 
-/**
- * @ORM\Entity(repositoryClass=NoteRepository::class)
- * @ORM\EntityListeners({
- *     "App\EntityListener\CreatedAtListener",
- *     "App\EntityListener\AuthorListener",
- *     "App\EntityListener\SlugListener"
- *     })
- */
+#[ORM\Entity(repositoryClass: NoteRepository::class)]
+#[ORM\EntityListeners(
+    ["App\EntityListener\TimestampListener", "App\EntityListener\AuthorListener", "App\EntityListener\SlugListener"]
+)]
 #[UniqueEntity(fields: ["slug"], message: "This slug is already used")]
 #[ApiResource(
     collectionOperations: [
-        'get' => [
-            'normalization_context' => ['groups' => ['note:read']],
-        ],
+    'get' => [
+        'normalization_context' => ['groups' => ['note:read']],
     ],
+],
     itemOperations: [
-        'get' => [
-            'normalization_context' => ['groups' => ['note:read']],
+    'get' => [
+        'normalization_context' => ['groups' => ['note:read']],
         ],
     ],
 )]
@@ -46,96 +45,63 @@ use ApiPlatform\Core\Annotation\ApiResource;
     'course.code' => 'iexact',
     'author.firstName' => 'ipartial',
     'author.lastName' => 'ipartial',
-    ])]
+])]
 #[ApiFilter(DateFilter::class, properties: ['wroteAt'])]
 class Note
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    use TimestampableTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=127)
-     */
+    #[ORM\Column(type: "string", length: 127)]
     #[NotBlank]
     #[Length(max: 127)]
     #[Groups(["note:read"])]
     private string $title;
 
-    /**
-     * @ORM\Column(type="string", length=127, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 127, unique: true)]
+    private string $slug;
+
+    #[ORM\Column(type: "string", length: 127, nullable: true)]
     #[NotBlank]
     #[Length(max: 127)]
     #[Groups(["note:read"])]
     private string $shortDescription;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: "text")]
     #[NotBlank]
     #[Length(max: 2000)]
     #[Groups(["note:read"])]
     private string $description;
 
-    /**
-     * @ORM\Column(type="string", length=127, unique=true)
-     */
-    #[Groups(["note:read"])]
-    private string $slug;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Course::class, inversedBy="notes")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: "notes")]
+    #[ORM\JoinColumn(nullable: false)]
     #[NotNull]
     #[Groups(["note:read"])]
     private Course $course;
 
-    /**
-     * @ORM\OneToOne(targetEntity=NoteFile::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\OneToOne(targetEntity: NoteFile::class, cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(nullable: false)]
     private NoteFile $noteFile;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="note", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "note", targetEntity: Comment::class, orphanRemoval: true)]
     private iterable $comments;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="note", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "note", targetEntity: Report::class, orphanRemoval: true)]
     private iterable $reports;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="note", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(mappedBy: "note", targetEntity: Review::class, orphanRemoval: true)]
     private iterable $reviews;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notes")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "notes")]
+    #[ORM\JoinColumn(nullable: false)]
     #[Groups(["note:read"])]
     private User $author;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTimeInterface $updatedAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: "datetime")]
     #[NotNull]
     #[Groups(["note:read"])]
     private DateTimeInterface $wroteAt;
@@ -169,6 +135,16 @@ class Note
         return $this;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
     public function getShortDescription(): ?string
     {
         return $this->shortDescription;
@@ -189,18 +165,6 @@ class Note
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSlug(): string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -329,30 +293,6 @@ class Note
     public function setAuthor(User $author): self
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
