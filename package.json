@@ -3,7 +3,7 @@
         "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
         "@symfony/webpack-encore": "^1.0.0",
-        "chart.js": "^3.5.1",
+        "chart.js": "^2.9.4",
         "core-js": "^3.0.0",
         "file-loader": "^6.0.0",
         "regenerator-runtime": "^0.13.2",
@@ -21,7 +21,7 @@
     "dependencies": {
         "@tailwindcss/forms": "^0.3.4",
         "autoprefixer": "^10.2.4",
-        "chart.js": "^3.5.1",
+        "chart.js": "^2.9.4",
         "postcss": ">=8.1",
         "postcss-loader": "^6.2.0",
         "stimulus-use": "^0.41.0",
