@@ -113,3 +113,8 @@ why-communote-personal-data: Communoté collects as less of its user's data as p
 why-communote-ease-of-use-title: Ease of use
 why-communote-ease-of-use: Communoté has been thought with the ease of use as a primary importance criteria.
 why-communote-api: Communoté offers a read-only API to access the notes if you want to integrate it to your app.
+Privacy Policy: Privacy Policy
+Name: Name and last name
+privacy_policy-why-name: We collect your name and last name to display them in the website so other users can identify you.
+Email: Email
+privacy_policy-why-email: We collect your email to have an unique identifier linked to your account.
