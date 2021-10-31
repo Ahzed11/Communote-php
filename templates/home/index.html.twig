@@ -16,10 +16,10 @@
             </p>
             {% if not is_granted('ROLE_USER') %}
             <div class="flex justify-center gap-x-4">
-                <a class="button primary" href="{{ path('connect_azure_start') }}">
+                <a class="button primary" href="{{ path('login') }}">
                     {% trans %} Register {% endtrans %}
                 </a>
-                <a class="button primary light" href="{{ path('connect_azure_start') }}">
+                <a class="button primary light" href="{{ path('login') }}">
                     {% trans %} Sign In {% endtrans %}
                 </a>
             </div>

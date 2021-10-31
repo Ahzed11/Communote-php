@@ -10,10 +10,19 @@
     {% endif %}
 
     {% if app.user %}
-        <div class="">
-            {% trans %}You are Signed In as{% endtrans %} {{ app.user.userIdentifier }},
-            <a href="{{ path('logout') }}">
+        <div class="flex flex-col align-center space-y-2">
+            <p class="self-center">{% trans %}You are Signed In as{% endtrans %} {{ app.user.userIdentifier }}</p>
+            <a class="button primary self-center" href="{{ path('logout') }}">
                 {% trans %}Sign Out{% endtrans %}
+            </a>
+        </div>
+    {% else %}
+        <div class="flex flex-col space-y-4 justify-center">
+            <a href="{{ path('connect_azure_start') }}" class=" flex align-center justify-center">
+                <img src="{{ asset('build/images/ms-light.png') }}" alt="Microsoft Logo"/>
+            </a>
+            <a href="{{ path('connect_google_start') }}" class=" flex justify-center">
+                <img src="{{ asset('build/images/google-light.png') }}" alt="Google Logo"/>
             </a>
         </div>
     {% endif %}
@@ -47,14 +56,4 @@
         </button>
     </form>
     -->
-    <div class="flex flex-col space-y-4 justify-center">
-        <span class="button primary flex flex-wrap justify-center space-x-2">
-            <img src="{{ asset('build/images/ms.png') }}" alt="Microsoft Logo"/>
-            <a href="{{ path('connect_azure_start') }}" class="font-semibold">
-                {% trans %}
-                Sign In with Microsoft
-                {% endtrans %}
-            </a>
-        </span>
-    </div>
 {% endblock %}

@@ -210,7 +210,7 @@
 
     label {
         @apply font-semibold;
-        @apply text-purple-700;
+        @apply text-white;
         @apply dark:text-green-400;
     }
 

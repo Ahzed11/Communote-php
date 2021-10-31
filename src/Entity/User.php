@@ -111,6 +111,16 @@ class User implements UserInterface
     }
 
     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -125,6 +135,20 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addRoles(array $roles): self
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    public function addRole(string $role): self
+    {
+        $this->roles[] = $role;
 
         return $this;
     }

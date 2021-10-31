@@ -14,4 +14,12 @@ class HomeController extends BaseController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/privacy-policy', name: 'privacy_policy')]
+    public function privacyPolicy(): Response
+    {
+        return $this->render('home/privacy-policy.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

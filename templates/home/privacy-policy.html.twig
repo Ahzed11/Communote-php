@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% trans %}Privacy Policy{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+    <section class="w-full lg:h-screen p-8">
+        <div class="h-full lg:p-0 flex flex-col lg:justify-center">
+            <h1 class="text-7xl font-bold text-center mb-1 text-black dark:text-white mb-16">
+                {% trans %} Privacy Policy {% endtrans %}
+            </h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-32 mx-auto container text-white">
+                <div class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
+                            bg-purple-800 dark:bg-gray-900">
+                    <div class="flex justify-center mb-2">
+                        <i class="fas fa-user text-6xl"></i>
+                    </div>
+                    <h2 class="text-center font-semibold text-3xl mb-4">
+                        {% trans %} Name {% endtrans %}
+                    </h2>
+                    <p class="text-justify">
+                        {% trans %} privacy_policy-why-name {% endtrans %}
+                    </p>
+                </div>
+
+                <div class="block rounded p-8 shadow hover:shadow-lg transform hover:scale-105 transition duration-300
+                            bg-purple-800 dark:bg-gray-900">
+                    <div class="flex justify-center mb-2">
+                        <i class="fas fa-envelope text-6xl"></i>
+                    </div>
+                    <h2 class="text-center font-semibold text-3xl mb-4">
+                        {% trans %} email {% endtrans %}
+                    </h2>
+                    <p class="text-justify">
+                        {% trans %} privacy_policy-why-email {% endtrans %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
