@@ -18,10 +18,12 @@
                 <span>{% trans %}Home{% endtrans %}</span>
             </a>
 
+            {% if app.user %}
             <a href="{{ path('browse_faculty') }}" class="py-4 px-2">
                 <i class="fas fa-folder-open"></i>
                 <span>{% trans %}Browse{% endtrans %}</span>
             </a>
+            {% endif %}
         </div>
     </div>
 
