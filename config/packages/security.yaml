@@ -29,6 +29,8 @@ security:
                 secret: "%kernel.secret%"
                 lifetime: 2592000
 
+            entry_point: App\Security\EntryPoint\OAuthEntryPoint
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
