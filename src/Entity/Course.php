@@ -136,4 +136,17 @@ class Course
 
         return $this;
     }
+
+    #[Groups(["note:read"])]
+    public function getPath(): string
+    {
+        return "/browse/"
+                .$this->getStudy()->getFaculty()
+                ."/"
+                .$this->getStudy()
+                ."/"
+                .$this->getYear()
+                ."/"
+                .$this->getTitle();
+    }
 }

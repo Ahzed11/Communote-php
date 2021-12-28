@@ -308,8 +308,7 @@ class Note
 
         return $this;
     }
-
-    #[Groups(["note:read"])]
+    
     public function getPath() : string
     {
         $path = $this->course->getStudy()->getFaculty()->getSchool()->getTitle() . '/' .
