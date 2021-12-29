@@ -120,7 +120,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $user->setOpenID('google-'.$googleUser->getId())
                 ->addRole('ROLE_VALIDATED')
                 ->setFirstName(empty($googleUser->getFirstName()) ? "firstname" : $googleUser->getFirstName())
-                ->setLastName(empty($googleUser->getLastName()) ? "surname" : $googleUser->getFirstName());
+                ->setLastName(empty($googleUser->getLastName()) ? "surname" : $googleUser->getLastName());
             $em->persist($user);
             $em->flush();
             return $user;
