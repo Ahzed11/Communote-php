@@ -73,9 +73,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         if ($user) {
             $user->setOpenID('azure-'.$azureUser->getId())
-                ->addRole('ROLE_VALIDATED')
-                ->setFirstName($names[0])
-                ->setLastName($names[1]);
+                ->addRole('ROLE_VALIDATED');
             $em->persist($user);
             $em->flush();
             return $user;
@@ -86,8 +84,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                             ->setEmail($azureUser->claim('email'))
                             ->setPassword(null)
                             ->addRole('ROLE_VALIDATED')
-                            ->setFirstName($names[0])
-                            ->setLastName($names[1]);
+                            ->setFirstName(empty($names[0]) ? "firstName" : $names[0])
+                            ->setLastName(empty($names[1]) ? "lastName" : $names[1]);
         $em->persist($user);
         $em->flush();
 
