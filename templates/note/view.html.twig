@@ -3,11 +3,11 @@
 {% block title %}{{ note.title }}{% endblock %}
 
 {% block body %}
-    <section class="text-center mb-8">
+    <section class="text-center mt-4 mb-8">
         <h1 class="text-5xl text-bold mb-2">{{ note.title | capitalize }}</h1>
-        <div class="flex justify-center mb-2">
-            <a href="{{ path('profile', {'slug': note.author.slug}) }}" class="pill primary block">
-                <i class="fas fa-user-edit"></i>
+        <div class="flex justify-center mb-2 space-x-2">
+            <a href="{{ path('profile', {'slug': note.author.slug}) }}" class="badge badge-primary badge-lg">
+                <i class="fas fa-user-edit mr-2"></i>
                 <span>{{ note.author.firstName | capitalize }} {{ note.author.lastName | capitalize }}</span>
             </a>
             <a href="{{ path('browse_note', {
@@ -15,19 +15,19 @@
                 'study':note.course.study.title,
                 'year':note.course.year.title,
                 'course':note.course.title,
-            }) }}" class="pill primary light block">
-                <i class="fas fa-book"></i>
+            }) }}" class="badge badge-secondary badge-lg">
+                <i class="fas fa-book mr-2"></i>
                 <span>{{ note.course.code }}</span>
             </a>
-            <a class="pill primary block">
+            <a class="badge badge-primary badge-lg">
                 {% set year = note.wroteAt | date('Y') %}
-                <i class="fas fa-calendar"></i>
+                <i class="fas fa-calendar mr-2"></i>
                 <span>{{ year }} - {{ year + 1 }}</span>
             </a>
         </div>
     </section>
     <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
-        <h2 class="text-3xl text-bold text-purple-700 dark:text-green-400">
+        <h2 class="text-3xl text-bold text-primary">
             {% trans %}
             Description
             {% endtrans %}
@@ -36,17 +36,17 @@
             {{ note.description | markdown }}
         </article>
         <div class="flex pb-4 flex-wrap sm:justify-between justify-around">
-            <div class="flex space-x-2">
-                <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="button primary block">
-                    <i class="fas fa-download"></i>
+            <div class="btn-group flex lg:w-full lg:justify-center">
+                <a href="{{ path('note_download', {'slug':note.slug}) }}" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-download mr-2"></i>
                     <span>
                         {% trans %}
                         Download
                         {% endtrans %}
                     </span>
                 </a>
-                <a href="{{ path('report_create', {'slug': note.slug}) }}" class="button primary light block">
-                    <i class="fas fa-flag"></i>
+                <a href="{{ path('report_create', {'slug': note.slug}) }}" class="btn btn-primary">
+                    <i class="fas fa-flag mr-2"></i>
                     <span>
                         {% trans %}
                         Report
@@ -54,16 +54,16 @@
                     </span>
                 </a>
                 {% if app.user == note.author or "ROLE_ADMIN" in app.user.roles%}
-                <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="button danger block">
-                    <i class="fas fa-pen"></i>
+                <a href="{{ path('note_edit', {'slug':note.slug}) }}" class="btn btn-error">
+                    <i class="fas fa-pen mr-2"></i>
                     <span>
                         {% trans %}
                             Edit
                         {% endtrans %}
                     </span>
                 </a>
-                <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="button danger light block">
-                    <i class="fas fa-trash"></i>
+                <a href="{{ path('note_delete', {'slug':note.slug}) }}" class="btn btn-error">
+                    <i class="fas fa-trash mr-2"></i>
                     <span>
                         {% trans %}
                             Delete
@@ -71,29 +71,31 @@
                     </span>
                 </a>
                 {% endif %}
-            </div>
-            {% if note.author != app.user %}
-            <div class="button warning" data-controller="review">
-                <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
-                {% if userReview is not null %}
-                    {% for i in 0..4 %}
-                        {% if i < userReview.score %}
-                            <i class="fas fa-star"></i>
+                {% if note.author != app.user %}
+                    <div class="btn btn-warning" data-controller="review">
+                        <span class="hidden">{{ path('review_create', {'slug': note.slug}) }}</span>
+                        {% if userReview is not null %}
+                            {% for i in 0..4 %}
+                                {% if i < userReview.score %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
                         {% else %}
                             <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
                         {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
+                    </div>
                 {% endif %}
             </div>
-            {% endif %}
         </div>
-        <hr />
+        <div class="divider font-bold">
+            {% trans %}Note{% endtrans %}
+        </div>
     </section>
 
     <section id="embed-section" class="py-4 mx-auto 8lg:w-2/3 xl:w-2/5">
@@ -105,7 +107,9 @@
     </section>
 
     <section class="lg:w-2/3 xl:w-2/5 px-4 lg:px-0 lg:mx-auto">
-        <hr class="mb-4" />
+        <div class="divider font-bold">
+            {% trans %}Comments{% endtrans %}
+        </div>
         <div class="flex flex-col space-y-4">
             {% for item in pagination %}
                 {% include ('/component/comment/comment.html.twig') %}
@@ -114,8 +118,8 @@
         {{ knp_pagination_render(pagination) }}
 
         <div class="mt-4">
-            <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-2xl p-8">
-                <h2 class="text-3xl text-center text-bold text-purple-700 dark:text-white mb-4">
+            <div class="bg-neutral-focus text-neutral-content rounded-2xl p-8">
+                <h2 class="text-3xl text-center text-bold mb-4">
                     {% trans %}
                         Post a comment
                     {% endtrans %}
