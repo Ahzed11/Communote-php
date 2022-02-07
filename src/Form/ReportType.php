@@ -15,7 +15,7 @@ class ReportType extends AbstractType
         $builder
             ->add('body')
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "button primary w-full"]
+                "attr" => ["class" => "btn btn-primary w-full"]
             ]);
     }
 

@@ -72,7 +72,7 @@ class NoteType extends AbstractType
                 )
             )
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "btn btn-primary btn-block mt-2"]
+                "attr" => ["class" => "btn btn-primary btn-block w-full mt-2"]
             ]);
     }
 
