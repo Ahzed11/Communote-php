@@ -1,28 +1,28 @@
 <li class="rounded-lg shadow overflow-hidden h-full hover:shadow-lg transform hover:scale-105 transition duration-300
-           bg-purple-800 dark:bg-gray-900">
+           bg-neutral-focus text-neutral-content">
     <a href="{{ path }}" class="relative h-full">
         <div class="py-10 px-8 flex flex-col justify-between h-full">
             <div>
-                <h2 class="text-2xl font-bold text-white truncate">{{ item.title }}</h2>
-                <div class="text-purple-300 dark:text-green-400 text-sm font-medium flex mb-4">
+                <h2 class="text-2xl font-bold truncate">{{ item.title }}</h2>
+                <div class="text-primary text-sm font-medium flex mb-4">
                     <span>
                         {{ item.author.firstName }} {{ item.author.lastName }}
                     </span>
                 </div>
             </div>
 
-            <p class="break-words text-white text-justify">
+            <p class="break-words text-justify">
                 {{ item.shortDescription }}
             </p>
 
             <div class="mt-10 flex justify-between items-center">
-                <span class="mr-4 text-purple-300 dark:text-green-400">
-                    <i class="fas fa-clock text-purple-300 dark:text-green-400"></i>
+                <span class="mr-4 text-primary">
+                    <i class="fas fa-clock"></i>
                     {{ item.createdAt | ago }}
                 </span>
 
                 {% if item.averageScore != 0 %}
-                <span class="text-yellow-500 dark:text-yellow-200">
+                <span class="text-warning">
                     {{ item.averageScore | round }}
                     <i class="fas fa-star"></i>
                     ({{ item.reviews | length }})

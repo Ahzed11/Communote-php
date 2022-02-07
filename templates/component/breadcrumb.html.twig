@@ -1,21 +1,19 @@
-<nav class="flex items-center">
+<nav class="breadcrumbs text-lg flex">
     {% set path = '/browse/' %}
-    <ul class="block text-lg font-medium flex flex-col md:flex-row mx-auto md:mx-0 md:inline-flex gap-1">
+    <ul class="self-end">
         <li>
-            <a class="hover:text-purple-700 dark:hover:text-green-400" href="{{ path('browse_faculty') }}">
+            <a href="{{ path('browse_faculty') }}">
                 {% trans %}Browse{% endtrans %}
             </a>
-            <span class="hidden md:inline text-purple-700 dark:text-green-400 font-medium">/</span>
         </li>
         {% for arg in app.request.attributes.get('_route_params') %}
         <li>
             {% set path = path ~ arg ~ '/' %}
-            <a class="hover:text-purple-700 dark:hover:text-green-400" href="{{ path }}">{{ arg }}</a>
-            <span class="hidden md:inline text-purple-700 dark:text-green-400 font-medium">/</span>
+            <a href="{{ path }}">{{ arg }}</a>
         </li>
         {% endfor %}
-        <li class="text-purple-700 dark:text-green-400 font-medium">
-            <a>{{ endWord | trans }}</a>
+        <li>
+            <a class="text-primary font-semibold">{{ endWord | trans }}</a>
         </li>
     </ul>
 </nav>

@@ -3,278 +3,32 @@
 @tailwind utilities;
 
 @layer base {
-    nav div div a {
-        @apply hover:text-purple-700;
-        @apply dark:hover:text-green-400;
+    .current, .page, .next, .last, .previous, .first {
+        @apply btn;
+        @apply inline-flex;
     }
 
-    hr {
-        @apply border;
-        @apply border-purple-700;
-        @apply dark:border-gray-900;
-    }
-
-    .button {
-        @apply px-2;
-        @apply py-2;
-        @apply rounded-lg;
-        @apply hover:shadow;
-        @apply cursor-pointer;
-        @apply font-semibold;
-    }
-
-    .content p {
-        @apply overflow-x-hidden;
-        @apply break-words;
-        @apply text-justify;
-    }
-
-    .content h1 {
-        @apply text-3xl;
-        @apply font-semibold;
-    }
-
-    .content h2 {
-        @apply text-2xl;
-        @apply font-semibold;
-    }
-
-    .content h3 {
-        @apply text-xl;
-        @apply font-semibold;
-    }
-
-    .content h4 {
-        @apply text-lg;
-        @apply font-semibold;
-    }
-
-    .content h5 {
-        @apply font-semibold;
-    }
-
-    .content a {
-        @apply underline;
-        @apply text-purple-700;
-        @apply dark:text-green-400;
-    }
-
-    .content ul li {
-        @apply list-disc;
-        @apply list-inside;
-    }
-
-    .content ol li {
-        @apply list-decimal;
-        @apply list-inside;
-    }
-
-    .content pre {
-        @apply p-4;
-        @apply rounded-sm;
-        @apply bg-purple-200;
-        @apply dark:bg-gray-700;
-    }
-
-    .content table {
-        @apply mx-auto;
-        @apply table-auto;
-        @apply border;
-        @apply border-2;
-        @apply border-collapse;
-        @apply border-purple-800;
-        @apply dark:border-green-600;
-    }
-
-    .content th {
-        @apply border;
-        @apply border-2;
-        @apply border-purple-800;
-        @apply px-4;
-        @apply py-2;
-        @apply dark:border-green-600;
-    }
-
-    .content td {
-        @apply border;
-        @apply border-2;
-        @apply border-purple-800;
-        @apply px-2;
-        @apply py-2;
-        @apply dark:border-gray-600;
-    }
-
-    .content blockquote {
-        @apply border-l-8;
-        @apply border-purple-800;
-        @apply dark:border-gray-600;
-        @apply pl-4;
-    }
-
-    .pill {
-        @apply rounded-full;
-        @apply py-1;
-        @apply px-4;
-        @apply shadow-md;
-        @apply mr-2;
-        @apply text-center;
-        @apply inline-block;
-    }
-
-    .pagination {
-        @apply mt-12;
-        @apply flex;
-        @apply flex-wrap;
-        @apply justify-center;
-        @apply space-x-2;
-    }
-
-    .pagination span {
-        @apply block;
-        @apply rounded-lg;
-        @apply shadow-lg;
-        @apply font-bold;
-        @apply text-purple-700;
-        @apply dark:text-white;
-        @apply bg-purple-200;
-        @apply dark:bg-gray-900;
-    }
-
-    .pagination span a {
-        @apply inline-block;
-        @apply px-4;
-        @apply py-2;
-    }
-
-    .pagination span:hover {
-        @apply text-white;
-        @apply dark:text-green-400;
-    }
-
-    .pagination .current {
-        @apply inline-block;
-        @apply px-4;
-        @apply py-2;
-        @apply bg-purple-700;
-        @apply dark:bg-green-400;
-        @apply text-white;
-        @apply dark:text-gray-900;
-    }
-
-    .pagination .current:hover {
-        @apply bg-purple-700;
-        @apply dark:bg-green-400;
-        @apply text-white;
-        @apply dark:text-gray-900;
-    }
-
-    .primary {
-        @apply bg-purple-700;
-        @apply dark:bg-green-600;
-        @apply text-white;
-    }
-
-    .primary.light {
-        @apply bg-purple-200;
-        @apply dark:bg-green-200;
-        @apply text-purple-700;
-        @apply dark:text-green-800;
-    }
-
-    .danger {
-        @apply bg-red-700;
-        @apply text-white;
-    }
-
-    .danger.light {
-        @apply bg-red-200;
-        @apply text-red-700;
-    }
-
-    .warning {
-        @apply bg-yellow-400;
-        @apply dark:bg-yellow-200;
-        @apply text-white;
-        @apply dark:text-yellow-600;
-    }
-
-    .browse-search {
-        @apply dark:text-white !important;
-        @apply dark:bg-gray-900;
-        @apply font-semibold;
-    }
-
-    .admin .browse-search {
-        @apply mb-0 !important
+    .current {
+        @apply btn-active
     }
 
     label {
-        @apply font-semibold;
-        @apply text-white;
-        @apply dark:text-green-400;
+        @apply label;
     }
 
-    form input {
-        @apply text-black;
-    }
-
-    input[type=text] {
+    input {
+        @apply input;
         @apply w-full;
-        @apply mb-3;
-        @apply text-black;
-        @apply dark:text-white;
-        @apply dark:bg-gray-800;
-        @apply rounded-lg;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
     }
 
-    input[type=email] {
+    select {
+        @apply select;
         @apply w-full;
-        @apply mb-3;
-        @apply text-black;
-        @apply dark:text-white;
-        @apply dark:bg-gray-800;
-        @apply rounded-lg;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
     }
 
-    input[type=password] {
+    textarea {
+        @apply textarea;
         @apply w-full;
-        @apply mb-3;
-        @apply text-black;
-        @apply dark:text-white;
-        @apply dark:bg-gray-800;
-        @apply rounded-lg;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
-    }
-
-    input[type=checkbox] {
-        @apply ml-2;
-        @apply rounded-lg;
-        @apply text-black;
-        @apply dark:text-white;
-        @apply dark:bg-gray-800;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
     }
 
     input[type=file] {
@@ -293,65 +47,13 @@
         @apply mb-4;
         @apply resize-none;
         @apply rounded-lg;
-        @apply text-gray-500;
-        @apply bg-white;
-        @apply dark:bg-gray-800;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
+        @apply text-gray-400;
+        @apply bg-base-100;
         @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
     }
 
-    textarea {
-        @apply w-full;
-        @apply mb-3;
-        @apply text-black;
-        @apply dark:text-white;
-        @apply dark:bg-gray-800;
-        @apply rounded-lg;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
-    }
-
-    select {
-        @apply w-full;
-        @apply mb-3;
-        @apply rounded-lg;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply dark:bg-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
-        @apply text-gray-500;
-    }
-
-    select[multiple] {
-        @apply w-full;
-        @apply mb-3;
-        @apply text-black;
-        @apply rounded-lg;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
-        @apply border-2;
-        @apply outline-none;
-        @apply focus:border-purple-700;
-        @apply dark:focus:border-green-600;
-    }
-
-    form li {
-        @apply text-red-600;
-        @apply font-normal
-    }
-
-    #embed-section {
-        height: 80vh;
+    hr {
+        @apply border;
+        @apply border-neutral;
     }
 }
