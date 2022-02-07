@@ -56,4 +56,8 @@
         @apply border;
         @apply border-neutral;
     }
+
+    #embed-section {
+        height: 80vh;
+    }
 }
