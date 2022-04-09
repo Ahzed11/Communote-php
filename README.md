@@ -1,3 +1,5 @@
+<a href="https://www.digitalocean.com/?refcode=78f0fe66f9b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="DigitalOcean Referral Badge" /></a><br/>
+
 # Communote
 Communoté, a platform to share notes between college students.
 
