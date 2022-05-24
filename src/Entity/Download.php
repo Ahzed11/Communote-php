@@ -18,11 +18,11 @@ class Download
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private User $author;
 
     #[ORM\ManyToOne(targetEntity: Note::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private Note $note;
 
     public function getId(): ?int
